@@ -8,9 +8,13 @@ const App = ( (props) => {
     return (
       // <React.Fragment>
       <>
-        <Header>
-        </Header>
-        <Main />
+        <Header />
+        <Main>
+          <h2>main.children</h2>
+          <h3>main.children</h3>
+          <h4>main.children</h4>
+          <h5>main.children</h5>
+        </Main>
       </>
       // </React.Fragment>
     )

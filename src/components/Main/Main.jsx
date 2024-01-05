@@ -7,7 +7,7 @@ export const Main = React.memo( (props) => {
     return (
       <main className={style.main}>
         <Layout>
-          <p> main.Layout</p>
+          {props.children}
         </Layout>        
       </main>
     )
