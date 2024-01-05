@@ -6,6 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
+  font-size: 50px;
 }
 
 .App {
@@ -15,5 +16,4 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 50px;
 }
