@@ -1,9 +1,13 @@
-import React from "react";
-import style from "./Heading.module.css"
+import React from 'react';
+import PropTypes from 'prop-types';
+import style from './Heading.module.css';
 
-export const Heading = React.memo( (props) => {
-    
-    return (
-      <div className={style.heading}>{props.text}</div>
-    )
-})
+const Heading = (props) => (
+  <div className={style.heading}>
+    {props.text}
+  </div>
+);
+Heading.propTypes = {
+  text: PropTypes.string,
+};
+export default Heading;

@@ -1,9 +1,12 @@
-import React from "react";
-import style from "./Layout.module.css"
+import React from 'react';
+import PropTypes from 'prop-types';
+import style from './Layout.module.css';
 
 // export const Layout = React.memo( (props) => {
-export const Layout = ( (props) => {
-    return (
-      <div className={style.container}>{props.children}</div>
-    )
-})
+const Layout = (props) => (
+  <div className={style.container}>{props.children}</div>
+);
+Layout.propTypes = {
+  children: PropTypes.object,
+};
+export default Layout;
