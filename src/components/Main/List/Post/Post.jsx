@@ -1,8 +1,18 @@
+/* eslint-disable max-len */
 import React from 'react';
 import PropTypes from 'prop-types';
 import style from './Post.module.css';
 import notphoto from './img/notphoto.jpg';
 import formatDate from '../../../utils/formatDate.js';
+console.warn(`🚀 ~ formatDate:`, formatDate);
+import InfoPost from './InfoPost';
+console.warn(`🚀 ~ InfoPost:`, InfoPost);
+import DelPost from './DelPost';
+console.warn(`🚀 ~ DelPost:`, DelPost);
+import RatePost from './RatePost';
+console.warn(`🚀 ~ RatePost:`, RatePost);
+import DatePost from './DatePost';
+console.warn(`🚀 ~ DatePost:`, DatePost);
 
 export const Post = ({postData}) => {
   console.log('Post props.postData:', postData);
@@ -12,24 +22,28 @@ export const Post = ({postData}) => {
     <li className={style.post}>
       <img className={style.img} src={notphoto} alt={title} />
 
-      <div className={style.content}>
+      <InfoPost title={title} author={author} />
+      {/* <div className={style.content}>
         <h2 className={style.title}>
           <a className={style.linkPost} href="#post">
             {title}
           </a>
         </h2>
         <a className={style.linkAuthor} href="#author">{author}</a>
-      </div>
+      </div> */}
 
-      <div className={style.rating}>
+      <RatePost ups={ups} />
+      {/* <div className={style.rating}>
         <button className={style.up} aria-label="повысить рейтинг"></button>
         <p className={style.ups}>{ups}</p>
         <button className={style.down} aria-label="понизить рейтинг"></button>
-      </div>
+      </div> */}
 
-      <time className={style.date} dateTime={date}>{formatDate(date)}</time>
+      <DatePost date={date} />
+      {/* <time className={style.date} dateTime={date}>{formatDate(date)}</time> */}
 
-      <button className={style.delete}>
+      <DelPost />
+      {/* <button className={style.delete}>
         <svg
           width='24'
           height='24'
@@ -51,7 +65,7 @@ export const Post = ({postData}) => {
             fill='currentColor'
           />
         </svg>
-      </button>
+      </button> */}
     </li>
   );
 };
