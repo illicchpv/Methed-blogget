@@ -18,7 +18,7 @@ export const List = (props) => {
       thumbnail: '',
       title: 'Title Title',
       author: 'Nickname',
-      ups: 1,
+      ups: 12,
       date: '2024-01-01T01:05:00.000Z',
       id: '22',
     },

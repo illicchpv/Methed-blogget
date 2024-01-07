@@ -2,13 +2,14 @@
 import React from 'react';
 import style from './DelPost.module.css';
 import PropTypes from 'prop-types';
-// console.log('PropTypes:', PropTypes);
+import {ReactComponent as DeleteIcon} from '../img/delete.svg';
 
 export const DelPost = (props) => {
   // console.log('DelPost props:', props);
   return (
     <button className={style.delete}>
-      <svg
+      <DeleteIcon width={24} height={24} />
+      {/* <svg
         width='24'
         height='24'
         viewBox='0 0 24 24'
@@ -28,7 +29,7 @@ export const DelPost = (props) => {
 19.6875H6.86016L6.29297 7.6875H17.707L17.1398 19.6875Z'
           fill='currentColor'
         />
-      </svg>
+      </svg> */}
     </button>
   );
 };

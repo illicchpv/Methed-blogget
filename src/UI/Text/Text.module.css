@@ -93,7 +93,17 @@
 .fs12 {
   font-size: 12px;
   line-height: 16px;
-} 
+}
+
+.medium{
+  font-weight: 400;
+}
+.bold{
+  font-weight: 700;
+}
+.italic{
+  font-style: italic;
+}
 
 @media (min-width: 768px) {
   .fst26 {

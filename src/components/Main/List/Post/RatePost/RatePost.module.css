@@ -33,6 +33,15 @@
   background-image: url('../img/down.svg');
 }
 
+.rating{
+  /* font-weight: bold; */
+}
+.ups{
+  /* color: red;
+  font-style: italic;
+  font-weight: bold;
+  font-weight: normal; */
+}
 
 @media (min-width: 580px) {
   .rating {

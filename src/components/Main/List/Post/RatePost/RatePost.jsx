@@ -1,7 +1,8 @@
 import React from 'react';
 import style from './RatePost.module.css';
 import PropTypes from 'prop-types';
-// console.log('PropTypes:', PropTypes);
+import Text from '../../../../../UI/Text';
+
 
 export const RatePost = (props) => {
   // console.log('RatePost props:', props);
@@ -9,7 +10,16 @@ export const RatePost = (props) => {
   return (
     <div className={style.rating}>
       <button className={style.up} aria-label="повысить рейтинг"></button>
-      <p className={style.ups}>{ups}</p>
+      {ups <= 10 && 
+        <Text As='p' size={16} tsize={24} medium italic
+          className={style.ups}>{ups}
+        </Text>
+      }
+      {ups > 10 && 
+        <Text As='p' size={16} tsize={24} bold color='green'
+          className={style.ups}>{ups}
+        </Text>
+      }
       <button className={style.down} aria-label="понизить рейтинг"></button>
     </div>
   );

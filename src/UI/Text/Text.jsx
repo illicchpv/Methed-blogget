@@ -15,6 +15,10 @@ const Text = (props) => {
     children,
     href,
     center,
+    onClick,
+    medium,
+    bold,
+    italic,
   } = props;
 
   const classes = classNames(
@@ -24,9 +28,12 @@ const Text = (props) => {
     { [style[`fst${tsize}`]]: tsize },
     { [style[`dst${dsize}`]]: dsize },
     { [style.center]: center },
+    { [style[`medium`]]: medium },
+    { [style[`bold`]]: bold },
+    { [style[`italic`]]: italic },
   );
 
-  return <As className={classes} href={href}>{children}</As>;
+  return <As className={classes} href={href} onClick={onClick}>{children}</As>;
 };
 Text.propTypes = {
   children: PropTypes.object,
