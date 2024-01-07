@@ -1,11 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import style from './Heading.module.css';
+import Text from '../../../UI/Text';
 
 const Heading = (props) => (
-  <div className={style.heading}>
+  <Text As='h1' size={22} tsize={26}
+    center
+    className={style.heading}
+  >
     {props.text}
-  </div>
+  </Text>
 );
 Heading.propTypes = {
   text: PropTypes.string,
