@@ -27,6 +27,7 @@ export const Tabs = (props) => {
   // const { list, setList } = props;
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdown, setIsDropdown] = useState(true); // true - mobile version / desktop;
+  const [selectedTab, setSelectedTab] = useState(-1);
 
   const handleResize = () => {
     if (document.documentElement.clientWidth < 768) {
@@ -49,7 +50,10 @@ export const Tabs = (props) => {
     <div className={style.container}>
       {isDropdown && <div className={style.wrapperBtn}>
         <button className={style.btn} onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
-          add item
+          {selectedTab < 0 && `add item`
+          }
+          {selectedTab >= 0 && LIST[selectedTab].value
+          }
           <ArrowIcon width={15} height={15} />
         </button>
       </div>}
@@ -57,7 +61,12 @@ export const Tabs = (props) => {
       {(isDropdownOpen || !isDropdown) && <ul className={style.list} onClick={() => setIsDropdownOpen(false)}>
         {LIST.map((el) => (
           <li className={style.item} key={el.id}>
-            <button className={style.btn} onClick={() => { console.log(el.value); }}>
+            <button className={style.btn} onClick={() => { 
+                // console.log(el.value); 
+                LIST.forEach((el2, i) => {
+                  if(el2.value === el.value) setSelectedTab(i)
+                });
+              }}>
               {el.value}
               {el.Icon && <el.Icon width={30} height={30} />}
             </button>
