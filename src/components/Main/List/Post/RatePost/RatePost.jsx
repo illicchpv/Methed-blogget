@@ -1,10 +1,10 @@
 import React from 'react';
 import style from './RatePost.module.css';
 import PropTypes from 'prop-types';
-console.log('PropTypes:', PropTypes);
+// console.log('PropTypes:', PropTypes);
 
 export const RatePost = (props) => {
-  console.log('RatePost props:', props);
+  // console.log('RatePost props:', props);
   const {ups} = props;
   return (
     <div className={style.rating}>
@@ -17,5 +17,5 @@ export const RatePost = (props) => {
 
 RatePost.propTypes = {
   props: PropTypes.object,
-  ups: PropTypes.string,
+  ups: PropTypes.number,
 };

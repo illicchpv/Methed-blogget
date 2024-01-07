@@ -1,10 +1,10 @@
 import React from 'react';
 import style from './InfoPost.module.css';
 import PropTypes from 'prop-types';
-console.log('PropTypes:', PropTypes);
+// console.log('PropTypes:', PropTypes);
 
 export const InfoPost = (props) => {
-  console.log('InfoPost props:', props);
+  // console.log('InfoPost props:', props);
   const {title, author} = props;
   return (
     <div className={style.content}>

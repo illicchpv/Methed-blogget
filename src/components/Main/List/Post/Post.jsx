@@ -1,21 +1,23 @@
+/* eslint-disable no-debugger */
 /* eslint-disable max-len */
 import React from 'react';
 import PropTypes from 'prop-types';
 import style from './Post.module.css';
 import notphoto from './img/notphoto.jpg';
-import formatDate from '../../../utils/formatDate.js';
-console.warn(`🚀 ~ formatDate:`, formatDate);
+// import formatDate from '../../../utils/formatDate.js';
+// console.warn(`🚀 ~ formatDate:`, formatDate);
 import InfoPost from './InfoPost';
-console.warn(`🚀 ~ InfoPost:`, InfoPost);
+// console.warn(`🚀 ~ InfoPost:`, InfoPost);
 import DelPost from './DelPost';
-console.warn(`🚀 ~ DelPost:`, DelPost);
+// console.warn(`🚀 ~ DelPost:`, DelPost);
 import RatePost from './RatePost';
-console.warn(`🚀 ~ RatePost:`, RatePost);
+// console.warn(`🚀 ~ RatePost:`, RatePost);
 import DatePost from './DatePost';
-console.warn(`🚀 ~ DatePost:`, DatePost);
+// console.warn(`🚀 ~ DatePost:`, DatePost);
 
 export const Post = ({postData}) => {
-  console.log('Post props.postData:', postData);
+  if (!postData) return <></>;
+  // console.log('Post props.postData:', postData);
   // const {thumbnail, title, author, ups, date} = postData;
   const {title, author, ups, date} = postData;
   return (
@@ -73,9 +75,9 @@ export const Post = ({postData}) => {
 Post.propTypes = {
   props: PropTypes.object,
   postData: PropTypes.object,
-  thumbnail: PropTypes.object,
-  title: PropTypes.object,
-  author: PropTypes.object,
-  ups: PropTypes.object,
-  date: PropTypes.object,
+  thumbnail: PropTypes.string,
+  title: PropTypes.string,
+  author: PropTypes.string,
+  ups: PropTypes.number,
+  date: PropTypes.string,
 };

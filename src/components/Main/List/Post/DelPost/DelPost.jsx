@@ -1,10 +1,11 @@
+/* eslint-disable arrow-body-style */
 import React from 'react';
 import style from './DelPost.module.css';
 import PropTypes from 'prop-types';
-console.log('PropTypes:', PropTypes);
+// console.log('PropTypes:', PropTypes);
 
 export const DelPost = (props) => {
-  console.log('DelPost props:', props);
+  // console.log('DelPost props:', props);
   return (
     <button className={style.delete}>
       <svg
