@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import style from './Post.module.css';
 import notphoto from './img/notphoto.jpg';

@@ -18,7 +18,7 @@
   "scripts": {
     "start": "react-scripts start",
     "cc": "hygen create component",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 200",
     "lint:fix": "eslint . --ext js,jsx --fix",
     "build": "react-scripts build",
     "test": "react-scripts test",

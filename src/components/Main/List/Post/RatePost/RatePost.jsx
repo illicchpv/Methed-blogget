@@ -1,4 +1,3 @@
-import React from 'react';
 import style from './RatePost.module.css';
 import PropTypes from 'prop-types';
 import Text from '../../../../../UI/Text';

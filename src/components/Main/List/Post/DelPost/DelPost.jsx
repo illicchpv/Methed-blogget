@@ -1,4 +1,3 @@
-import React from 'react';
 import style from './DelPost.module.css';
 import PropTypes from 'prop-types';
 import {ReactComponent as DeleteIcon} from '../img/delete.svg';

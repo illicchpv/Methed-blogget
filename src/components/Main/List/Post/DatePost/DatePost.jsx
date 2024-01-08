@@ -1,4 +1,3 @@
-import React from 'react';
 import style from './DatePost.module.css';
 import PropTypes from 'prop-types';
 import formatDate from '../../../../utils/formatDate.js';

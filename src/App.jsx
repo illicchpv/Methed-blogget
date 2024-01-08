@@ -1,7 +1,5 @@
-import { useEffect, useState } from 'react';
 import Header from './components/Header';
 import Main from './components/Main';
-import { URL } from './api/const';
 import { useToken } from './hooks/useToken';
 
 // export const Layout = React.memo( (props) => {
