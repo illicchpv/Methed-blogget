@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import PropTypes from 'prop-types';
 import style from './Main.module.css';
 import Layout from '../Layout';
 import Tabs from './Tabs';

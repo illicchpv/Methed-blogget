@@ -3,7 +3,6 @@ import Post from './Post';
 import style from './List.module.css';
 
 export const List = (props) => {
-  // console.log('List props:', props);
   const postsData = [
     {
       thumbnail: '',
@@ -24,7 +23,6 @@ export const List = (props) => {
   ];
 
   return (
-    // <div className={style.container}>List</div>
     <ul className={style.list}>
       {
         postsData.map((el) => <Post key={el.id} postData={el} />)

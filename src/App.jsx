@@ -4,6 +4,7 @@ import Main from './components/Main';
 import { URL } from './api/const';
 import { useToken } from './hooks/useToken';
 
+// export const Layout = React.memo( (props) => {
 const App = (props) => {
   const [token] = useToken('');
 

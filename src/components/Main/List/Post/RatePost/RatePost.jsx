@@ -5,7 +5,6 @@ import Text from '../../../../../UI/Text';
 
 
 export const RatePost = (props) => {
-  // console.log('RatePost props:', props);
   const {ups} = props;
   return (
     <div className={style.rating}>

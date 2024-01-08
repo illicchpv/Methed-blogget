@@ -27,7 +27,6 @@ const LIST = [
 ].map(assignId);
 
 export const Tabs = (props) => {
-  // const { list, setList } = props;
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdown, setIsDropdown] = useState(true); // true - mobile version / desktop;
   const [selectedTab, setSelectedTab] = useState(-1);

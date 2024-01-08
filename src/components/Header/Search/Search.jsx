@@ -1,7 +1,6 @@
 import React from 'react';
 import style from './Search.module.css';
-// import search from './img/search.svg'
-// React.memo(
+
 const Search = (props) => (
   <form className={style.form} action=''>
     <input className={style.search} type='search' />

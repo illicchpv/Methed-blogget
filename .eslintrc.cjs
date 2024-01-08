@@ -63,7 +63,7 @@ module.exports = {
         "functions": false
       }
     ],
-    "arrow-body-style": ["error", "as-needed"],
+    "arrow-body-style": ["warn", "as-needed"],
     "arrow-spacing": ["error"],
     "no-confusing-arrow": [
       "error",

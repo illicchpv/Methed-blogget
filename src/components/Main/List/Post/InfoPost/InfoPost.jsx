@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import Text from '../../../../../UI/Text';
 
 export const InfoPost = (props) => {
-  // console.log('InfoPost props:', props);
   const {title, author} = props;
   return (
     <div className={style.content}>
