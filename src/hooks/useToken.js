@@ -10,14 +10,14 @@ export const useToken = (state) => {
         .get('access_token');
       setToken(token);
     }
-    if (localStorage.getItem('bearer')) {
-      setToken(localStorage.getItem('bearer'));
+    if (sessionStorage.getItem('bearer')) {
+      setToken(sessionStorage.getItem('bearer'));
     }
   }, []);
 
   useEffect(() => {
     if (token) {
-      localStorage.setItem('bearer', token)
+      sessionStorage.setItem('bearer', token)
     }
   }, [token]);
 
