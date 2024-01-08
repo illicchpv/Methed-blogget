@@ -1,9 +1,3 @@
-/* eslint-disable block-spacing */
-/* eslint-disable brace-style */
-/* eslint-disable max-len */
-/* eslint-disable object-curly-spacing */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import style from './Tabs.module.css';
@@ -60,8 +54,8 @@ export const Tabs = (props) => {
       {isDropdown && <div className={style.wrapperBtn}>
         <Text As='button' size={18} tsize={24}
           className={style.btn} onClick={() => {
-          setIsDropdownOpen(!isDropdownOpen)
-        }}
+            setIsDropdownOpen(!isDropdownOpen)
+          }}
         >
           {selectedTab < 0 && `add item`
           }
@@ -75,11 +69,11 @@ export const Tabs = (props) => {
         {LIST.map((el) => (
           <li className={style.item} key={el.id}>
             <Text As='button' size={18} tsize={24}
-              className={style.btn} onClick={() => { 
-              LIST.forEach((el2, i) => {
-                if(el2.value === el.value) setSelectedTab(i)
-              });
-            }}>
+              className={style.btn} onClick={() => {
+                LIST.forEach((el2, i) => {
+                  if (el2.value === el.value) setSelectedTab(i)
+                });
+              }}>
               {el.value}
               {el.Icon && <el.Icon width={30} height={30} />}
             </Text>

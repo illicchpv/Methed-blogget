@@ -1,8 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable block-spacing */
-/* eslint-disable max-len */
-/* eslint-disable object-curly-spacing */
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 // import PropTypes from 'prop-types';
 import style from './Main.module.css';

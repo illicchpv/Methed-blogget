@@ -10,12 +10,12 @@ export const RatePost = (props) => {
   return (
     <div className={style.rating}>
       <button className={style.up} aria-label="повысить рейтинг"></button>
-      {ups <= 10 && 
+      {ups <= 10 &&
         <Text As='p' size={16} tsize={24} medium italic
           className={style.ups}>{ups}
         </Text>
       }
-      {ups > 10 && 
+      {ups > 10 &&
         <Text As='p' size={16} tsize={24} bold color='green'
           className={style.ups}>{ups}
         </Text>

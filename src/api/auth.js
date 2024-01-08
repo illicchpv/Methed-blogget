@@ -1,6 +1,6 @@
 /*
 
-authorization URL: 
+authorization URL:
   https://www.reddit.com/api/v1/authorize?client_id=&response_type=&state=&redirect_uri=URI&scope=SCOPE_STRING
 
 */

@@ -1,5 +1,3 @@
-/* eslint-disable no-debugger */
-/* eslint-disable max-len */
 import React from 'react';
 import PropTypes from 'prop-types';
 import style from './Post.module.css';

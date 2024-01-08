@@ -13,9 +13,9 @@ export const InfoPost = (props) => {
           {title}
         </Text>
       </Text>
-      <Text 
-        As='a' size={12} tsize={14} color='orange' 
-        className={style.linkAuthor} 
+      <Text
+        As='a' size={12} tsize={14} color='orange'
+        className={style.linkAuthor}
         href="#author">{author}</Text>
     </div>
   );

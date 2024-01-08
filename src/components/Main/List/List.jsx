@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import React from 'react';
 import Post from './Post';
 import style from './List.module.css';

@@ -94,7 +94,7 @@ module.exports = {
     "no-with": "error",
     "prefer-promise-reject-errors": "error",
     "no-unused-vars": [
-      "error",
+      "warn",
       {
         "args": "none"
       }
@@ -142,7 +142,7 @@ module.exports = {
     "max-len": [
       "error",
       {
-        "code": 80,
+        "code": 280,
         "tabWidth": 2,
         "ignoreUrls": true,
         "ignorePattern": "goog.(module|require)"

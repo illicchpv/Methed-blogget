@@ -10,7 +10,7 @@ export const useToken = (state) => {
         .get('access_token');
       setToken(token);
     }
-    if(localStorage.getItem('bearer')){
+    if (localStorage.getItem('bearer')) {
       setToken(localStorage.getItem('bearer'));
     }
   }, []);
