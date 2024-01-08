@@ -2,6 +2,12 @@ import { useEffect, useState } from 'react';
 
 export const useToken = (state) => {
   const [token, setToken] = useState(state);
+  // console.log('useToken = token: ', token);
+
+  const clearToken = () => {
+    sessionStorage.removeItem('bearer');
+    setToken('');
+  };
 
   useEffect(() => {
     if (window.location.pathname.includes('/auth')) {
@@ -20,5 +26,5 @@ export const useToken = (state) => {
     }
   }, [token]);
 
-  return [token];
+  return [token, clearToken];
 };

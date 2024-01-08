@@ -1,17 +1,25 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import style from './Auth.module.css';
-import { ReactComponent as LoginIcon } from './img/login.svg';
+import { URL_API } from '../../../api/const'
 import { urlAuth } from '../../../api/auth';
 import Text from '../../../UI/Text';
-import { URL_API } from '../../../api/const'
+import { ReactComponent as LoginIcon } from './img/login.svg';
+import style from './Auth.module.css';
+import Logout from './Logout'
 
-export const Auth = ({ token }) => {
+export const Auth = ({ token, clearToken }) => {
   const [auth, setAuth] = useState({});
+  const [logoutVisible, setLogoutVisible] = useState(false);
+
+  const handleLogout = () => {
+    clearToken('');
+    setAuth({});
+    console.log('----------------handleLogout: token:', token.length);
+  };
 
   useEffect(() => {
     if (!token) return;
-    console.log(`token:`, token);
+    console.log(`token:`, token.length);
 
     // https://github.com/reddit-archive/reddit/wiki/OAuth2#authorization-implicit-grant-flow
     // API requests with a bearer token should be made to https://oauth.reddit.com, NOT www.reddit.com.
@@ -22,34 +30,47 @@ export const Auth = ({ token }) => {
     })
       .then(resp => {
         console.log(`----------resp:`, resp);
+        if(resp.status === 401) {
+          throw new Error('Сервер вернул ошибку: ', resp.statusText)
+        }
         return resp.json();
       })
       .then(({ name, icon_img: iconImg }) => {
         const img = iconImg.split('&')[0];
         console.log(`iconImg, name:`, img, name, iconImg);
         setAuth({ name, img });
+
+        const newHref = window.location.href.split('#')[0];
+        console.log('newHref: ', newHref);
+        // console.log('window.location.href: ', window.location.href);
+        window.history.replaceState(null, null, newHref);
       })
       .catch((err) => {
         console.error(err);
-        setAuth({});
+        handleLogout();
       });
   }, [token]);
 
   return (
     <div className={style.container}>
       {auth.name ? (
-        <button className={style.btn}>
-          <img className={style.img} src={auth.img} title={auth.name} alt={`Аватар ${auth.name}`} />
-        </button>
-      ) :
-        (
-          <Text As='a' href={urlAuth}
-            className={style.authLink}
+        <>
+          <button className={style.btn}
+            onClick={() => { setLogoutVisible((prev) => !prev) }}
           >
-            <LoginIcon width={128} height={128} />
-          </Text>
-        )
-      }
+            <img className={style.img} src={auth.img} title={auth.name} alt={`Аватар ${auth.name}`} />
+          </button>
+          {logoutVisible && <Logout logout={handleLogout} />
+          }
+
+        </>
+      ) : (
+        <Text As='a' href={urlAuth}
+          className={style.authLink}
+        >
+          <LoginIcon width={128} height={128} />
+        </Text>
+      )}
     </div>
   );
 };
@@ -106,5 +127,4 @@ snoovatar_size: (2)[380, 600]
 subreddit: {default_set: true , user_is_contributor: false  , banner_img: '',
 restrict_posting: true , user_is_banned: false  ,}
 suspension_expiration_utc: nulltotal_karma: 1verified: true [[Prototype]]: Object
-
 */
