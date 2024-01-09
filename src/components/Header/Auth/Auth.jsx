@@ -6,50 +6,16 @@ import Text from '../../../UI/Text';
 import { ReactComponent as LoginIcon } from './img/login.svg';
 import style from './Auth.module.css';
 import Logout from './Logout'
+import { useAuth } from '../../../hooks/useAuth';
 
 export const Auth = ({ token, delToken }) => {
-  const [auth, setAuth] = useState({});
+  const [auth, clearAuth] = useAuth(token);
   const [logoutVisible, setLogoutVisible] = useState(false);
 
   const handleLogout = () => {
     delToken('');
-    setAuth({});
-    console.log('----------------handleLogout: token:', token.length);
+    clearAuth();
   };
-
-  useEffect(() => {
-    if (!token) return;
-    console.log(`token:`, token.length);
-
-    // https://github.com/reddit-archive/reddit/wiki/OAuth2#authorization-implicit-grant-flow
-    // API requests with a bearer token should be made to https://oauth.reddit.com, NOT www.reddit.com.
-    fetch(`${URL_API}/api/v1/me`, {// https://www.reddit.com/dev/api/#GET_api_v1_me
-      headers: {
-        Authorization: `bearer ${token}`, // https://github.com/reddit-archive/reddit/wiki/OAuth2#authorization-implicit-grant-flow
-      },
-    })
-      .then(resp => {
-        console.log(`----------resp:`, resp);
-        if(resp.status === 401) {
-          throw new Error('Сервер вернул ошибку: ', resp.statusText)
-        }
-        return resp.json();
-      })
-      .then(({ name, icon_img: iconImg }) => {
-        const img = iconImg.split('&')[0];
-        console.log(`iconImg, name:`, img, name, iconImg);
-        setAuth({ name, img });
-
-        const newHref = window.location.href.split('#')[0];
-        console.log('newHref: ', newHref);
-        // console.log('window.location.href: ', window.location.href);
-        window.history.replaceState(null, null, newHref);
-      })
-      .catch((err) => {
-        console.error(err);
-        handleLogout();
-      });
-  }, [token]);
 
   return (
     <div className={style.container}>
@@ -62,7 +28,6 @@ export const Auth = ({ token, delToken }) => {
           </button>
           {logoutVisible && <Logout logout={handleLogout} />
           }
-
         </>
       ) : (
         <Text As='a' href={urlAuth}
