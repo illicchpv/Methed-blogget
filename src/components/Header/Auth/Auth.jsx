@@ -6,13 +6,15 @@ import Text from '../../../UI/Text';
 import { ReactComponent as LoginIcon } from './img/login.svg';
 import style from './Auth.module.css';
 import Logout from './Logout'
-import { useAuth } from '../../../hooks/useAuth';
+// import { useAuth } from '../../../hooks/useAuth';
 import { tokenContext } from '../../../context/tokenContext';
+import { authContext } from '../../../context/authContext';
 
 export const Auth = () => {
   const { delToken } = useContext(tokenContext);
-  const [auth, clearAuth] = useAuth();
+  // const [auth, clearAuth] = useAuth();
   const [logoutVisible, setLogoutVisible] = useState(false);
+  const {auth, clearAuth} = useContext(authContext);
 
   const handleLogout = () => {
     delToken();
