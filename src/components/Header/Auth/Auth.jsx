@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { URL_API } from '../../../api/const'
 import { urlAuth } from '../../../api/auth';
@@ -7,13 +7,15 @@ import { ReactComponent as LoginIcon } from './img/login.svg';
 import style from './Auth.module.css';
 import Logout from './Logout'
 import { useAuth } from '../../../hooks/useAuth';
+import { tokenContext } from '../../../context/tokenContext';
 
-export const Auth = ({ token, delToken }) => {
-  const [auth, clearAuth] = useAuth(token);
+export const Auth = () => {
+  const { delToken } = useContext(tokenContext);
+  const [auth, clearAuth] = useAuth();
   const [logoutVisible, setLogoutVisible] = useState(false);
 
   const handleLogout = () => {
-    delToken('');
+    delToken();
     clearAuth();
   };
 
