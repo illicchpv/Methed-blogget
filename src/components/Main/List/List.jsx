@@ -22,7 +22,7 @@ export const List = (props) => {
       id: '22',
     },
   ];
-  const { posts, setPosts } = useContext(postsContext);
+  const { posts } = useContext(postsContext);
   if(!posts) return;
   if(!posts.data) return;
   // console.log('List==================postsDat: ', posts);

@@ -1,6 +1,6 @@
-import { useEffect, useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { URL_API } from '../../../api/const'
+// import { URL_API } from '../../../api/const'
 import { urlAuth } from '../../../api/auth';
 import Text from '../../../UI/Text';
 import { ReactComponent as LoginIcon } from './img/login.svg';

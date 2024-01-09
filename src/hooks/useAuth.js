@@ -4,7 +4,7 @@ import { tokenContext } from '../context/tokenContext';
 
 export const useAuth = () => {
   const [auth, setAuth] = useState({});
-  const [logoutVisible, setLogoutVisible] = useState(false);
+  // const [logoutVisible, setLogoutVisible] = useState(false);
   const { token, delToken } = useContext(tokenContext);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export const useAuth = () => {
         // ! handleLogout();
         delToken();
       });
-  }, [token]);
+  }, [token, delToken]);
 
   const clearAuth = () => {
     setAuth({});
