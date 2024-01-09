@@ -32,7 +32,8 @@ export const List = (props) => {
   const children_data = children.map(el => el.data);
   const datas = children_data.map((el,i) =>{ 
     // console.log('el: ', el.data);
-    if(i < 3) console.log(JSON.stringify(el, null, 2))
+    // if(i < 3) console.log(JSON.stringify(el, null, 2))
+    if(el.thumbnail !== 'self') console.log(JSON.stringify(el, null, 2))
     return { 
       thumbnail: (el.thumbnail === 'self' ? '' : el.thumbnail), // el.thumbnail, // ! ??? self
       title: el.title,
