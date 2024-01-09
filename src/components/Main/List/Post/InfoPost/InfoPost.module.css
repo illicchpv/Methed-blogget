@@ -6,6 +6,7 @@
   padding-right: 10px;
   margin-bottom: 8px;
 }
+
 .linkPost {
   overflow: hidden;
   -webkit-line-clamp: 2;
@@ -33,24 +34,14 @@
   transition: color 0.36s ease-in-out;
 }
 
-@media (min-width: 580px){
-  .linkPost {
-    font-size: 26px;
+@media (min-width: 580px) {
+  .content {
+    grid-area: content;
+    padding-top: 10px;
+    padding-right: 40px;
   }
-  .linkPost:hover {
-    color: #cc6633;
-  }
-
-  .linkPost:hover:after {
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
-  }  
 
   .linkAuthor:hover {
     color: #2d2d2d;
   }
-}
-@media (min-width: 768px){
-  .linkPost {
-    font-size: 32px;
-  }  
 }

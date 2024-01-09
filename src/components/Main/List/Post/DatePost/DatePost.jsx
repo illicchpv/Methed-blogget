@@ -11,5 +11,5 @@ export const DatePost = (props) => {
 
 DatePost.propTypes = {
   props: PropTypes.object,
-  date: PropTypes.string,
+  date: PropTypes.number,
 };
