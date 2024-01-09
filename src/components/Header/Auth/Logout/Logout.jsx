@@ -7,7 +7,7 @@ export const Logout = (props) => {
   const { logout } = props;
 
   return (
-    <button className={style.container}
+    <button className={style.logout}
       onClick={() => {logout()}}
     >Logout</button>
   );

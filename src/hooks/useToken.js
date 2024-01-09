@@ -4,7 +4,7 @@ export const useToken = (state) => {
   const [token, setToken] = useState(state);
   // console.log('useToken = token: ', token);
 
-  const clearToken = () => {
+  const delToken = () => {
     sessionStorage.removeItem('bearer');
     setToken('');
   };
@@ -26,5 +26,5 @@ export const useToken = (state) => {
     }
   }, [token]);
 
-  return [token, clearToken];
+  return [token, delToken];
 };

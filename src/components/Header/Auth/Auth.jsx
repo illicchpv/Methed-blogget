@@ -7,12 +7,12 @@ import { ReactComponent as LoginIcon } from './img/login.svg';
 import style from './Auth.module.css';
 import Logout from './Logout'
 
-export const Auth = ({ token, clearToken }) => {
+export const Auth = ({ token, delToken }) => {
   const [auth, setAuth] = useState({});
   const [logoutVisible, setLogoutVisible] = useState(false);
 
   const handleLogout = () => {
-    clearToken('');
+    delToken('');
     setAuth({});
     console.log('----------------handleLogout: token:', token.length);
   };

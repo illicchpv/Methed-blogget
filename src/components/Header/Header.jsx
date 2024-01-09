@@ -6,14 +6,14 @@ import Heading from './Heading';
 import Search from './Search';
 import Auth from './Auth';
 
-export const Header = ({token, clearToken}) => (
+export const Header = ({token, delToken}) => (
   <header className={style.header}>
     <Layout>
       <div className={style.gridContainer}>
         <Logo />
         <Heading text='Главная' />
         <Search />
-        <Auth token={token} clearToken={clearToken} />
+        <Auth token={token} delToken={delToken} />
       </div>
     </Layout>
   </header>

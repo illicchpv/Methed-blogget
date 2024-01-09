@@ -4,10 +4,10 @@ import { useToken } from './hooks/useToken';
 
 // export const Layout = React.memo( (props) => {
 const App = (props) => {
-  const [token, clearToken] = useToken('');
+  const [token, delToken] = useToken('');
 
   return (<>
-    <Header token={token} clearToken={clearToken} />
+    <Header token={token} delToken={delToken} />
     <Main>
       <h2>2main.children</h2>
       <h3>3main.children</h3>
