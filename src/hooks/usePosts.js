@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-// import { URL_API } from '../api/const';
+import { URL_API } from '../api/const';
 import { tokenContext } from '../context/tokenContext';
 // import { postsContext } from '../context/postsContext';
 
@@ -10,10 +10,10 @@ export const usePosts = (state) => {
   useEffect(() => {
     if(!token) return;
 
-    // const url = `${URL_API}/best`;
+    const url = `${URL_API}/best?limit=7`;
     // const url = `https://oauth.reddit.com/best`;
-    const url = `https://oauth.reddit.com/best?limit=100`;
-    console.log('usePosts fetch url: ', url, `Authorization: bearer ${token}`);
+    // const url = `https://oauth.reddit.com/best?limit=100`;
+    // console.log('usePosts fetch url: ', url, `Authorization: bearer ${token}`);
 
     fetch(url, {
       headers: {
