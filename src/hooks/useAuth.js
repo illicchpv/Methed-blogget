@@ -9,7 +9,7 @@ export const useAuth = () => {
 
   useEffect(() => {
     if (!token) return;
-    console.log(`token:`, token.length);
+    console.log(`token:.length`, token.length);
 
     // https://github.com/reddit-archive/reddit/wiki/OAuth2#authorization-implicit-grant-flow
     // API requests with a bearer token should be made to https://oauth.reddit.com, NOT www.reddit.com.
@@ -27,12 +27,11 @@ export const useAuth = () => {
       })
       .then(({ name, icon_img: iconImg }) => {
         const img = iconImg.split('&')[0];
-        console.log(`iconImg, name:`, img, name, iconImg);
+        // console.log(`iconImg, name:`, img, name, iconImg);
         setAuth({ name, img });
 
         const newHref = window.location.href.split('#')[0];
-        console.log('newHref: ', newHref);
-        // console.log('window.location.href: ', window.location.href);
+        // console.log('newHref: ', newHref);
         window.history.replaceState(null, null, newHref);
       })
       .catch((err) => {

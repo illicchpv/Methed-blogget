@@ -29,7 +29,7 @@ export const usePosts = (state) => {
       })
       .then(data => {
         if(!data) return
-        console.log('usePosts ----------- setPosts(data): ', data);
+        // console.log('usePosts ----------- setPosts(data): ', data);
         setPosts(data);
       })
       .catch((err) => {

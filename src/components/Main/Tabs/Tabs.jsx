@@ -29,7 +29,7 @@ const LIST = [
 export const Tabs = (props) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdown, setIsDropdown] = useState(true); // true - mobile version / desktop;
-  const [selectedTab, setSelectedTab] = useState(0);
+  const [setSelectedTab] = useState(0);
 
   const handleResize = () => {
     if (document.documentElement.clientWidth < 768) {
@@ -48,7 +48,6 @@ export const Tabs = (props) => {
     };
   }, []);
 
-  console.log('selectedTab: ', selectedTab);
   return (
     <div className={style.container}>
       {isDropdown && <div className={style.wrapperBtn}>
@@ -58,7 +57,7 @@ export const Tabs = (props) => {
           }}
         >
           LIST[selectedTab].value
-          
+
           <ArrowIcon width={15} height={15} />
         </Text>
       </div>}

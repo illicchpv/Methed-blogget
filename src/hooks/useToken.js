@@ -10,7 +10,10 @@ export const useToken = (state) => {
   };
 
   useEffect(() => {
-    if (window.location.pathname.includes('/auth')) {
+    // console.log('window.location: ', window.location);
+    // console.log('window.location.pathname: ', window.location.pathname);
+    // console.log('window.location.hash: ', window.location.hash);
+    if (window.location.pathname.includes('/auth') || window.location.hash.startsWith('#access_token=')) {
       const token = new URLSearchParams(window.location.hash.substring(1))
         .get('access_token');
       setToken(token);
