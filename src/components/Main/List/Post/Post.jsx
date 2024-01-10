@@ -6,19 +6,24 @@ import DelPost from './DelPost';
 import RatePost from './RatePost';
 import DatePost from './DatePost';
 
-export const Post = ({postData}) => {
+export const Post = ({ postData }) => {
   if (!postData) return <></>;
 
-  const {title, author, ups, date} = postData;
+  const { thumbnail, title, author, ups, date } = postData;
+  // console.log('thumbnail: ', thumbnail);
+  let imgSrc = (thumbnail ? thumbnail.replaceAll('&amp;', '&') : notphoto);
+  if(imgSrc.trim().length < 12) imgSrc = '';
+  // console.log('imgSrc: ', imgSrc);
   return (
     <li className={style.post}>
-      <img className={style.img} src={notphoto} alt={title} />
+      {!imgSrc && <img className={style.img} src={notphoto} alt={title} />}
+      {imgSrc && <img className={style.img} src={imgSrc} alt={title} />}
 
       <InfoPost title={title} author={author} />
       {/* <div className={style.content}>
         <h2 className={style.title}>
           <a className={style.linkPost} href="#post">
-            {title}
+            {title} 
           </a>
         </h2>
         <a className={style.linkAuthor} href="#author">{author}</a>
