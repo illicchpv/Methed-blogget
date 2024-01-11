@@ -10,8 +10,8 @@ export const usePosts = (state) => {
   useEffect(() => {
     if (!token) return;
 
-    const url = `${URL_API}/best?limit=3`;
-    // const url = `${URL_API}/best/.json?limit=3`;
+    const url = `${URL_API}/best?limit=30`;
+    // const url = `${URL_API}/best/.json?limit=30`;
     // const url = `https://oauth.reddit.com/best`;
     // const url = `https://oauth.reddit.com/best?limit=100`;
     // console.log('usePosts fetch url: ', url, `Authorization: bearer ${token}`);

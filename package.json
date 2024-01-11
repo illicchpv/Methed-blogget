@@ -8,6 +8,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "classnames": "^2.5.1",
+    "markdown-to-jsx": "^7.4.0",
     "normalize.css": "^8.0.1",
     "prop-types": "^15.8.1",
     "random-words": "^2.0.0",
@@ -22,7 +23,7 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 200",
     "lint:fix": "eslint . --ext js,jsx --fix",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",    
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

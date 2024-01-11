@@ -41,6 +41,7 @@ export const List = (props) => {
       ups: el.ups,
       date: el.created,
       id: el.id,
+      selftext: el.selftext,
     }
   });
   // console.log('List component -- count el.thumbnail !== "self":', tnCnt, 'postsData.length:', postsData.length)

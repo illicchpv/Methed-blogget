@@ -9,7 +9,7 @@ import DatePost from './DatePost';
 export const Post = ({ postData }) => {
   if (!postData) return <></>;
 
-  const { thumbnail, title, author, ups, date } = postData;
+  const { thumbnail, title, author, ups, date, selftext: markdown } = postData;
   // console.log('thumbnail: ', thumbnail);
   let imgSrc = (thumbnail ? thumbnail.replaceAll('&amp;', '&') : notphoto);
   if (imgSrc.trim().length < 12) imgSrc = '';
@@ -19,7 +19,7 @@ export const Post = ({ postData }) => {
       {!imgSrc && <img className={style.img} src={notphoto} alt={title} />}
       {imgSrc && <img className={style.img} src={imgSrc} alt={title} />}
 
-      <InfoPost title={title} author={author} />
+      <InfoPost title={title} author={author} markdown={markdown} />
       {/* <div className={style.content}>
         <h2 className={style.title}>
           <a className={style.linkPost} href="#post">
