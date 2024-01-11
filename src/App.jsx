@@ -6,7 +6,6 @@ import { TokenContextProvider } from './context/tokenContext';
 // import { useToken } from './hooks/useToken';
 
 function App() {
-
   return (
     <TokenContextProvider>
       <AuthContextProvider>
@@ -17,5 +16,5 @@ function App() {
       </AuthContextProvider>
     </TokenContextProvider>
   );
-};
+}
 export default App;

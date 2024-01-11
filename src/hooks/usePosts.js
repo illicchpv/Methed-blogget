@@ -8,17 +8,18 @@ export const usePosts = (state) => {
   const { token } = useContext(tokenContext);
 
   useEffect(() => {
-    // if(!token) return;
+    if (!token) return;
 
-    const url = `${URL_API}/best/.json?limit=100`;
+    const url = `${URL_API}/best?limit=3`;
+    // const url = `${URL_API}/best/.json?limit=3`;
     // const url = `https://oauth.reddit.com/best`;
     // const url = `https://oauth.reddit.com/best?limit=100`;
     // console.log('usePosts fetch url: ', url, `Authorization: bearer ${token}`);
 
     fetch(url, {
-      // headers: {
-      //   Authorization: `bearer ${token}`,
-      // },
+      headers: {
+        Authorization: `bearer ${token}`,
+      },
     })
       .then(resp => {
         // console.log(`----------resp:`, resp);
@@ -28,14 +29,13 @@ export const usePosts = (state) => {
         return resp.json();
       })
       .then(data => {
-        if(!data) return
+        if (!data) return
         // console.log('usePosts ----------- setPosts(data): ', data);
         setPosts(data);
       })
       .catch((err) => {
         console.error(err);
       });
-
   }, [token]);
 
   return [posts, setPosts];

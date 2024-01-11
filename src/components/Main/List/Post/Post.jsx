@@ -12,7 +12,7 @@ export const Post = ({ postData }) => {
   const { thumbnail, title, author, ups, date } = postData;
   // console.log('thumbnail: ', thumbnail);
   let imgSrc = (thumbnail ? thumbnail.replaceAll('&amp;', '&') : notphoto);
-  if(imgSrc.trim().length < 12) imgSrc = '';
+  if (imgSrc.trim().length < 12) imgSrc = '';
   // console.log('imgSrc: ', imgSrc);
   return (
     <li className={style.post}>
@@ -23,7 +23,7 @@ export const Post = ({ postData }) => {
       {/* <div className={style.content}>
         <h2 className={style.title}>
           <a className={style.linkPost} href="#post">
-            {title} 
+            {title}
           </a>
         </h2>
         <a className={style.linkAuthor} href="#author">{author}</a>

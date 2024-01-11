@@ -26,9 +26,10 @@ export const List = (props) => {
   if (!posts || !posts.data) return;
   // console.log('List==================postsDat: ', posts);
   const children = posts?.data?.children;
-  const children_data = children.map(el => el.data);
-  let tnCnt = 0;
-  const postsData = children_data.map((el, i) => {
+  const childrenData = children.map(el => el.data);
+  let tnCnt = 0; // ? ??? warning  'tnCnt' is assigned a value but never used  no-unused-vars
+
+  const postsData = childrenData.map((el, i) => {
     if (el.thumbnail !== 'self') {
       tnCnt++;
       // console.log(JSON.stringify(el, null, 2));
@@ -42,7 +43,7 @@ export const List = (props) => {
       id: el.id,
     }
   });
-  console.log('List component -- count el.thumbnail !== "self":', tnCnt, 'postsData.length:', postsData.length)
+  // console.log('List component -- count el.thumbnail !== "self":', tnCnt, 'postsData.length:', postsData.length)
 
   return (
     <ul className={style.list}>

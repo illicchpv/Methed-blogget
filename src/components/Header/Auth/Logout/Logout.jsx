@@ -8,7 +8,9 @@ export const Logout = (props) => {
 
   return (
     <button className={style.logout}
-      onClick={() => {logout()}}
+      onClick={() => {
+        logout()
+      }}
     >Logout</button>
   );
 };

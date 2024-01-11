@@ -26,7 +26,9 @@ export const Auth = () => {
       {auth.name ? (
         <>
           <button className={style.btn}
-            onClick={() => { setLogoutVisible((prev) => !prev) }}
+            onClick={() => {
+              setLogoutVisible((prev) => !prev)
+            }}
           >
             <img className={style.img} src={auth.img} title={auth.name} alt={`Аватар ${auth.name}`} />
           </button>

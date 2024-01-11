@@ -20,7 +20,7 @@ export const useAuth = () => {
     })
       .then(resp => {
         // console.log(`----------resp:`, resp);
-        if(resp.status === 401) {
+        if (resp.status === 401) {
           throw new Error('Сервер вернул ошибку: ', resp.statusText)
         }
         return resp.json();

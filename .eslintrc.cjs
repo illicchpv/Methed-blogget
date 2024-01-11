@@ -105,7 +105,7 @@ module.exports = {
     "block-spacing": ["error", "never"],
     "brace-style": "error",
     "camelcase": [
-      "error",
+      1,
       {
         "properties": "never"
       }
@@ -170,7 +170,7 @@ module.exports = {
       }
     ],
     "operator-linebreak": ["error", "after"],
-    "padded-blocks": ["error", "never"],
+    "padded-blocks": [1, "never"],
     "quote-props": ["error", "consistent"],
     // "quotes": [
     //   "error",
