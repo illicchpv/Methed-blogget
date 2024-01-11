@@ -22,23 +22,23 @@ const Text = (props) => {
   const classes = classNames(
     className,
     style[color],
-    { [style[`fs${size}`]]: size },
-    { [style[`fst${tsize}`]]: tsize },
-    { [style[`dst${dsize}`]]: dsize },
-    { [style.center]: center },
-    { [style[`medium`]]: medium },
-    { [style[`bold`]]: bold },
-    { [style[`italic`]]: italic },
+    {[style[`fs${size}`]]: size},
+    {[style[`fst${tsize}`]]: tsize},
+    {[style[`dst${dsize}`]]: dsize},
+    {[style.center]: center},
+    {[style[`medium`]]: medium},
+    {[style[`bold`]]: bold},
+    {[style[`italic`]]: italic},
   );
 
   return <As className={classes} href={href} onClick={onClick}>{children}</As>;
 };
 Text.propTypes = {
-  // children: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.object,
-  //   PropTypes.array,
-  // ]),
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.array,
+  ]),
   As: PropTypes.string,
   color: PropTypes.string,
   size: PropTypes.number,
@@ -47,5 +47,9 @@ Text.propTypes = {
   className: PropTypes.string,
   href: PropTypes.string,
   center: PropTypes.bool,
+  onClick: PropTypes.func,
+  medium: PropTypes.bool,
+  bold: PropTypes.bool,
+  italic: PropTypes.bool,
 };
 export default Text;

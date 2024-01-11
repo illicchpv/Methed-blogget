@@ -1,11 +1,11 @@
-import { useContext, useEffect, useState } from 'react';
-import { URL_API } from '../api/const';
-import { tokenContext } from '../context/tokenContext';
+import {useContext, useEffect, useState} from 'react';
+import {URL_API} from '../api/const';
+import {tokenContext} from '../context/tokenContext';
 
 export const useAuth = () => {
   const [auth, setAuth] = useState({});
   // const [logoutVisible, setLogoutVisible] = useState(false);
-  const { token, delToken } = useContext(tokenContext);
+  const {token, delToken} = useContext(tokenContext);
 
   useEffect(() => {
     if (!token) return;
@@ -21,14 +21,14 @@ export const useAuth = () => {
       .then(resp => {
         // console.log(`----------resp:`, resp);
         if (resp.status === 401) {
-          throw new Error('Сервер вернул ошибку: ', resp.statusText)
+          throw new Error('Сервер вернул ошибку: ', resp.statusText);
         }
         return resp.json();
       })
-      .then(({ name, icon_img: iconImg }) => {
+      .then(({name, icon_img: iconImg}) => {
         const img = iconImg.split('&')[0];
         // console.log(`iconImg, name:`, img, name, iconImg);
-        setAuth({ name, img });
+        setAuth({name, img});
 
         const newHref = window.location.href.split('#')[0];
         // console.log('newHref: ', newHref);

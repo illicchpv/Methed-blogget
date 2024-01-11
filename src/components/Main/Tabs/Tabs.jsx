@@ -1,18 +1,18 @@
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import style from './Tabs.module.css';
-import { assignId } from '../../utils/genRandomId';
+import {assignId} from '../../utils/genRandomId';
 
-import { ReactComponent as ArrowIcon } from './img/arrow.svg';
+import {ReactComponent as ArrowIcon} from './img/arrow.svg';
 // import { ReactComponent as EyeIcon } from './img/eye.svg';
 // import { ReactComponent as HomeIcon } from './img/home.svg';
 // import { ReactComponent as PostIcon } from './img/post.svg';
 // import { ReactComponent as SaveIcon } from './img/save.svg';
-import { ReactComponent as HomeIcon } from './img2/home.svg';
-import { ReactComponent as TopIcon } from './img2/top.svg';
-import { ReactComponent as BestIcon } from './img2/best.svg';
-import { ReactComponent as HotIcon } from './img2/hot.svg';
-import { debounceRaf } from '../../utils/debounceRaf';
+import {ReactComponent as HomeIcon} from './img2/home.svg';
+import {ReactComponent as TopIcon} from './img2/top.svg';
+import {ReactComponent as BestIcon} from './img2/best.svg';
+import {ReactComponent as HotIcon} from './img2/hot.svg';
+import {debounceRaf} from '../../utils/debounceRaf';
 import Text from '../../../UI/Text';
 
 const LIST = [
@@ -20,10 +20,10 @@ const LIST = [
   // { value: 'Просмотренные', Icon: HomeIcon },
   // { value: 'Сохранённые', Icon: PostIcon },
   // { value: 'Мои посты', Icon: SaveIcon },
-  { value: 'Главная', Icon: HomeIcon },
-  { value: 'Топ', Icon: TopIcon },
-  { value: 'Лучшие', Icon: BestIcon },
-  { value: 'Горячие', Icon: HotIcon },
+  {value: 'Главная', Icon: HomeIcon},
+  {value: 'Топ', Icon: TopIcon},
+  {value: 'Лучшие', Icon: BestIcon},
+  {value: 'Горячие', Icon: HotIcon},
 ].map(assignId);
 
 export const Tabs = (props) => {
@@ -55,7 +55,7 @@ export const Tabs = (props) => {
       {isDropdown && <div className={style.wrapperBtn}>
         <Text As='button' size={18} tsize={24}
           className={style.btn} onClick={() => {
-            setIsDropdownOpen(!isDropdownOpen)
+            setIsDropdownOpen(!isDropdownOpen);
           }}
         >
           {LIST[selectedTab].value}
@@ -70,7 +70,7 @@ export const Tabs = (props) => {
             <Text As='button' size={18} tsize={24}
               className={style.btn} onClick={() => {
                 LIST.forEach((el2, i) => {
-                  if (el2.value === el.value) setSelectedTab(i)
+                  if (el2.value === el.value) setSelectedTab(i);
                 });
               }}>
               {el.value}

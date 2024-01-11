@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 
 export const useToken = (state) => {
   const [token, setToken] = useState(state);
@@ -25,7 +25,7 @@ export const useToken = (state) => {
 
   useEffect(() => {
     if (token) {
-      sessionStorage.setItem('bearer', token)
+      sessionStorage.setItem('bearer', token);
     }
   }, [token]);
 

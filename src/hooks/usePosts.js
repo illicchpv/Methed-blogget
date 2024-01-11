@@ -1,11 +1,11 @@
-import { useContext, useEffect, useState } from 'react';
-import { URL_API } from '../api/const';
-import { tokenContext } from '../context/tokenContext';
+import {useContext, useEffect, useState} from 'react';
+import {URL_API} from '../api/const';
+import {tokenContext} from '../context/tokenContext';
 // import { postsContext } from '../context/postsContext';
 
 export const usePosts = (state) => {
   const [posts, setPosts] = useState({});
-  const { token } = useContext(tokenContext);
+  const {token} = useContext(tokenContext);
 
   useEffect(() => {
     if (!token) return;
@@ -24,12 +24,12 @@ export const usePosts = (state) => {
       .then(resp => {
         // console.log(`----------resp:`, resp);
         if (resp.status === 401) {
-          throw new Error('Сервер вернул ошибку: ', resp.statusText)
+          throw new Error('Сервер вернул ошибку: ', resp.statusText);
         }
         return resp.json();
       })
       .then(data => {
-        if (!data) return
+        if (!data) return;
         // console.log('usePosts ----------- setPosts(data): ', data);
         setPosts(data);
       })

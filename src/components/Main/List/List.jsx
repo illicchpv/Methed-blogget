@@ -1,7 +1,7 @@
 import Post from './Post';
 import style from './List.module.css';
-import { useContext } from 'react';
-import { postsContext } from '../../../context/postsContext';
+import {useContext} from 'react';
+import {postsContext} from '../../../context/postsContext';
 
 export const List = (props) => {
   // let postsData = [
@@ -22,7 +22,7 @@ export const List = (props) => {
   //     id: '22',
   //   },
   // ];
-  const { posts } = useContext(postsContext);
+  const {posts} = useContext(postsContext);
   if (!posts || !posts.data) return;
   // console.log('List==================postsDat: ', posts);
   const children = posts?.data?.children;
@@ -42,7 +42,7 @@ export const List = (props) => {
       date: el.created,
       id: el.id,
       selftext: el.selftext,
-    }
+    };
   });
   // console.log('List component -- count el.thumbnail !== "self":', tnCnt, 'postsData.length:', postsData.length)
 

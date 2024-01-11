@@ -1,11 +1,11 @@
 import style from './InfoPost.module.css';
 import PropTypes from 'prop-types';
 import Text from '../../../../../UI/Text';
-import { useState } from 'react';
-import Modal from '../../../../Modal'
+import {useState} from 'react';
+import Modal from '../../../../Modal';
 
 export const InfoPost = (props) => {
-  const { title, author, markdown } = props;
+  const {title, author, id} = props;
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -26,7 +26,8 @@ export const InfoPost = (props) => {
         href="#author"
       >{author}
       </Text>
-      {isModalOpen && <Modal title={title} author={author} markdown={markdown}
+      {/* title={title} author={author} markdown={markdown}  */}
+      {isModalOpen && <Modal id={id}
         closeModal={() => {
           setIsModalOpen(false);
         }} />}

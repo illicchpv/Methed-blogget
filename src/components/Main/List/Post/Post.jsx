@@ -1,3 +1,4 @@
+
 import PropTypes from 'prop-types';
 import style from './Post.module.css';
 import notphoto from './img/notphoto.jpg';
@@ -6,10 +7,11 @@ import DelPost from './DelPost';
 import RatePost from './RatePost';
 import DatePost from './DatePost';
 
-export const Post = ({ postData }) => {
+export const Post = ({postData}) => {
   if (!postData) return <></>;
 
-  const { thumbnail, title, author, ups, date, selftext: markdown } = postData;
+  // debugger;
+  const {thumbnail, title, author, ups, date, selftext: markdown, id} = postData;
   // console.log('thumbnail: ', thumbnail);
   let imgSrc = (thumbnail ? thumbnail.replaceAll('&amp;', '&') : notphoto);
   if (imgSrc.trim().length < 12) imgSrc = '';
@@ -19,7 +21,7 @@ export const Post = ({ postData }) => {
       {!imgSrc && <img className={style.img} src={notphoto} alt={title} />}
       {imgSrc && <img className={style.img} src={imgSrc} alt={title} />}
 
-      <InfoPost title={title} author={author} markdown={markdown} />
+      <InfoPost title={title} author={author} markdown={markdown} id={id} />
       {/* <div className={style.content}>
         <h2 className={style.title}>
           <a className={style.linkPost} href="#post">
@@ -75,4 +77,5 @@ Post.propTypes = {
   author: PropTypes.string,
   ups: PropTypes.number,
   date: PropTypes.string,
+  id: PropTypes.string,
 };

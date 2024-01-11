@@ -21,4 +21,4 @@ searchParams.append('state', RANDOM_STRING);
 searchParams.append('redirect_uri', REDIRECT_URI);
 searchParams.append('scope', SCOPE_STRING);
 
-export const urlAuth = `${URL_AUTH}${searchParams.toString()}`
+export const urlAuth = `${URL_AUTH}${searchParams.toString()}`;

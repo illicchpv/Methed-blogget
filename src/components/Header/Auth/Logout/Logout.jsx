@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 
 export const Logout = (props) => {
   // console.log('Logout props:', props);
-  const { logout } = props;
+  const {logout} = props;
 
   return (
     <button className={style.logout}
       onClick={() => {
-        logout()
+        logout();
       }}
     >Logout</button>
   );

@@ -17,6 +17,6 @@ export const <%= component_name %> = (props) => {
   );
 };
 
-Modal.propTypes = {
+<%= component_name %>.propTypes = {
   props: PropTypes.object,
 };

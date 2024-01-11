@@ -1,17 +1,17 @@
-import { useState, useContext } from 'react';
+import {useState, useContext} from 'react';
 import PropTypes from 'prop-types';
 // import { URL_API } from '../../../api/const'
-import { urlAuth } from '../../../api/auth';
+import {urlAuth} from '../../../api/auth';
 import Text from '../../../UI/Text';
-import { ReactComponent as LoginIcon } from './img/login.svg';
+import {ReactComponent as LoginIcon} from './img/login.svg';
 import style from './Auth.module.css';
-import Logout from './Logout'
+import Logout from './Logout';
 // import { useAuth } from '../../../hooks/useAuth';
-import { tokenContext } from '../../../context/tokenContext';
-import { authContext } from '../../../context/authContext';
+import {tokenContext} from '../../../context/tokenContext';
+import {authContext} from '../../../context/authContext';
 
 export const Auth = () => {
-  const { delToken } = useContext(tokenContext);
+  const {delToken} = useContext(tokenContext);
   // const [auth, clearAuth] = useAuth();
   const [logoutVisible, setLogoutVisible] = useState(false);
   const {auth, clearAuth} = useContext(authContext);
@@ -27,7 +27,7 @@ export const Auth = () => {
         <>
           <button className={style.btn}
             onClick={() => {
-              setLogoutVisible((prev) => !prev)
+              setLogoutVisible((prev) => !prev);
             }}
           >
             <img className={style.img} src={auth.img} title={auth.name} alt={`Аватар ${auth.name}`} />
