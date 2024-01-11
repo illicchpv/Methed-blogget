@@ -26,7 +26,10 @@ export const InfoPost = (props) => {
         href="#author"
       >{author}
       </Text>
-      {isModalOpen && <Modal title={title} author={author} markdown={markdown} />}
+      {isModalOpen && <Modal title={title} author={author} markdown={markdown}
+        closeModal={() => {
+          setIsModalOpen(false);
+        }} />}
     </div>
   );
 };

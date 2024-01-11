@@ -1,19 +1,33 @@
-// import React from 'react';
-import PropTypes from 'prop-types';
-// import { URL_API } from '../../../api/const'
-// import { urlAuth } from '../../../api/auth';
-// import Text from '../../../UI/Text';
-// import { ReactComponent as LoginIcon } from './img/login.svg';
 import style from './Modal.module.css';
+import PropTypes from 'prop-types';
 import { ReactComponent as CloseIcon } from './img/close.svg'
 import Markdown from 'markdown-to-jsx';
 import ReactDOM from 'react-dom';
+import { useEffect, useRef } from 'react';
 
-export const Modal = (props) => {
-  const { title, author, markdown } = props;
+export const Modal = ({ title, author, markdown, closeModal }) => {
+  const overlayRef = useRef(null);
+
+  const handleClick = (e) => {
+    console.log('handleClick: ', e);
+
+    const target = e.target;
+    if (target === overlayRef.current) {
+      closeModal();
+    }
+  };
+
+  useEffect(() => {
+    console.log('-----useEffect: ');
+
+    document.addEventListener('click', handleClick);
+    return () => {
+      document.removeEventListener('click', handleClick);
+    }
+  }, []);
 
   return ReactDOM.createPortal(
-    <div className={style.overlay}>
+    <div className={style.overlay} ref={overlayRef}>
       <div className={style.modal}>
         <h2 className={style.title}>{title}</h2>
 
@@ -45,4 +59,5 @@ Modal.propTypes = {
   title: PropTypes.string,
   author: PropTypes.string,
   markdown: PropTypes.string,
+  closeModal: PropTypes.func,
 };
