@@ -7,22 +7,34 @@ import { useEffect, useRef } from 'react';
 
 export const Modal = ({ title, author, markdown, closeModal }) => {
   const overlayRef = useRef(null);
+  const closeRef = useRef(null);
 
   const handleClick = (e) => {
-    console.log('handleClick: ', e);
-
     const target = e.target;
-    if (target === overlayRef.current) {
+    if (target === overlayRef.current || target === closeRef.current || target.closest('button') === closeRef.current) {
       closeModal();
     }
   };
+  const handleKey = (e) => {
+    if (e.key === 'Escape') closeModal();
+  }
 
   useEffect(() => {
-    console.log('-----useEffect: ');
-
     document.addEventListener('click', handleClick);
     return () => {
       document.removeEventListener('click', handleClick);
+    }
+  }, []);
+  useEffect(() => {
+    document.addEventListener('keydown', handleKey);
+    return () => {
+      document.removeEventListener('keydown', handleKey);
+    }
+  }, []);
+  useEffect(() => {
+    closeRef.current.addEventListener('click', handleClick);
+    return () => {
+      closeRef?.current?.removeEventListener('click', handleClick);
     }
   }, []);
 
@@ -45,7 +57,7 @@ export const Modal = ({ title, author, markdown, closeModal }) => {
 
         <p className={style.author}>{author}</p>
 
-        <button className={style.close}>
+        <button className={style.close} ref={closeRef}>
           <CloseIcon />
         </button>
       </div>
