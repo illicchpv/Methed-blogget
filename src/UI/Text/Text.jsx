@@ -34,11 +34,11 @@ const Text = (props) => {
   return <As className={classes} href={href} onClick={onClick}>{children}</As>;
 };
 Text.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-    PropTypes.array,
-  ]),
+  // children: PropTypes.oneOfType([
+  //   PropTypes.string,
+  //   PropTypes.object,
+  //   PropTypes.array,
+  // ]),
   As: PropTypes.string,
   color: PropTypes.string,
   size: PropTypes.number,
