@@ -10,7 +10,7 @@ export const getRedditRezArray = (posts) => {
     });
     // const a3 = a2.filter(el => el.kind && el.kind === 't3');
     const a4 = a3.map((el) => el.data);
-    return a3;
+    return a4;
 
     /*
     // console.log('List==================postsDat: ', posts);

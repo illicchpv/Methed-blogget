@@ -1,7 +1,7 @@
 
 import {useContext, useEffect, useState} from 'react';
 import {URL_API} from '../api/const';
-import {tokenContext} from '../context/tokenContext';
+import {tokenContext} from '../context';
 // import { postsContext } from '../context/postsContext';
 
 export const useCommentsData = (id) => {
@@ -60,7 +60,7 @@ export const useCommentsData = (id) => {
       .finally(() => {
         setLoading(false);
       });
-  }, [token]);
+  }, [token, id]);
 
   return [data, error, loading];
 };

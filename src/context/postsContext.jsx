@@ -1,8 +1,8 @@
-import React from 'react';
+// import React from 'react';
 import PropTypes from 'prop-types';
 import {usePosts} from '../hooks/usePosts';
+import {postsContext} from './index';
 
-export const postsContext = React.createContext({});
 export const PostsContextProvider = ({children}) => {
   const [posts, setPosts] = usePosts();
   // console.log('posts: ', posts);

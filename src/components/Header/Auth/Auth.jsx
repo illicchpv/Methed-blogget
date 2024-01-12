@@ -7,8 +7,7 @@ import {ReactComponent as LoginIcon} from './img/login.svg';
 import style from './Auth.module.css';
 import Logout from './Logout';
 // import { useAuth } from '../../../hooks/useAuth';
-import {tokenContext} from '../../../context/tokenContext';
-import {authContext} from '../../../context/authContext';
+import {authContext, tokenContext} from '../../../context/index';
 
 export const Auth = () => {
   const {delToken} = useContext(tokenContext);

@@ -1,8 +1,8 @@
-import React from 'react';
+// import React from 'react';
 import PropTypes from 'prop-types';
 import {useToken} from '../hooks/useToken';
+import {tokenContext} from './index';
 
-export const tokenContext = React.createContext({});
 export const TokenContextProvider = ({children}) => {
   const [token, delToken] = useToken('');
   // const [counta, setCounta] = useState(0);

@@ -1,7 +1,7 @@
 import Post from './Post';
 import style from './List.module.css';
 import {useContext} from 'react';
-import {postsContext} from '../../../context/postsContext';
+import {postsContext} from '../../../context/index';
 
 export const List = (props) => {
   // let postsData = [

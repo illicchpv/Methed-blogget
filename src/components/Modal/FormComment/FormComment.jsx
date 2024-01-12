@@ -6,7 +6,7 @@
 import PropTypes from 'prop-types';
 import style from './FormComment.module.css';
 import {useContext, useRef} from 'react';
-import {authContext} from '../../../context/authContext';
+import {authContext} from '../../../context/index';
 import Text from '../../../UI/Text/Text';
 
 export const FormComment = () => {

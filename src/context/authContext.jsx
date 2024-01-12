@@ -1,8 +1,8 @@
-import React from 'react';
+// import React from 'react';
 import PropTypes from 'prop-types';
 import {useAuth} from '../hooks/useAuth';
+import { authContext } from './index'
 
-export const authContext = React.createContext({}); // ? ???warning  Fast refresh only works when a file only exports components.
 export const AuthContextProvider = ({children}) => {
   const [auth, clearAuth] = useAuth();
 
