@@ -8,7 +8,7 @@ import style from './FormComment.module.css';
 import {useContext, useRef, useState} from 'react';
 import {authContext, commentContext} from '../../../context/index';
 import Text from '../../../UI/Text/Text';
-import {useSelector, useStore} from 'react-redux';
+import {useDispatch, useSelector, useStore} from 'react-redux';
 
 export const FormComment = () => {
   // console.log('FormComment props:', props);
@@ -17,15 +17,17 @@ export const FormComment = () => {
   // const textareaRef = useRef(null);
 
   // const {value, setValue} = useContext(commentContext);
-  const {setValue} = useContext(commentContext);
+  // const {setValue} = useContext(commentContext);
 
   // const store = useStore();
   // const value = store.getState().comment;
   const value = useSelector(state => state.comment);
+  const dispatch = useDispatch();
 
 
   const handleChange = (e) => {
-    setValue(e.target.value);
+    // setValue(e.target.value);
+    dispatch({type: 'UPDATE_COMMENT', comment: e.target.value});
   };
   const handleSubmit = (e) => {
     // console.log('handleSubmit: ', e.target);

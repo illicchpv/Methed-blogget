@@ -10,7 +10,12 @@ import {Provider} from 'react-redux'; // чтоб передать stor в пр�
 
 const initialState = {comment: 'Привет Redux'};
 const rootReducer = (state = initialState, action) => { // преобразователь состояний
-  return state;
+  switch (action.type) {
+    case 'UPDATE_COMMENT':
+      return {...state, comment: action.comment};
+    default:
+      return state;
+  }
 };
 const store = createStore(rootReducer);
 function App() {
