@@ -47,26 +47,26 @@ export const Modal = ({closeModal, id}) => { // title, author, markdown,
   const handleKey = (e) => {
     if (e.key === 'Escape') closeModal();
   };
-  {
-    useEffect(() => {
-      document.addEventListener('click', handleClick);
-      return () => {
-        document.removeEventListener('click', handleClick);
-      };
-    }, []);
-    useEffect(() => {
-      document.addEventListener('keydown', handleKey);
-      return () => {
-        document.removeEventListener('keydown', handleKey);
-      };
-    }, []);
-    useEffect(() => {
-      closeRef.current.addEventListener('click', handleClick);
-      return () => {
-        closeRef?.current?.removeEventListener('click', handleClick);
-      };
-    }, []);
-  }
+
+  useEffect(() => {
+    document.addEventListener('click', handleClick);
+    return () => {
+      document.removeEventListener('click', handleClick);
+    };
+  }, []);
+  useEffect(() => {
+    document.addEventListener('keydown', handleKey);
+    return () => {
+      document.removeEventListener('keydown', handleKey);
+    };
+  }, []);
+  useEffect(() => {
+    closeRef.current.addEventListener('click', handleClick);
+    return () => {
+      closeRef?.current?.removeEventListener('click', handleClick);
+    };
+  }, []);
+
 
   return ReactDOM.createPortal(
     <div className={style.overlay} ref={overlayRef}>
@@ -90,7 +90,7 @@ export const Modal = ({closeModal, id}) => { // title, author, markdown,
         {!loading && <FormComment />}
 
         {loading && <p>“Loading”</p>}
-        {(!loading && comments.length > 0) && <Comments comments={comments}/>}
+        {(!loading && comments.length > 0) && <Comments comments={comments} />}
         {(!loading && comments.length === 0) && <p>“Нет комментариев”</p>}
 
         <button className={style.close} ref={closeRef}>
