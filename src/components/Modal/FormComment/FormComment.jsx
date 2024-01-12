@@ -6,7 +6,7 @@
 import PropTypes from 'prop-types';
 import style from './FormComment.module.css';
 import {useContext, useRef, useState} from 'react';
-import {authContext} from '../../../context/index';
+import {authContext, commentContext} from '../../../context/index';
 import Text from '../../../UI/Text/Text';
 
 export const FormComment = () => {
@@ -14,7 +14,7 @@ export const FormComment = () => {
   const {auth} = useContext(authContext);
   // console.log('auth: ', auth);
   // const textareaRef = useRef(null);
-  const [value, setValue] = useState('');
+  const {value, setValue} = useContext(commentContext);
 
   const handleChange = (e) => {
     setValue(e.target.value);
