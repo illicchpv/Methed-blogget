@@ -9,6 +9,7 @@ import {useContext, useRef, useState} from 'react';
 import {authContext, commentContext} from '../../../context/index';
 import Text from '../../../UI/Text/Text';
 import {useDispatch, useSelector, useStore} from 'react-redux';
+import {updateComment} from '../../../App';
 
 export const FormComment = () => {
   // console.log('FormComment props:', props);
@@ -24,10 +25,10 @@ export const FormComment = () => {
   const value = useSelector(state => state.comment);
   const dispatch = useDispatch();
 
-
+  updateComment
   const handleChange = (e) => {
     // setValue(e.target.value);
-    dispatch({type: 'UPDATE_COMMENT', comment: e.target.value});
+    dispatch(updateComment(e.target.value));
   };
   const handleSubmit = (e) => {
     // console.log('handleSubmit: ', e.target);

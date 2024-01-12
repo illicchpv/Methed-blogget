@@ -8,10 +8,12 @@ import {TokenContextProvider} from './context/tokenContext';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux'; // чтоб передать stor в приложение
 
+const UPDATE_COMMENT = 'UPDATE_COMMENT';
 const initialState = {comment: 'Привет Redux'};
+export const updateComment = (comment) => ({type: UPDATE_COMMENT, comment});
 const rootReducer = (state = initialState, action) => { // преобразователь состояний
   switch (action.type) {
-    case 'UPDATE_COMMENT':
+    case UPDATE_COMMENT:
       return {...state, comment: action.comment};
     default:
       return state;
