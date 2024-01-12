@@ -9,7 +9,7 @@ import {useContext, useRef, useState} from 'react';
 import {authContext} from '../../../context/index';
 import Text from '../../../UI/Text/Text';
 import {useDispatch, useSelector, useStore} from 'react-redux';
-import {updateComment} from '../../../App';
+import {updateComment} from '../../../store';
 
 export const FormComment = () => {
   // console.log('FormComment props:', props);
@@ -22,7 +22,6 @@ export const FormComment = () => {
   const value = useSelector(state => state.comment);
   const dispatch = useDispatch();
 
-  updateComment;
   const handleChange = (e) => {
     // setValue(e.target.value);
     dispatch(updateComment(e.target.value));
