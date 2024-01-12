@@ -53,19 +53,19 @@ export const Modal = ({closeModal, id}) => { // title, author, markdown,
     return () => {
       document.removeEventListener('click', handleClick);
     };
-  }, []);
+  }, [handleClick]);
   useEffect(() => {
     document.addEventListener('keydown', handleKey);
     return () => {
       document.removeEventListener('keydown', handleKey);
     };
-  }, []);
+  }, [handleKey]);
   useEffect(() => {
     closeRef.current.addEventListener('click', handleClick);
     return () => {
       closeRef?.current?.removeEventListener('click', handleClick);
     };
-  }, []);
+  }, [handleClick]);
 
 
   return ReactDOM.createPortal(

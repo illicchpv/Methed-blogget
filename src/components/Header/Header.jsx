@@ -5,12 +5,8 @@ import Logo from './Logo';
 import Search from './Search';
 import Auth from './Auth';
 import Heading from './Heading';
-// import { tokenContext } from '../../context/tokenContext';
 
 export const Header = () =>
-// const {Consumer} = tokenContext; v1
-// const ctx = useContext(tokenContext); // v2
-
   (
     <header className={style.header}>
       <Layout>

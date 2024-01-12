@@ -7,16 +7,19 @@ import {ReactComponent as LoginIcon} from './img/login.svg';
 import style from './Auth.module.css';
 import Logout from './Logout';
 // import { useAuth } from '../../../hooks/useAuth';
-import {authContext, tokenContext} from '../../../context/index';
+import {authContext} from '../../../context/index';
+import {useDispatch} from 'react-redux';
+import {deleteToken} from '../../../store';
 
 export const Auth = () => {
-  const {delToken} = useContext(tokenContext);
   // const [auth, clearAuth] = useAuth();
   const [logoutVisible, setLogoutVisible] = useState(false);
   const {auth, clearAuth} = useContext(authContext);
+  // const token = useSelector(state => state.token);
+  const dispatch = useDispatch();
 
   const handleLogout = () => {
-    delToken();
+    dispatch(deleteToken()); // delToken();
     clearAuth();
   };
 

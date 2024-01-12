@@ -5,10 +5,10 @@
 // import { ReactComponent as LoginIcon } from './img/login.svg';
 import PropTypes from 'prop-types';
 import style from './FormComment.module.css';
-import {useContext, useRef, useState} from 'react';
+import {useContext} from 'react';
 import {authContext} from '../../../context/index';
 import Text from '../../../UI/Text/Text';
-import {useDispatch, useSelector, useStore} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {updateComment} from '../../../store';
 
 export const FormComment = () => {
