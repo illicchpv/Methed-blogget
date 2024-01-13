@@ -3,6 +3,7 @@ import {combineReducers, createStore, applyMiddleware} from "redux";
 import {composeWithDevTools} from '@redux-devtools/extension';
 import {commentReducer} from "./commentReducer";
 import {tokenMidleware, tokenReducer} from "./tokenReducer";
+import {thunk} from 'redux-thunk';
 
 const rootReducer = combineReducers({commentReducer, tokenReducer});
 
@@ -16,5 +17,5 @@ const rootReducer = combineReducers({commentReducer, tokenReducer});
 export const store = createStore(
   rootReducer,
   // composeWithDevTools(applyMiddleware(logger)); // для примера напишем логер
-  composeWithDevTools(applyMiddleware(tokenMidleware))
+  composeWithDevTools(applyMiddleware(tokenMidleware, thunk))
 );
