@@ -17,6 +17,7 @@ export const tokenMidleware = (store) => (next) => (action) => {
     setToken(action.token);
   }
   if (action.type === DELETE_TOKEN) {
+    window.location.reload();
     setToken('');
   }
 
