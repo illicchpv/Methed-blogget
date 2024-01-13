@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {ReactComponent as CloseIcon} from './img/close.svg';
 import Markdown from 'markdown-to-jsx';
 import ReactDOM from 'react-dom';
-import {useEffect, useRef} from 'react';
+import {useCallback, useEffect, useRef} from 'react';
 import {useCommentsData} from '../../hooks/useCommentsData';
 // import {getRedditRezArray} from '../utils/getRedditRezArray';
 import FormComment from './FormComment';
@@ -38,15 +38,15 @@ export const Modal = ({closeModal, id}) => { // title, author, markdown,
   //   }
   // }
 
-  const handleClick = (e) => {
+  const handleClick = useCallback((e) => {
     const target = e.target;
     if (target === overlayRef.current || target === closeRef.current || target.closest('button') === closeRef.current) {
       closeModal();
     }
-  };
-  const handleKey = (e) => {
+  }, [closeModal]);
+  const handleKey = useCallback((e) => {
     if (e.key === 'Escape') closeModal();
-  };
+  }, [closeModal]);
 
   useEffect(() => {
     document.addEventListener('click', handleClick);
