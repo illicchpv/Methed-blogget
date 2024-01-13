@@ -1,6 +1,6 @@
 import Header from './components/Header';
 import Main from './components/Main';
-import {AuthContextProvider} from './context/authContext';
+// import {AuthContextProvider} from './context/authContext';
 import {PostsContextProvider} from './context/postsContext';
 
 // import {Provider, useDispatch} from 'react-redux'; // чтоб передать stor в приложение
@@ -27,12 +27,12 @@ function App() {
 
   return (
 
-    <AuthContextProvider>
-      <PostsContextProvider>
-        <Header />
-        <Main />
-      </PostsContextProvider>
-    </AuthContextProvider>
+    // <AuthContextProvider>
+    <PostsContextProvider>
+      <Header />
+      <Main />
+    </PostsContextProvider>
+    // </AuthContextProvider>
 
   );
 }

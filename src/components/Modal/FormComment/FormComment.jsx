@@ -6,14 +6,16 @@
 import PropTypes from 'prop-types';
 import style from './FormComment.module.css';
 import {useContext} from 'react';
-import {authContext} from '../../../context/index';
+// import {authContext} from '../../../context/index';
 import Text from '../../../UI/Text/Text';
 import {useDispatch, useSelector} from 'react-redux';
 import {updateComment} from '../../../store/commentReducer';
+import {useAuth} from '../../../hooks/useAuth';
 
 export const FormComment = () => {
   // console.log('FormComment props:', props);
-  const {auth} = useContext(authContext);
+  // const {auth} = useContext(authContext);
+  const [auth] = useAuth();
   // console.log('auth: ', auth);
   // const textareaRef = useRef(null);
 

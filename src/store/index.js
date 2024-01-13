@@ -4,8 +4,9 @@ import {composeWithDevTools} from '@redux-devtools/extension';
 import {commentReducer} from "./commentReducer";
 import {tokenMidleware, tokenReducer} from "./tokenReducer";
 import {thunk} from 'redux-thunk';
+import {authReducer} from './auth/authReducer'
 
-const rootReducer = combineReducers({commentReducer, tokenReducer});
+const rootReducer = combineReducers({commentReducer, tokenReducer, authReducer});
 
 // // для примера напишем логер
 // const logger = (store) => (next) => (action) => {

@@ -1,4 +1,4 @@
-import {useState, useContext} from 'react';
+import {useState} from 'react';
 import PropTypes from 'prop-types';
 // import { URL_API } from '../../../api/const'
 import {urlAuth} from '../../../api/auth';
@@ -7,14 +7,16 @@ import {ReactComponent as LoginIcon} from './img/login.svg';
 import style from './Auth.module.css';
 import Logout from './Logout';
 // import { useAuth } from '../../../hooks/useAuth';
-import {authContext} from '../../../context/index';
+// import {authContext} from '../../../context/index';
 import {useDispatch} from 'react-redux';
 import {deleteToken} from '../../../store/tokenReducer';
+import {useAuth} from '../../../hooks/useAuth';
 
 export const Auth = () => {
   // const [auth, clearAuth] = useAuth();
   const [logoutVisible, setLogoutVisible] = useState(false);
-  const {auth, clearAuth} = useContext(authContext);
+  // const {auth, clearAuth} = useContext(authContext);
+  const [auth, clearAuth] = useAuth();
   const dispatch = useDispatch();
 
   const handleLogout = () => {

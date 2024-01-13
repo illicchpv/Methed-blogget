@@ -1,11 +1,13 @@
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import {URL_API} from '../api/const';
 import {useDispatch, useSelector} from 'react-redux';
 import {deleteToken} from '../store/tokenReducer';
-import {authRequest, authRequestError, authRequestSuccess} from '../store/auth/action';
+import {authLogout, authRequest, authRequestError, authRequestSuccess} from '../store/auth/action';
+import axios from 'axios';
 
 export const useAuth = () => {
-  const [auth, setAuth] = useState({});
+  // const [auth, setAuth] = useState({});
+  const auth = useSelector(state => state.authReducer.data);
   // const [logoutVisible, setLogoutVisible] = useState(false);
   const token = useSelector(state => state.tokenReducer.token);
   const dispatch = useDispatch();
@@ -18,23 +20,16 @@ export const useAuth = () => {
 
     // https://github.com/reddit-archive/reddit/wiki/OAuth2#authorization-implicit-grant-flow
     // API requests with a bearer token should be made to https://oauth.reddit.com, NOT www.reddit.com.
-    fetch(`${URL_API}/api/v1/me1`, {// https://www.reddit.com/dev/api/#GET_api_v1_me
+    axios(`${URL_API}/api/v1/me`, {// https://www.reddit.com/dev/api/#GET_api_v1_me
       headers: {
         Authorization: `bearer ${token}`, // https://github.com/reddit-archive/reddit/wiki/OAuth2#authorization-implicit-grant-flow
       },
     })
-      .then(resp => {
-        // console.log(`----------resp:`, resp);
-        if (resp.status === 401) {
-          throw new Error('Сервер вернул ошибку: ', resp.statusText);
-        }
-        return resp.json();
-      })
-      .then(({name, icon_img: iconImg}) => {
+      .then(({data: {name, icon_img: iconImg}}) => {
         const img = iconImg.split('&')[0];
         // console.log(`iconImg, name:`, img, name, iconImg);
         const data = {name, img};
-        setAuth(data);
+        // setAuth(data);
 
         dispatch(authRequestSuccess(data));
 
@@ -44,16 +39,17 @@ export const useAuth = () => {
       })
       .catch((err) => {
         console.error(err);
-        setAuth({});
+        // setAuth({});
         // ! handleLogout();
         dispatch(deleteToken());// delToken();
 
-        dispatch(authRequestError(err));
+        dispatch(authRequestError(err.message)); // ? err.toString()
       });
   }, [token]);
 
   const clearAuth = () => {
-    setAuth({});
+    // setAuth({});
+    dispatch(authLogout());
   };
 
   return [auth, clearAuth];
