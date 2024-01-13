@@ -16,7 +16,7 @@ export const Auth = () => {
   // const [auth, clearAuth] = useAuth();
   const [logoutVisible, setLogoutVisible] = useState(false);
   // const {auth, clearAuth} = useContext(authContext);
-  const [auth, clearAuth] = useAuth();
+  const [auth, loading, clearAuth] = useAuth();
   const dispatch = useDispatch();
 
   const handleLogout = () => {
@@ -26,24 +26,26 @@ export const Auth = () => {
 
   return (
     <div className={style.container}>
-      {auth.name ? (
-        <>
-          <button className={style.btn}
-            onClick={() => {
-              setLogoutVisible((prev) => !prev);
-            }}
+      {loading ? (<p>loading...</p>) : (
+        auth.name ? (
+          <>
+            <button className={style.btn}
+              onClick={() => {
+                setLogoutVisible((prev) => !prev);
+              }}
+            >
+              <img className={style.img} src={auth.img} title={auth.name} alt={`Аватар ${auth.name}`} />
+            </button>
+            {logoutVisible && <Logout logout={handleLogout} />
+            }
+          </>
+        ) : (
+          <Text As='a' href={urlAuth}
+            className={style.authLink}
           >
-            <img className={style.img} src={auth.img} title={auth.name} alt={`Аватар ${auth.name}`} />
-          </button>
-          {logoutVisible && <Logout logout={handleLogout} />
-          }
-        </>
-      ) : (
-        <Text As='a' href={urlAuth}
-          className={style.authLink}
-        >
-          <LoginIcon width={128} height={128} />
-        </Text>
+            <LoginIcon width={128} height={128} />
+          </Text>
+        )
       )}
     </div>
   );
