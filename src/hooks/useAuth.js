@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react';
 import {URL_API} from '../api/const';
 import {useDispatch, useSelector} from 'react-redux';
 import {deleteToken} from '../store/tokenReducer';
+import {authRequest, authRequestError, authRequestSuccess} from '../store/auth/action';
 
 export const useAuth = () => {
   const [auth, setAuth] = useState({});
@@ -13,7 +14,7 @@ export const useAuth = () => {
     if (!token) return;
     console.log(`token:.length`, token.length);
 
-    dispatch({type: 'AUTH_REQUEST'});
+    dispatch(authRequest());
 
     // https://github.com/reddit-archive/reddit/wiki/OAuth2#authorization-implicit-grant-flow
     // API requests with a bearer token should be made to https://oauth.reddit.com, NOT www.reddit.com.
@@ -32,9 +33,10 @@ export const useAuth = () => {
       .then(({name, icon_img: iconImg}) => {
         const img = iconImg.split('&')[0];
         // console.log(`iconImg, name:`, img, name, iconImg);
-        setAuth({name, img});
+        const data = {name, img};
+        setAuth(data);
 
-        dispatch({type: 'AUTH_REQUEST_SUCCESS'});
+        dispatch(authRequestSuccess(data));
 
         const newHref = window.location.href.split('#')[0].replace('/auth', '');
         // console.log('newHref: ', newHref);
@@ -46,7 +48,7 @@ export const useAuth = () => {
         // ! handleLogout();
         dispatch(deleteToken());// delToken();
 
-        dispatch({type: 'AUTH_REQUEST_ERROR'});
+        dispatch(authRequestError(err));
       });
   }, [token]);
 
