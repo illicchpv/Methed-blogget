@@ -8,7 +8,7 @@ export const useCommentsData = (id) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const token = useSelector(state => state.token);
+  const token = useSelector(state => state.tokenReducer.token);
   // const dispatch = useDispatch();
 
   useEffect(() => {

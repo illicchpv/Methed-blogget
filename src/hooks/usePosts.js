@@ -5,7 +5,7 @@ import {useSelector} from 'react-redux';
 
 export const usePosts = (state) => {
   const [posts, setPosts] = useState({});
-  const token = useSelector(state => state.token);
+  const token = useSelector(state => state.tokenReducer.token);
   // const dispatch = useDispatch();
 
   useEffect(() => {

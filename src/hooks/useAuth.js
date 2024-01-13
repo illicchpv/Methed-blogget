@@ -1,12 +1,12 @@
 import {useEffect, useState} from 'react';
 import {URL_API} from '../api/const';
 import {useDispatch, useSelector} from 'react-redux';
-import {deleteToken} from '../store';
+import {deleteToken} from '../store/tokenReducer';
 
 export const useAuth = () => {
   const [auth, setAuth] = useState({});
   // const [logoutVisible, setLogoutVisible] = useState(false);
-  const token = useSelector(state => state.token);
+  const token = useSelector(state => state.tokenReducer.token);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export const useAuth = () => {
         // console.log(`iconImg, name:`, img, name, iconImg);
         setAuth({name, img});
 
-        const newHref = window.location.href.split('#')[0];
+        const newHref = window.location.href.split('#')[0].replace('/auth', '');
         // console.log('newHref: ', newHref);
         window.history.replaceState(null, null, newHref);
       })

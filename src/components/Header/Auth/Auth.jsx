@@ -9,13 +9,12 @@ import Logout from './Logout';
 // import { useAuth } from '../../../hooks/useAuth';
 import {authContext} from '../../../context/index';
 import {useDispatch} from 'react-redux';
-import {deleteToken} from '../../../store';
+import {deleteToken} from '../../../store/tokenReducer';
 
 export const Auth = () => {
   // const [auth, clearAuth] = useAuth();
   const [logoutVisible, setLogoutVisible] = useState(false);
   const {auth, clearAuth} = useContext(authContext);
-  // const token = useSelector(state => state.token);
   const dispatch = useDispatch();
 
   const handleLogout = () => {
