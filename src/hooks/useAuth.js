@@ -2,7 +2,7 @@ import {useEffect} from 'react';
 import {URL_API} from '../api/const';
 import {useDispatch, useSelector} from 'react-redux';
 import {deleteToken} from '../store/tokenReducer';
-import {authLogout, authRequest, authRequestAsync, authRequestError, authRequestSuccess} from '../store/auth/action';
+import {authLogout, authRequest, authRequestAsync, authRequestError, authRequestSuccess} from '../store/auth/authAction';
 import axios from 'axios';
 
 export const useAuth = () => {
