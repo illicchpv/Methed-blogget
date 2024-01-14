@@ -8,6 +8,7 @@ import {useCallback, useEffect, useRef} from 'react';
 import FormComment from './FormComment';
 import Comments from './Comments';
 import {usePostInfo} from '../../hooks/usePostInfo';
+import Text from '../../UI/Text';
 
 export const Modal = ({closeModal, id}) => { // title, author, markdown,
   const overlayRef = useRef(null);
@@ -21,6 +22,7 @@ export const Modal = ({closeModal, id}) => { // title, author, markdown,
     if (post.selftext) markdown = post.selftext;
     comments = comms;
   }
+  let status = error ? 'error' : (loading ? 'loading' : 'ok');
 
   const handleClick = useCallback((e) => {
     const target = e.target;
@@ -58,27 +60,34 @@ export const Modal = ({closeModal, id}) => { // title, author, markdown,
   return ReactDOM.createPortal(
     <div className={style.overlay} ref={overlayRef}>
       <div className={style.modal}>
-        <h2 className={style.title}>{title}</h2>
 
-        <div className={style.content}>
-          <Markdown options={{
-            overrides: {
-              a: {
-                props: {
-                  target: '_blank',
+        {status === 'loading' && <h2>Загрузка...</h2>}
+        {status === 'error' && <h2>Ошибка!</h2>}
+        {status === 'ok' && (
+          <>
+            <Text As='h2' size={22} tsize={24} className={style.title}>{title}</Text>
+
+            <div className={style.content}>
+              <Markdown options={{
+                overrides: {
+                  a: {
+                    props: {
+                      target: '_blank',
+                    }
+                  }
                 }
-              }
-            }
-          }}>{markdown}</Markdown>
-        </div>
+              }}>{markdown}</Markdown>
+            </div>
 
-        <p className={style.author}>{author}</p>
+            <p className={style.author}>{author}</p>
 
-        {!loading && <FormComment />}
+            {!loading && <FormComment />}
 
-        {loading && <p>“Loading”</p>}
-        {(!loading && comments.length > 0) && <Comments comments={comments} />}
-        {(!loading && comments.length === 0) && <p>“Нет комментариев”</p>}
+            {loading && <p>“Loading”</p>}
+            {(!loading && comments.length > 0) && <Comments comments={comments} />}
+            {(!loading && comments.length === 0) && <p>“Нет комментариев”</p>}
+          </>
+        )}
 
         <button className={style.close} ref={closeRef}>
           <CloseIcon />
