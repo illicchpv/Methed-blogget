@@ -21,7 +21,7 @@ export const Auth = () => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    dispatch(deleteToken()); // delToken();
+    // dispatch(deleteToken()); // delToken();
     clearAuth();
   };
 

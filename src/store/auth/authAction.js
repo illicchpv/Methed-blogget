@@ -55,7 +55,8 @@ export const authRequestAsync = () => (dispatch, getState) => {
       console.error(err);
       // setAuth({});
       // ! handleLogout();
-      dispatch(deleteToken());// delToken();
+      // dispatch(deleteToken());// delToken();
+      // dispatch(postsClear());// delToken();
 
       dispatch(authRequestError(err.message)); // ? err.toString()
     });

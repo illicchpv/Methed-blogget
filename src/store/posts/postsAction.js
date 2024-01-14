@@ -4,6 +4,7 @@ import {URL_API} from "../../api/const";
 export const POSTS_REQUEST = 'POSTS_REQUEST';
 export const POSTS_REQUEST_SUCCESS = 'POSTS_REQUEST_SUCCESS';
 export const POSTS_REQUEST_ERROR = 'POSTS_REQUEST_ERROR';
+export const POSTS_CLEAR = 'POSTS_CLEAR';
 
 export const postsRequest = () => ({
   type: POSTS_REQUEST,
@@ -15,6 +16,9 @@ export const postsRequestSuccess = (data) => ({
 export const postsRequestError = (error) => ({
   type: POSTS_REQUEST_ERROR,
   error,
+});
+export const postsClear = (error) => ({
+  type: POSTS_CLEAR,
 });
 
 export const postsRequestAsync = () => (dispatch, getState) => {

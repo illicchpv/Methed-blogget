@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {deleteToken} from '../store/tokenReducer';
 import {authLogout, authRequest, authRequestAsync, authRequestError, authRequestSuccess} from '../store/auth/authAction';
 import axios from 'axios';
+import {postsClear} from '../store/posts/postsAction';
 
 export const useAuth = () => {
   // const [auth, setAuth] = useState({});
@@ -19,6 +20,8 @@ export const useAuth = () => {
 
   const clearAuth = () => {
     // setAuth({});
+    dispatch(postsClear());
+    dispatch(deleteToken());
     dispatch(authLogout());
   };
 

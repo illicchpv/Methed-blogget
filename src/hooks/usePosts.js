@@ -16,7 +16,7 @@ export const usePosts = (state) => {
   // debugger;
   useEffect(() => {
     dispatch(postsRequestAsync());
-  }, [token]);
+  }, [token]); // ? ???  тут чего-то не хватает. получается что список постов обновляестя только при изменении token ?
 
   return [posts, loading];
 };

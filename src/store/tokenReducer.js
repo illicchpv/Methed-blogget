@@ -1,5 +1,7 @@
 // import {getToken, setToken} from "../api/token";
+import {useDispatch} from "react-redux";
 import {setToken} from "../api/token";
+import {postsClear} from "./posts/postsAction";
 
 const UPDATE_TOKEN = 'UPDATE_TOKEN';
 const DELETE_TOKEN = 'DELETE_TOKEN';
@@ -17,7 +19,7 @@ export const tokenMidleware = (store) => (next) => (action) => {
     setToken(action.token);
   }
   if (action.type === DELETE_TOKEN) {
-    window.location.reload(); // ? ??? без этого после logout список постов не обновляется 
+    // window.location.reload(); // ? ??? без этого после logout список постов не обновляется 
     setToken('');
   }
 
