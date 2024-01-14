@@ -1,20 +1,10 @@
-// import React from 'react';
-// import { URL_API } from '../../../api/const'
-// import { urlAuth } from '../../../api/auth';
-// import Text from '../../../UI/Text';
-// import { ReactComponent as LoginIcon } from './img/login.svg';
 import PropTypes from 'prop-types';
 import style from './Comments.module.css';
-// import formatDate from '../../utils/formatDate';
 import DatePost from '../../Main/List/Post/DatePost';
 import Text from '../../../UI/Text';
 
 export const Comments = (props) => {
-  console.log('Comments props:', props);
-  // const {body, author, created: date} = props;
-  // console.log('date: ', date);
 
-  // debugger;
   return (
     <>
       {props.comments.map((el) => {
@@ -40,18 +30,3 @@ Comments.propTypes = {
   // author: PropTypes.string,
   // created: PropTypes.number,
 };
-/*
-
-          <div className={style.container}>
-            <div className="body">{body}</div>
-            <div className="author">{author}</div>
-            <div className="created">{formatDate(date)}</div>
-            <hr />
-          </div>
-
-      <div className={style.container}>
-        <div className="body">{body}</div>
-        <div className="author">{author}</div>
-        <div className="created">{formatDate(date)}</div>
-      </div>
-*/

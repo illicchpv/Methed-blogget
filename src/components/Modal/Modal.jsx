@@ -5,38 +5,22 @@ import {ReactComponent as CloseIcon} from './img/close.svg';
 import Markdown from 'markdown-to-jsx';
 import ReactDOM from 'react-dom';
 import {useCallback, useEffect, useRef} from 'react';
-import {useCommentsData} from '../../hooks/useCommentsData';
-// import {getRedditRezArray} from '../utils/getRedditRezArray';
 import FormComment from './FormComment';
 import Comments from './Comments';
+import {usePostInfo} from '../../hooks/usePostInfo';
 
 export const Modal = ({closeModal, id}) => { // title, author, markdown,
   const overlayRef = useRef(null);
   const closeRef = useRef(null);
-  const [data, loading] = useCommentsData(id); // data, error, loading
-  // console.log('loading: ', loading);
-  // console.log('error: ', error);
-
+  const [post, error, loading, comms] = usePostInfo(id);
   let title = 'title loading...'; let author = 'author loading...'; let markdown = 'markdown loading...';
   let comments = [];
-  if (data) {
-    title = data[0].title;
-    author = data[0].author;
-    markdown = data[0].selftext;
-
-    // console.log('data: ', data[1]);
-    comments = data[1];
+  if (post) {
+    title = post.title;
+    author = post.author;
+    if (post.selftext) markdown = post.selftext;
+    comments = comms;
   }
-  // if (data) {
-  //   console.log(`Modal data id=${id} data: `, data);
-  //   {
-  //     console.log('data[0]: ', data[0]);
-  //     const {title: t, author: a, selftext: m} = data[0];
-  //     console.log('m: ', m);
-  //     console.log('a: ', a);
-  //     console.log('t: ', t);
-  //   }
-  // }
 
   const handleClick = useCallback((e) => {
     const target = e.target;
@@ -49,18 +33,21 @@ export const Modal = ({closeModal, id}) => { // title, author, markdown,
   }, [closeModal]);
 
   useEffect(() => {
+    if (!closeRef.current) return;
     document.addEventListener('click', handleClick);
     return () => {
       document.removeEventListener('click', handleClick);
     };
   }, [handleClick]);
   useEffect(() => {
+    if (!closeRef.current) return;
     document.addEventListener('keydown', handleKey);
     return () => {
       document.removeEventListener('keydown', handleKey);
     };
   }, [handleKey]);
   useEffect(() => {
+    if (!closeRef.current) return;
     closeRef.current.addEventListener('click', handleClick);
     return () => {
       closeRef?.current?.removeEventListener('click', handleClick);
@@ -97,7 +84,8 @@ export const Modal = ({closeModal, id}) => { // title, author, markdown,
           <CloseIcon />
         </button>
       </div>
-    </div>,
+    </div>
+    ,
     document.getElementById('modal-root')
   );
 };

@@ -24,12 +24,11 @@ export const postsClear = (error) => ({
 export const postsRequestAsync = () => (dispatch, getState) => {
   const token = getState().tokenReducer.token; // или useSelector(state => state.tokenReducer.token);
   if (!token) return;
-  console.log(`postsRequestAsync token:.length`, token.length);
 
   dispatch(postsRequest()); // ! это сбрасывает данные и выставляет loading = true
 
   const url = `${URL_API}/best?limit=30`;
-  console.log('url: ', url);
+  console.log('postsRequestAsync url: ', url);
   // const url = `${URL_API}/best/.json?limit=30`;
   // const url = `https://oauth.reddit.com/best`;
   // const url = `https://oauth.reddit.com/best?limit=100`;

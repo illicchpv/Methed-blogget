@@ -4,7 +4,6 @@ import {usePosts} from '../../../hooks/usePosts';
 
 export const List = (props) => {
   const [posts, loading] = usePosts();
-  console.log('List==================postsDat: ', posts);
   if (!posts || !posts.data) return;
   const children = posts?.data?.children;
   const childrenData = children.map(el => el.data);
@@ -25,7 +24,7 @@ export const List = (props) => {
       selftext: el.selftext,
     };
   });
-  console.log('List component -- count el.thumbnail !== "self":', tnCnt, 'postsData.length:', postsData.length);
+  // console.log('List component -- count el.thumbnail !== "self":', tnCnt, 'postsData.length:', postsData.length);
 
   return (
     <>

@@ -1,7 +1,5 @@
 import axios from "axios";
 import {URL_API} from "../../api/const";
-import {deleteToken} from "../tokenReducer";
-import {useSelector} from "react-redux";
 
 export const AUTH_REQUEST = 'AUTH_REQUEST';
 export const AUTH_REQUEST_SUCCESS = 'AUTH_REQUEST_SUCCESS';
@@ -26,9 +24,9 @@ export const authLogout = (error) => ({
 export const authRequestAsync = () => (dispatch, getState) => {
   const token = getState().tokenReducer.token; // или useSelector(state => state.tokenReducer.token);
   if (!token) return;
-  console.log(`token:.length`, token.length);
+  console.log(`authRequestAsync token:.length`, token.length);
 
-  dispatch(authRequest());
+  // ? ??? dispatch(authRequest()); // зачем это?
 
   const url = `${URL_API}/api/v1/me`;
 
@@ -41,9 +39,7 @@ export const authRequestAsync = () => (dispatch, getState) => {
   })
     .then(({data: {name, icon_img: iconImg}}) => {
       const img = iconImg.split('&')[0];
-      // console.log(`iconImg, name:`, img, name, iconImg);
       const data = {name, img};
-      // setAuth(data);
 
       dispatch(authRequestSuccess(data));
 
