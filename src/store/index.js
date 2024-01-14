@@ -5,10 +5,11 @@ import {commentReducer} from "./commentReducer";
 import {tokenMidleware, tokenReducer} from "./tokenReducer";
 import {thunk} from 'redux-thunk';
 import {authReducer} from './auth/authReducer'
+import {postsReducer} from './posts/postsReducer'
 
-const rootReducer = combineReducers({commentReducer, tokenReducer, authReducer});
+const rootReducer = combineReducers({commentReducer, tokenReducer, authReducer, postsReducer});
 
-// // для примера напишем логер
+// для примера напишем логер
 // const logger = (store) => (next) => (action) => {
 //   console.log('logger action: ', action);
 //   next(action); // ! иначе дальнейшего прохождения action не будет!

@@ -11,29 +11,6 @@ export const getRedditRezArray = (posts) => {
     // const a3 = a2.filter(el => el.kind && el.kind === 't3');
     const a4 = a3.map((el) => el.data);
     return a4;
-
-    /*
-    // console.log('List==================postsDat: ', posts);
-    const children = posts?.data?.children;
-    const childrenData = children.map(el => el.data);
-    let tnCnt = 0; // ? ??? warning  'tnCnt' is assigned a value but never used  no-unused-vars
-
-    const postsData = childrenData.map((el, i) => {
-      if (el.thumbnail !== 'self') {
-        tnCnt++;
-        // console.log(JSON.stringify(el, null, 2));
-      }
-      return {
-        thumbnail: (el.thumbnail === 'self' ? '' : el.thumbnail), // el.thumbnail, // ! ??? self
-        title: el.title,
-        author: el.author,
-        ups: el.ups,
-        date: el.created,
-        id: el.id,
-        selftext: el.selftext,
-      };
-    });
-    */
   } catch (e) {
     console.error('getRedditRezArray err: ', e);
     return [];

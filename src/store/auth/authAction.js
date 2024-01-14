@@ -30,9 +30,11 @@ export const authRequestAsync = () => (dispatch, getState) => {
 
   dispatch(authRequest());
 
+  const url = `${URL_API}/api/v1/me`;
+
   // https://github.com/reddit-archive/reddit/wiki/OAuth2#authorization-implicit-grant-flow
   // API requests with a bearer token should be made to https://oauth.reddit.com, NOT www.reddit.com.
-  axios(`${URL_API}/api/v1/me`, {// https://www.reddit.com/dev/api/#GET_api_v1_me
+  axios(url, {// https://www.reddit.com/dev/api/#GET_api_v1_me
     headers: {
       Authorization: `bearer ${token}`, // https://github.com/reddit-archive/reddit/wiki/OAuth2#authorization-implicit-grant-flow
     },

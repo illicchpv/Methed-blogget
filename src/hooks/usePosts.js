@@ -1,43 +1,22 @@
 import {useEffect, useState} from 'react';
 import {URL_API} from '../api/const';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {postsRequest, postsRequestAsync, postsRequestSuccess} from '../store/posts/postsAction';
 // import { postsContext } from '../context/postsContext';
 
 export const usePosts = (state) => {
-  const [posts, setPosts] = useState({});
+  // const [posts, setPosts] = useState({});
   const token = useSelector(state => state.tokenReducer.token);
-  // const dispatch = useDispatch();
+  const posts = useSelector(state => state.postsReducer.data);
+  const loading = useSelector(state => state.postsReducer.loading);
+  console.log('loading: ', loading);
+  // console.log('posts: ', posts);
+  const dispatch = useDispatch();
 
+  // debugger;
   useEffect(() => {
-    if (!token) return;
-
-    const url = `${URL_API}/best?limit=30`;
-    // const url = `${URL_API}/best/.json?limit=30`;
-    // const url = `https://oauth.reddit.com/best`;
-    // const url = `https://oauth.reddit.com/best?limit=100`;
-    // console.log('usePosts fetch url: ', url, `Authorization: bearer ${token}`);
-
-    fetch(url, {
-      headers: {
-        Authorization: `bearer ${token}`,
-      },
-    })
-      .then(resp => {
-        // console.log(`----------resp:`, resp);
-        if (resp.status === 401) {
-          throw new Error('Сервер вернул ошибку: ', resp.statusText);
-        }
-        return resp.json();
-      })
-      .then(data => {
-        if (!data) return;
-        // console.log('usePosts ----------- setPosts(data): ', data);
-        setPosts(data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    dispatch(postsRequestAsync());
   }, [token]);
 
-  return [posts, setPosts];
+  return [posts, loading];
 };

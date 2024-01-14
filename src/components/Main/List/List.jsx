@@ -1,28 +1,10 @@
 import Post from './Post';
 import style from './List.module.css';
 import {useContext} from 'react';
-import {postsContext} from '../../../context/index';
+import {usePosts} from '../../../hooks/usePosts';
 
 export const List = (props) => {
-  // let postsData = [
-  //   {
-  //     thumbnail: '',
-  //     title: 'Title long long long long long long long long long long long long',
-  //     author: 'Nickname',
-  //     ups: 2,
-  //     date: '2024-01-01T01:05:00.000Z',
-  //     id: '11',
-  //   },
-  //   {
-  //     thumbnail: '',
-  //     title: 'Title Title',
-  //     author: 'Nickname',
-  //     ups: 12,
-  //     date: '2024-01-01T01:05:00.000Z',
-  //     id: '22',
-  //   },
-  // ];
-  const {posts} = useContext(postsContext);
+    const [posts, loading] = usePosts();
   if (!posts || !posts.data) return;
   // console.log('List==================postsDat: ', posts);
   const children = posts?.data?.children;
@@ -47,11 +29,16 @@ export const List = (props) => {
   // console.log('List component -- count el.thumbnail !== "self":', tnCnt, 'postsData.length:', postsData.length)
 
   return (
-    <ul className={style.list}>
-      {
-        postsData.map((el) => <Post key={el.id} postData={el} />)
-      }
-    </ul>
+    <>
+      {loading ? (<h1>Posts loading...</h1>) :
+        (
+          <ul className={style.list}>
+            {
+              postsData.map((el) => <Post key={el.id} postData={el} />)
+            }
+          </ul>
+        )}
+    </>
   );
 };
 
