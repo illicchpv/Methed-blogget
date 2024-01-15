@@ -1,6 +1,6 @@
 import style from './DatePost.module.css';
 import PropTypes from 'prop-types';
-import formatDate from '../../../../utils/formatDate.js';
+import formatDate from '../../../../../utils/formatDate.js';
 
 export const DatePost = (props) => {
   const {date} = props;

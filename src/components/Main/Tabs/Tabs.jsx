@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import style from './Tabs.module.css';
-import {assignId} from '../../utils/genRandomId';
+import {assignId} from '../../../utils/genRandomId';
 
 import {ReactComponent as ArrowIcon} from './img/arrow.svg';
 // import { ReactComponent as EyeIcon } from './img/eye.svg';
@@ -12,7 +12,7 @@ import {ReactComponent as HomeIcon} from './img2/home.svg';
 import {ReactComponent as TopIcon} from './img2/top.svg';
 import {ReactComponent as BestIcon} from './img2/best.svg';
 import {ReactComponent as HotIcon} from './img2/hot.svg';
-import {debounceRaf} from '../../utils/debounceRaf';
+import {debounceRaf} from '../../../utils/debounceRaf';
 import Text from '../../../UI/Text';
 
 const LIST = [

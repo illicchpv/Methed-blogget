@@ -11,9 +11,9 @@ export const Preloader = (props) => {
   console.log('Preloader props:', props);
 
   return (
-    <ClockLoader color='#cc6633' 
-    cssOverride={{display: 'block'}} 
-    size={30} />
+    <ClockLoader color='#cc6633'
+      cssOverride={{display: 'block'}}
+      size={30} />
   );
 };
 
