@@ -26,6 +26,6 @@ export const xDataxRequestAsync = (id) => (dispatch, getState) => {
       }, 300);
     })
     .catch((err) => {
-      dispatch(xDataxRequestError(err.message)); // ? err.toString()
+      dispatch(xDataxRequestError(err.message)); // ? err.toString()]]]]
     });
 };
