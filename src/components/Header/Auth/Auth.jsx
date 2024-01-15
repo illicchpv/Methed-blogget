@@ -8,8 +8,8 @@ import style from './Auth.module.css';
 import Logout from './Logout';
 // import { useAuth } from '../../../hooks/useAuth';
 // import {authContext} from '../../../context/index';
-import {useDispatch} from 'react-redux';
-import {deleteToken} from '../../../store/tokenReducer';
+// import {useDispatch} from 'react-redux';
+// import {deleteToken} from '../../../store/tokenReducer';
 import {useAuth} from '../../../hooks/useAuth';
 import {AuthLoader} from './AuthLoader/AuthLoader';
 
@@ -18,7 +18,7 @@ export const Auth = () => {
   const [logoutVisible, setLogoutVisible] = useState(false);
   // const {auth, clearAuth} = useContext(authContext);
   const [auth, loading, clearAuth] = useAuth();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const handleLogout = () => {
     // dispatch(deleteToken()); // delToken();

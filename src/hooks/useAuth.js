@@ -1,9 +1,10 @@
 import {useEffect} from 'react';
-import {URL_API} from '../api/const';
+// import {URL_API} from '../api/const';
 import {useDispatch, useSelector} from 'react-redux';
 import {deleteToken} from '../store/tokenReducer';
-import {authLogout, authRequest, authRequestAsync, authRequestError, authRequestSuccess} from '../store/auth/authAction';
-import axios from 'axios';
+// import {authLogout, authRequest, authRequestAsync, authRequestError, authRequestSuccess} from '../store/auth/authAction';
+import {authLogout, authRequestAsync} from '../store/auth/authAction';
+// import axios from 'axios';
 import {postsClear} from '../store/posts/postsAction';
 
 export const useAuth = () => {
@@ -16,7 +17,7 @@ export const useAuth = () => {
 
   useEffect(() => {
     dispatch(authRequestAsync());
-  }, [token]);
+  }, [token, dispatch]);
 
   const clearAuth = () => {
     // setAuth({});

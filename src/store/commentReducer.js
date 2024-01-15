@@ -1,4 +1,4 @@
-import {getToken, setToken} from "../api/token";
+// import {getToken, setToken} from "../api/token";
 
 const UPDATE_COMMENT = 'UPDATE_COMMENT';
 
@@ -9,6 +9,7 @@ const initialState = {
 export const updateComment = (comment) => ({type: UPDATE_COMMENT, comment});
 
 export const commentReducer = (state = initialState, action) => { // преобразователь состояний
+  // debugger;
   switch (action.type) {
     case UPDATE_COMMENT:
       return {...state, comment: action.comment};

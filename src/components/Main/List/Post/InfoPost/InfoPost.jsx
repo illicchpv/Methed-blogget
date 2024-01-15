@@ -7,6 +7,7 @@ import Modal from '../../../../Modal';
 export const InfoPost = (props) => {
   const {title, author, id} = props;
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // debugger;
 
   return (
     <div className={style.content}>

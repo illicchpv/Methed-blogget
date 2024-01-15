@@ -4,7 +4,7 @@ import DatePost from '../../Main/List/Post/DatePost';
 import Text from '../../../UI/Text';
 
 export const Comments = (props) => {
-
+  console.log('Comments props: ', props);
   return (
     <>
       {props.comments.map((el) => {
@@ -20,7 +20,6 @@ export const Comments = (props) => {
         );
       })}
     </>
-
   );
 };
 

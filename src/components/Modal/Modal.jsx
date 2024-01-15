@@ -1,4 +1,3 @@
-
 import style from './Modal.module.css';
 import PropTypes from 'prop-types';
 import {ReactComponent as CloseIcon} from './img/close.svg';
@@ -9,12 +8,20 @@ import FormComment from './FormComment';
 import Comments from './Comments';
 import {usePostInfo} from '../../hooks/usePostInfo';
 import Text from '../../UI/Text';
+// import {useXDatax} from "../../hooks/useXDatax";
+// import {useSelector} from "react-redux";
 
 export const Modal = ({closeModal, id}) => { // title, author, markdown,
   const overlayRef = useRef(null);
   const closeRef = useRef(null);
   const [post, error, loading, comms] = usePostInfo(id);
-  let title = 'title loading...'; let author = 'author loading...'; let markdown = 'markdown loading...';
+  // пример получения значений const [xdata, xerror, xloading] = useXDatax(id);
+  // пример получения значений const {data: xxdata, loading: xxloading, error: xxerror} = useSelector(state => state.xDataxReducer);
+
+  // debugger;
+  let title = 'title loading...';
+  let author = 'author loading...';
+  let markdown = 'markdown loading...';
   let comments = [];
   if (post) {
     title = post.title;
@@ -22,7 +29,7 @@ export const Modal = ({closeModal, id}) => { // title, author, markdown,
     if (post.selftext) markdown = post.selftext;
     comments = comms;
   }
-  let status = error ? 'error' : (loading ? 'loading' : 'ok');
+  const status = error ? 'error' : (loading ? 'loading' : 'ok');
 
   const handleClick = useCallback((e) => {
     const target = e.target;
@@ -53,6 +60,10 @@ export const Modal = ({closeModal, id}) => { // title, author, markdown,
     closeRef.current.addEventListener('click', handleClick);
     return () => {
       closeRef?.current?.removeEventListener('click', handleClick);
+      // ? ???   61:17  warning  The ref value 'closeRef.current' will likely have changed
+      // by the time this effect cleanup function runs. If this ref points to a node rendered by React,
+      // copy 'closeRef.current' to a variable inside the effect,
+      // and use that variable in the cleanup function  react-hooks/exhaustive-deps
     };
   }, [handleClick]);
 

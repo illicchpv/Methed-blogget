@@ -7,11 +7,11 @@ export const List = (props) => {
   if (!posts || !posts.data) return;
   const children = posts?.data?.children;
   const childrenData = children.map(el => el.data);
-  let tnCnt = 0;
+  // let tnCnt = 0;
 
   const postsData = childrenData.map((el, i) => {
     if (el.thumbnail !== 'self') {
-      tnCnt++;
+      // tnCnt++;
       // console.log(JSON.stringify(el, null, 2));
     }
     return {

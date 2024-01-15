@@ -1,6 +1,7 @@
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {postsRequest, postsRequestAsync, postsRequestSuccess} from '../store/posts/postsAction';
+// import {postsRequest, postsRequestAsync, postsRequestSuccess} from '../store/posts/postsAction';
+import {postsRequestAsync} from '../store/posts/postsAction';
 
 export const usePosts = (state) => {
   const token = useSelector(state => state.tokenReducer.token);
@@ -10,7 +11,7 @@ export const usePosts = (state) => {
 
   useEffect(() => {
     dispatch(postsRequestAsync());
-  }, [token]); // ? ???  тут чего-то не хватает. получается что список постов обновляется только при изменении token ?
+  }, [token, dispatch]); // ? ???  тут чего-то не хватает. получается что список постов обновляется только при изменении token ?
 
   return [posts, loading];
 };
