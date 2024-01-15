@@ -6,3 +6,9 @@
   justify-content: space-around;
   gap: 30px;
 }
+.PreloaderContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}

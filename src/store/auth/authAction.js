@@ -26,7 +26,7 @@ export const authRequestAsync = () => (dispatch, getState) => {
   if (!token) return;
   console.log(`authRequestAsync token:.length`, token.length);
 
-  // ? ??? dispatch(authRequest()); // зачем это?
+  dispatch(authRequest()); // ! это сбрасывает данные и выставляет loading = true
 
   const url = `${URL_API}/api/v1/me`;
 
@@ -41,7 +41,9 @@ export const authRequestAsync = () => (dispatch, getState) => {
       const img = iconImg.split('&')[0];
       const data = {name, img};
 
-      dispatch(authRequestSuccess(data));
+      setTimeout(() => {
+        dispatch(authRequestSuccess(data));
+      }, 300);
 
       const newHref = window.location.href.split('#')[0].replace('/auth', '');
       // console.log('newHref: ', newHref);

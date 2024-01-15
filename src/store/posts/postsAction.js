@@ -43,7 +43,10 @@ export const postsRequestAsync = () => (dispatch, getState) => {
   })
     .then((data) => {
       if (!data || !data.data) return;
-      dispatch(postsRequestSuccess(data.data));
+
+      setTimeout(() => {
+        dispatch(postsRequestSuccess(data.data));
+      }, 300);
     })
     .catch((err) => {
       dispatch(postsRequestError(err.message)); // ? err.toString()

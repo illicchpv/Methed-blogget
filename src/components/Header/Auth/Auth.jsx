@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 // import { URL_API } from '../../../api/const'
 import {urlAuth} from '../../../api/auth';
 import Text from '../../../UI/Text';
+import Preloader from '../../../UI/Preloader';
 import {ReactComponent as LoginIcon} from './img/login.svg';
 import style from './Auth.module.css';
 import Logout from './Logout';
@@ -11,14 +12,13 @@ import Logout from './Logout';
 // import {useDispatch} from 'react-redux';
 // import {deleteToken} from '../../../store/tokenReducer';
 import {useAuth} from '../../../hooks/useAuth';
-import {AuthLoader} from './AuthLoader/AuthLoader';
+// import {AuthLoader} from './AuthLoader/AuthLoader';
 
 export const Auth = () => {
   // const [auth, clearAuth] = useAuth();
   const [logoutVisible, setLogoutVisible] = useState(false);
   // const {auth, clearAuth} = useContext(authContext);
   const [auth, loading, clearAuth] = useAuth();
-  // const dispatch = useDispatch();
 
   const handleLogout = () => {
     // dispatch(deleteToken()); // delToken();
@@ -27,7 +27,7 @@ export const Auth = () => {
 
   return (
     <div className={style.container}>
-      {loading ? (<AuthLoader />) : (
+      {loading ? (<Preloader />) : (
         auth.name ? (
           <>
             <button className={style.btn}

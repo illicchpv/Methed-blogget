@@ -1,11 +1,13 @@
 import Post from './Post';
 import style from './List.module.css';
 import {usePosts} from '../../../hooks/usePosts';
+import Preloader from '../../../UI/Preloader';
 
 export const List = (props) => {
   const [posts, loading] = usePosts();
-  if (!posts || !posts.data) return;
-  const children = posts?.data?.children;
+  console.log('List loading: ', loading);
+  if (!posts) return;
+  const children = posts?.data?.children ?? [];
   const childrenData = children.map(el => el.data);
   // let tnCnt = 0;
 
@@ -26,9 +28,18 @@ export const List = (props) => {
   });
   // console.log('List component -- count el.thumbnail !== "self":', tnCnt, 'postsData.length:', postsData.length);
 
+  // const is_loading = true;
   return (
     <>
-      {loading ? (<h1>Posts loading...</h1>) :
+      {loading ? (
+        <div className={style.PreloaderContainer}>
+          <Preloader />
+          <Preloader />
+          <Preloader />
+          <Preloader />
+          <Preloader />
+        </div>
+      ) :
         (
           <ul className={style.list}>
             {

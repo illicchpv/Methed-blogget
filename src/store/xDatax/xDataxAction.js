@@ -20,7 +20,10 @@ export const xDataxRequestAsync = (id) => (dispatch, getState) => {
   })
     .then((data) => {
       if (!data || !data.data) return;
-      dispatch(xDataxRequestSuccess(data.data));
+
+      setTimeout(() => {
+        dispatch(xDataxRequestSuccess(data.data));
+      }, 300);
     })
     .catch((err) => {
       dispatch(xDataxRequestError(err.message)); // ? err.toString()

@@ -42,7 +42,9 @@ export const postInfoRequestAsync = (id) => (dispatch, getState) => {
         return true;
       });
 
-      dispatch(postInfoRequestSuccess({post, comms: comments}));
+      setTimeout(() => {
+        dispatch(postInfoRequestSuccess({post, comms: comments}));
+      }, 300);
     })
     .catch((err) => {
       dispatch(postInfoRequestError(err.message)); // ? err.toString()
