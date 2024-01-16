@@ -12,3 +12,14 @@
   align-items: center;
   gap: 20px;
 }
+.end{
+  flex-basis: 100%;
+  background-color: lightgreen;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}

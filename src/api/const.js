@@ -17,3 +17,6 @@ export const SCOPE_STRING = 'identity submit read'; // https://www.reddit.com/de
 // Scope Values: identity, edit, flair, history, modconfig, modflair, modlog, modposts,
 //    modwiki, mysubreddits, privatemessages, read, report, save, submit, subscribe, vote,
 //    wikiedit, wikiread.
+
+export const POSTS_COUNT = 3;
+export const FETCH_TIMEOUT = 300;

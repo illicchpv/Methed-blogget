@@ -1,8 +1,9 @@
 import axios from "axios";
-import {URL_API} from "../../api/const";
+import {URL_API, POSTS_COUNT, FETCH_TIMEOUT} from "../../api/const";
 
 export const POSTS_REQUEST = 'POSTS_REQUEST';
 export const POSTS_REQUEST_SUCCESS = 'POSTS_REQUEST_SUCCESS';
+export const POSTS_REQUEST_SUCCESS_AFTER = 'POSTS_REQUEST_SUCCESS_AFTER';
 export const POSTS_REQUEST_ERROR = 'POSTS_REQUEST_ERROR';
 export const POSTS_CLEAR = 'POSTS_CLEAR';
 
@@ -11,6 +12,10 @@ export const postsRequest = () => ({
 });
 export const postsRequestSuccess = (data) => ({
   type: POSTS_REQUEST_SUCCESS,
+  data,
+});
+export const postsRequestSuccessAfter = (data) => ({
+  type: POSTS_REQUEST_SUCCESS_AFTER,
   data,
 });
 export const postsRequestError = (error) => ({
@@ -23,12 +28,16 @@ export const postsClear = (error) => ({
 
 export const postsRequestAsync = () => (dispatch, getState) => {
   const token = getState().tokenReducer.token; // или useSelector(state => state.tokenReducer.token);
-  if (!token) return;
+  const after = getState().postsReducer.after;
+  const loading = getState().postsReducer.loading;
+  const isLast = getState().postsReducer.isLast;
+
+  if (!token || loading || isLast) return;
 
   dispatch(postsRequest()); // ! это сбрасывает данные и выставляет loading = true
 
-  const url = `${URL_API}/best?limit=30`;
-  console.log('postsRequestAsync url: ', url);
+  const url = `${URL_API}/best?limit=${POSTS_COUNT}${after ? ('&after=' + after) : ''}`;
+  console.log(`postsRequestAsync after:[${after}] url: `, url);
   // const url = `${URL_API}/best/.json?limit=30`;
   // const url = `https://oauth.reddit.com/best`;
   // const url = `https://oauth.reddit.com/best?limit=100`;
@@ -44,9 +53,19 @@ export const postsRequestAsync = () => (dispatch, getState) => {
     .then((data) => {
       if (!data || !data.data) return;
 
-      setTimeout(() => {
-        dispatch(postsRequestSuccess(data.data));
-      }, 300);
+      if(after){
+        // console.log('postsRequestSuccessAfter')
+        setTimeout(() => {
+          dispatch(postsRequestSuccessAfter(data.data));
+        }, FETCH_TIMEOUT);
+      }else
+      {
+        // console.log('postsRequestSuccess')
+        setTimeout(() => {
+          dispatch(postsRequestSuccess(data.data));
+        }, FETCH_TIMEOUT);
+      }
+
     })
     .catch((err) => {
       dispatch(postsRequestError(err.message)); // ? err.toString()

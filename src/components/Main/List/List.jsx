@@ -2,51 +2,59 @@ import Post from './Post';
 import style from './List.module.css';
 import {usePosts} from '../../../hooks/usePosts';
 import Preloader from '../../../UI/Preloader';
+import {useDispatch, useSelector} from 'react-redux';
+import {useEffect, useRef} from "react";
+import {postsRequestAsync} from '../../../store/posts/postsAction';
+import {postsReducer} from "../../../store/posts/postsReducer";
 
 export const List = (props) => {
-  const [posts, loading] = usePosts();
-  console.log('List loading: ', loading);
-  if (!posts) return;
-  const children = posts?.data?.children ?? [];
-  const childrenData = children.map(el => el.data);
-  // let tnCnt = 0;
+  //const [posts, loading] = usePosts();
+  const {posts, loading} = useSelector(state => state.postsReducer); // loading === null ключ что это первая отрисовка
+  const endList = useRef(null);
+  const after = useSelector(state => state.postsReducer.after);
+  const dispatch = useDispatch()
 
-  const postsData = childrenData.map((el, i) => {
-    if (el.thumbnail !== 'self') {
-      // tnCnt++;
-      // console.log(JSON.stringify(el, null, 2));
+  if (!after) { // (loading === null) {
+    dispatch(postsRequestAsync());
+  }
+  useEffect(() => {
+    if (after) { // if (loading !== null) {
+      if (!posts || !posts.length || !endList.current) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          dispatch(postsRequestAsync());
+        }
+      }, {rootMargin: '100px'});
+      observer.observe(endList.current);
     }
+
+  }, [endList.current, posts]);
+
+  const childrenData = posts.map(el => el.data);
+  const postsData = childrenData.map((el, i) => {
+    // console.log('=====', el.selftext);
     return {
-      thumbnail: (el.thumbnail === 'self' ? '' : el.thumbnail), // el.thumbnail, // ! ??? self
-      title: el.title,
+      thumbnail: (el.thumbnail === 'self' ? '' : el.thumbnail),
+      title: el.title.replaceAll('&amp;', '&'),
       author: el.author,
       ups: el.ups,
       date: el.created,
       id: el.id,
-      selftext: el.selftext,
+      selftext: el.selftext, // .replaceAll('&amp;', 'IIII'),
     };
   });
-  // console.log('List component -- count el.thumbnail !== "self":', tnCnt, 'postsData.length:', postsData.length);
 
-  // const is_loading = true;
   return (
     <>
-      {loading ? (
-        <div className={style.PreloaderContainer}>
-          <Preloader />
-          <Preloader />
-          <Preloader />
-          <Preloader />
-          <Preloader />
-        </div>
-      ) :
-        (
-          <ul className={style.list}>
-            {
-              postsData.map((el) => <Post key={el.id} postData={el} />)
-            }
-          </ul>
-        )}
+      <ul className={style.list}>
+        {
+          postsData.map((el) => <Post key={el.id} postData={el}/>)
+        }
+        <li ref={endList} className={style.end}>
+          {loading && <Preloader/>}
+        </li>
+      </ul>
     </>
   );
 };
