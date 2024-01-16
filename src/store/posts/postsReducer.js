@@ -1,4 +1,11 @@
-import {POSTS_REQUEST, POSTS_REQUEST_SUCCESS, POSTS_REQUEST_SUCCESS_AFTER, POSTS_REQUEST_ERROR, POSTS_CLEAR} from "./postsAction";
+import {
+  POSTS_REQUEST,
+  POSTS_REQUEST_SUCCESS,
+  POSTS_REQUEST_SUCCESS_AFTER,
+  POSTS_REQUEST_ERROR,
+  POSTS_CLEAR,
+  CHANGE_PAGE
+} from "./postsAction";
 import {uniqByKeepFirst} from "../../utils/uniqByKey";
 
 const initialState = {
@@ -6,6 +13,8 @@ const initialState = {
   error: '',
   posts: [],
   after: '',
+  isLast: false,
+  page: '',
 };
 
 // const posts = useSelector(state => state.postsReducer.posts);
@@ -37,10 +46,20 @@ export const postsReducer = (state = initialState, action) => { // преобр�
         ...state, loading: false, error: action.error,
         // posts: [] ???
       };
-    case POSTS_CLEAR:
+    case POSTS_CLEAR: {
+      debugger;
       return {
         ...state, loading: false, error: '',
         // posts: [] ???
+      };
+    }
+    case CHANGE_PAGE:
+      return {
+        ...state, loading: false, error: '',
+        page: action.page,
+        after: '',
+        posts: [],
+        isLast: false
       };
 
     default:

@@ -4,6 +4,7 @@ import {useDispatch} from 'react-redux'; // чтоб передать stor в п
 // import {store} from './store';
 import {updateToken} from './store/tokenReducer';
 import {getToken} from './api/token';
+import {Route, Routes} from "react-router-dom";
 
 // import {store} from './store';
 // const time = () => dispatch => {
@@ -23,11 +24,16 @@ function App() {
 
   return (
 
-    <>
-      <Header />
-      <Main />
-    </>
+    <Routes>
+      <Route path='*' element={
+        <>
+          <Header/>
+          <Main/>
+        </>
+      }/>
+    </Routes>
 
   );
 }
+
 export default App;

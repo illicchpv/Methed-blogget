@@ -2,5 +2,5 @@
 vite.config.js
 package.json
 package-lock.json
-std.eslintrc.cjs
+stdno.eslintrc.cjs
 std.eslintrc.js

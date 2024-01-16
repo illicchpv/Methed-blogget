@@ -4,32 +4,27 @@ import style from './Tabs.module.css';
 import {assignId} from '../../../utils/genRandomId';
 
 import {ReactComponent as ArrowIcon} from './img/arrow.svg';
-// import { ReactComponent as EyeIcon } from './img/eye.svg';
-// import { ReactComponent as HomeIcon } from './img/home.svg';
-// import { ReactComponent as PostIcon } from './img/post.svg';
-// import { ReactComponent as SaveIcon } from './img/save.svg';
 import {ReactComponent as HomeIcon} from './img2/home.svg';
 import {ReactComponent as TopIcon} from './img2/top.svg';
 import {ReactComponent as BestIcon} from './img2/best.svg';
 import {ReactComponent as HotIcon} from './img2/hot.svg';
 import {debounceRaf} from '../../../utils/debounceRaf';
 import Text from '../../../UI/Text';
+import {useNavigate} from "react-router-dom";
 
 const LIST = [
-  // { value: 'Главная', Icon: EyeIcon },
-  // { value: 'Просмотренные', Icon: HomeIcon },
-  // { value: 'Сохранённые', Icon: PostIcon },
-  // { value: 'Мои посты', Icon: SaveIcon },
-  {value: 'Главная', Icon: HomeIcon},
-  {value: 'Топ', Icon: TopIcon},
-  {value: 'Лучшие', Icon: BestIcon},
-  {value: 'Горячие', Icon: HotIcon},
+  {value: 'Главная', Icon: HomeIcon, link: 'rising'},
+  {value: 'Топ', Icon: TopIcon, link: 'top'},
+  {value: 'Лучшие', Icon: BestIcon, link: 'best'},
+  {value: 'Горячие', Icon: HotIcon, link: 'hot'},
 ].map(assignId);
 
 export const Tabs = (props) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdown, setIsDropdown] = useState(true); // true - mobile version / desktop;
   const [selectedTab, setSelectedTab] = useState(0);
+  const navigate = useNavigate();
+
 
   const handleResize = () => {
     if (document.documentElement.clientWidth < 768) {
@@ -60,7 +55,7 @@ export const Tabs = (props) => {
         >
           {LIST[selectedTab].value}
 
-          <ArrowIcon width={15} height={15} />
+          <ArrowIcon width={15} height={15}/>
         </Text>
       </div>}
 
@@ -72,9 +67,10 @@ export const Tabs = (props) => {
                 LIST.forEach((el2, i) => {
                   if (el2.value === el.value) setSelectedTab(i);
                 });
+                navigate(`/category/${el.link}`);
               }}>
               {el.value}
-              {el.Icon && <el.Icon width={30} height={30} />}
+              {el.Icon && <el.Icon width={30} height={30}/>}
             </Text>
           </li>
         ))}

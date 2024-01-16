@@ -5,6 +5,7 @@ import Preloader from '../../../UI/Preloader';
 import {useDispatch, useSelector} from 'react-redux';
 import {useEffect, useRef} from "react";
 import {postsRequestAsync} from '../../../store/posts/postsAction';
+import {useParams} from "react-router-dom";
 // import {postsReducer} from "../../../store/posts/postsReducer";
 
 export const List = () => {
@@ -12,20 +13,35 @@ export const List = () => {
   const endList = useRef(null);
   const after = useSelector(state => state.postsReducer.after);
   const dispatch = useDispatch();
+  const {page} = useParams()
+  console.log(`List page: ${page}  [${loading}]  [${after}] `, new Date().getTime())
 
-  if (!after) { // (loading === null) {
-    dispatch(postsRequestAsync());
-  }
+  // if (!after) { // (loading === null) {
+  //   dispatch(postsRequestAsync());
+  // }
+
   useEffect(() => {
-    if (after) { // if (loading !== null) {
+    console.log('useEffect postsRequestAsync')
+    dispatch(postsRequestAsync(page));
+  }, [page])
+
+  useEffect(() => {
+    let observer = undefined;
+    if (after && !loading) { // if (loading !== null) {
       if (!posts || !posts.length || !endList.current) return;
 
-      const observer = new IntersectionObserver((entries) => {
+      observer = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting) {
+          console.log('-------------------------------')
           dispatch(postsRequestAsync());
         }
       }, {rootMargin: '100px'});
       observer.observe(endList.current);
+    }
+    return () => {
+      if (endList.current && observer) {
+        observer.unobserve(endList.current);
+      }
     }
   }, [endList.current, posts]);
 
@@ -44,10 +60,10 @@ export const List = () => {
     <>
       <ul className={style.list}>
         {
-          postsData.map((el) => <Post key={el.id} postData={el} />)
+          postsData.map((el) => <Post key={el.id} postData={el}/>)
         }
         <li ref={endList} className={style.end}>
-          {loading && <Preloader />}
+          {loading && <Preloader/>}
         </li>
       </ul>
     </>
