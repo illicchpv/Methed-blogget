@@ -14,13 +14,12 @@ console.log(uniqByKeepLast(data, it => it.u))
 
  */
 export function uniqByKeepFirst(a, key) {
-  let seen = new Set();
+  const seen = new Set();
   return a.filter(item => {
-    let k = key(item);
+    const k = key(item);
     return seen.has(k) ? false : seen.add(k);
   });
 }
-
 
 export function uniqByKeepLast(a, key) {
   return [

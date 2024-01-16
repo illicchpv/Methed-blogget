@@ -53,19 +53,17 @@ export const postsRequestAsync = () => (dispatch, getState) => {
     .then((data) => {
       if (!data || !data.data) return;
 
-      if(after){
+      if (after) {
         // console.log('postsRequestSuccessAfter')
         setTimeout(() => {
           dispatch(postsRequestSuccessAfter(data.data));
         }, FETCH_TIMEOUT);
-      }else
-      {
+      } else {
         // console.log('postsRequestSuccess')
         setTimeout(() => {
           dispatch(postsRequestSuccess(data.data));
         }, FETCH_TIMEOUT);
       }
-
     })
     .catch((err) => {
       dispatch(postsRequestError(err.message)); // ? err.toString()

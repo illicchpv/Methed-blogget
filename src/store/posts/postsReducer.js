@@ -23,16 +23,15 @@ export const postsReducer = (state = initialState, action) => { // преобр�
         after: action.data.data.after,
         isLast: !action.data.data.after
       };
-    case POSTS_REQUEST_SUCCESS_AFTER:
-      const newPosts = uniqByKeepFirst([...state.posts, ...action.data.data.children], el => {
-        return el.data.id
-      })
+    case POSTS_REQUEST_SUCCESS_AFTER: {
+      const newPosts = uniqByKeepFirst([...state.posts, ...action.data.data.children], el => el.data.id);
       return {
         ...state, loading: false, error: '',
         posts: newPosts, // [...state.posts, ...action.data.data.children],
         after: action.data.data.after,
         isLast: !action.data.data.after
       };
+    }
     case POSTS_REQUEST_ERROR:
       return {
         ...state, loading: false, error: action.error,
