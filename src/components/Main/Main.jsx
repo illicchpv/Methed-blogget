@@ -8,11 +8,25 @@ import Modal from "../Modal";
 const Main = (props) => (
   <main className={style.main}>
     <Layout>
-      <Tabs />
+      <Tabs/>
       <Routes>
-        <Route path='/category/:page' element={<List />}>
-          <Route path='post/:id' element={<Modal />} />
+        <Route path='/' element={
+          <div className={style.headerPage}>
+            <h1>Стартовая страница</h1>
+            <h2>добро пожаловать</h2>
+            <h3>Выберите категорию</h3>
+          </div>
+        }/>
+
+        <Route path='/category/:page' element={<List/>}>
+          <Route path='post/:id' element={<Modal/>}/>
         </Route>
+
+        <Route path='*' element={
+          <div className={style.errorPage}>
+            <h1>404</h1>
+          </div>
+        }/>
       </Routes>
     </Layout>
   </main>

@@ -5,6 +5,21 @@ h2,h3,h4,h5{
 .main {
   padding: 30px 0;
 }
+.headerPage{
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+}
+.errorPage{
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  color: #cc6633;
+}
 
 @media (min-width: 768px) {
   .main {
