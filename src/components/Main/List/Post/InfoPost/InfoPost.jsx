@@ -1,37 +1,28 @@
 import style from './InfoPost.module.css';
 import PropTypes from 'prop-types';
 import Text from '../../../../../UI/Text';
-import {useState} from 'react';
-import Modal from '../../../../Modal';
+import {Link, useParams} from "react-router-dom";
 
 export const InfoPost = (props) => {
   const {title, author, id} = props;
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const {page} = useParams();
   // debugger;
 
   return (
     <div className={style.content}>
       <Text As='h2' className={style.title}>
-        <Text As='a' size={18} tsize={24} className={style.linkPost}
-          href="#post"
-          onClick={() => {
-            setIsModalOpen(true);
-          }}
-        >
-          {title}
-        </Text>
+        <Link to={`/category/${page}/post/${id}`} className={style.linkPost}>
+          <Text size={14} tsize={22} bold className={style.linkPost}>
+            {title}
+          </Text>
+        </Link>
       </Text>
       <Text
-        As='a' size={12} tsize={14} color='orange'
+        As='a' size={12} tsize={14} medium color='orange'
         className={style.linkAuthor}
         href="#author"
       >{author}
       </Text>
-      {/* title={title} author={author} markdown={markdown}  */}
-      {isModalOpen && <Modal id={id}
-        closeModal={() => {
-          setIsModalOpen(false);
-        }} />}
     </div>
   );
 };

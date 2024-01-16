@@ -5,7 +5,7 @@ import Preloader from '../../../UI/Preloader';
 import {useDispatch, useSelector} from 'react-redux';
 import {useEffect, useRef} from "react";
 import {postsRequestAsync} from '../../../store/posts/postsAction';
-import {useParams} from "react-router-dom";
+import {Outlet, useParams} from "react-router-dom";
 // import {postsReducer} from "../../../store/posts/postsReducer";
 
 export const List = () => {
@@ -66,6 +66,7 @@ export const List = () => {
           {loading && <Preloader/>}
         </li>
       </ul>
+      <Outlet />
     </>
   );
 };

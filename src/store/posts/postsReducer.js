@@ -47,10 +47,9 @@ export const postsReducer = (state = initialState, action) => { // преобр�
         // posts: [] ???
       };
     case POSTS_CLEAR: {
-      debugger;
       return {
         ...state, loading: false, error: '',
-        // posts: [] ???
+        posts: [] // ???
       };
     }
     case CHANGE_PAGE:

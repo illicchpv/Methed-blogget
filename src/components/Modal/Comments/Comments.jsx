@@ -9,7 +9,7 @@ export const Comments = (props) => {
     <>
       {props.comments.map((el) => {
         const {id, body, author, created: date} = el;
-        return (
+        return ( body &&
           <ul key={id} className={style.list}>
             <li className={style.item}>
               <Text As='h3' className={style.author} size={18} tsize={22}>{author}</Text>

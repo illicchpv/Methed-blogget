@@ -8,10 +8,18 @@ import FormComment from './FormComment';
 import Comments from './Comments';
 import {usePostInfo} from '../../hooks/usePostInfo';
 import Text from '../../UI/Text';
+import {useNavigate, useParams} from "react-router-dom";
 // import {useXDatax} from "../../hooks/useXDatax";
 // import {useSelector} from "react-redux";
 
-export const Modal = ({closeModal, id}) => { // title, author, markdown,
+export const Modal = () => {
+  const {id, page} = useParams()
+  const navigate = useNavigate()
+  const closeModal = () => {
+    // navigate(-1)
+    navigate(`/category/${page}`);
+  }
+
   const overlayRef = useRef(null);
   const closeRef = useRef(null);
   const [post, error, loading, comms] = usePostInfo(id);
