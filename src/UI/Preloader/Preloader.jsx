@@ -7,7 +7,7 @@ import ClockLoader from "react-spinners/ClockLoader";
 import PropTypes from 'prop-types';
 // import style from './Preloader.module.css';
 
-export const Preloader = (props) => (
+export const Preloader = () => (
   <ClockLoader color='#cc6633'
     cssOverride={{display: 'block'}}
     size={30}/>

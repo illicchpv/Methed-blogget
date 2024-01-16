@@ -22,7 +22,7 @@ export const postsRequestError = (error) => ({
   type: POSTS_REQUEST_ERROR,
   error,
 });
-export const postsClear = (error) => ({
+export const postsClear = () => ({
   type: POSTS_CLEAR,
 });
 

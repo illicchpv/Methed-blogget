@@ -7,7 +7,7 @@ import {useEffect, useRef} from "react";
 import {postsRequestAsync} from '../../../store/posts/postsAction';
 // import {postsReducer} from "../../../store/posts/postsReducer";
 
-export const List = (props) => {
+export const List = () => {
   const {posts, loading} = useSelector(state => state.postsReducer); // loading === null ключ что это первая отрисовка
   const endList = useRef(null);
   const after = useSelector(state => state.postsReducer.after);
@@ -30,7 +30,7 @@ export const List = (props) => {
   }, [endList.current, posts]);
 
   const childrenData = posts.map(el => el.data);
-  const postsData = childrenData.map((el, i) => ({
+  const postsData = childrenData.map((el) => ({
     thumbnail: (el.thumbnail === 'self' ? '' : el.thumbnail),
     title: el.title.replaceAll('&amp;', '&'),
     author: el.author,
