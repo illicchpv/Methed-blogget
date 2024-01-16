@@ -1,8 +1,8 @@
-import {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-// import {postsRequest, postsRequestAsync, postsRequestSuccess} from '../store/posts/postsAction';
-import {postsRequestAsync} from '../store/posts/postsAction';
-
+// import {useEffect} from 'react';
+// import {useDispatch, useSelector} from 'react-redux';
+// // import {postsRequest, postsRequestAsync, postsRequestSuccess} from '../store/posts/postsAction';
+// import {postsRequestAsync} from '../store/posts/postsAction';
+//
 // export const usePosts = (state) => {
 //   const token = useSelector(state => state.tokenReducer.token);
 //   const posts = useSelector(state => state.postsReducer.data);
