@@ -4,24 +4,28 @@ import style from './List.module.css';
 import Preloader from '../../../UI/Preloader';
 import {useDispatch, useSelector} from 'react-redux';
 import {useEffect, useRef} from "react";
-import {postsRequestAsync} from '../../../store/posts/postsAction';
+import {autoLoadCntInc, postsRequestAsync} from '../../../store/posts/postsAction';
 import {Outlet, useParams} from "react-router-dom";
+import {POSTS_COUNT} from "../../../api/const";
 // import {postsReducer} from "../../../store/posts/postsReducer";
 
 export const List = () => {
-  const {posts, loading} = useSelector(state => state.postsReducer); // loading === null ключ что это первая отрисовка
+  const {posts, loading, autoLoadMaxBlockCnt} = useSelector(state => state.postsReducer); // loading === null ключ что это первая отрисовка
+  const autoLoadCnt = posts ? Math.round(posts.length / POSTS_COUNT) : 0;
   const endList = useRef(null);
   const after = useSelector(state => state.postsReducer.after);
   const dispatch = useDispatch();
   const {page} = useParams()
-  console.log(`List page: ${page}  [${loading}]  [${after}] `, new Date().getTime())
+  // const [autoLoadCnt, setAutoLoadCnt] = useState(0);
+
+  // console.log(`${autoLoadCnt}/${autoLoadMaxBlockCnt} List page: ${page}  [${loading}]  [${after}] `, new Date().getTime())
 
   // if (!after) { // (loading === null) {
   //   dispatch(postsRequestAsync());
   // }
 
   useEffect(() => {
-    console.log('useEffect postsRequestAsync')
+    // console.log('useEffect postsRequestAsync')
     dispatch(postsRequestAsync(page));
   }, [page])
 
@@ -30,13 +34,17 @@ export const List = () => {
     if (after && !loading) { // if (loading !== null) {
       if (!posts || !posts.length || !endList.current) return;
 
-      observer = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-          console.log('-------------------------------')
-          dispatch(postsRequestAsync());
-        }
-      }, {rootMargin: '100px'});
-      observer.observe(endList.current);
+      if (autoLoadCnt < autoLoadMaxBlockCnt) {
+        //setAutoLoadCnt((p) => p++);
+        // dispatch(autoLoadCntInc())
+
+        observer = new IntersectionObserver((entries) => {
+          if (entries[0].isIntersecting) {
+            dispatch(postsRequestAsync());
+          }
+        }, {rootMargin: '100px'});
+        observer.observe(endList.current);
+      }
     }
     return () => {
       if (endList.current && observer) {
@@ -56,6 +64,7 @@ export const List = () => {
     selftext: el.selftext, // .replaceAll('&amp;', 'IIII'),
   }));
 
+  const s = <span>{autoLoadCnt}/{autoLoadMaxBlockCnt} по {POSTS_COUNT}</span>
   return (
     <>
       <ul className={style.list}>
@@ -63,10 +72,17 @@ export const List = () => {
           postsData.map((el) => <Post key={el.id} postData={el}/>)
         }
         <li ref={endList} className={style.end}>
-          {loading && <Preloader/>}
+          {autoLoadCnt < autoLoadMaxBlockCnt && (loading && (<><Preloader/>{s}</>))}
+          {autoLoadCnt >= autoLoadMaxBlockCnt && (after &&
+            <button className={style.continue} onClick={() => {
+              dispatch(autoLoadCntInc());
+              dispatch(postsRequestAsync());
+            }}> "загрузить еще" {s}</button>
+
+          )}
         </li>
       </ul>
-      <Outlet />
+      <Outlet/>
     </>
   );
 };

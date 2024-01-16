@@ -7,6 +7,7 @@ export const POSTS_REQUEST_SUCCESS_AFTER = 'POSTS_REQUEST_SUCCESS_AFTER';
 export const POSTS_REQUEST_ERROR = 'POSTS_REQUEST_ERROR';
 export const POSTS_CLEAR = 'POSTS_CLEAR';
 export const CHANGE_PAGE = 'CHANGE_PAGE';
+export const AUTOLOAD_INC = 'AUTOLOAD_INC';
 
 export const postsRequest = () => ({
   type: POSTS_REQUEST,
@@ -30,6 +31,10 @@ export const postsClear = () => ({
 export const changePage = (page) => ({
   type: CHANGE_PAGE,
   page,
+});
+
+export const autoLoadCntInc = (page) => ({
+  type: AUTOLOAD_INC,
 });
 
 export const postsRequestAsync = (newPage) => (dispatch, getState) => {

@@ -4,9 +4,11 @@ import {
   POSTS_REQUEST_SUCCESS_AFTER,
   POSTS_REQUEST_ERROR,
   POSTS_CLEAR,
-  CHANGE_PAGE
+  CHANGE_PAGE,
+  AUTOLOAD_INC
 } from "./postsAction";
 import {uniqByKeepFirst} from "../../utils/uniqByKey";
+import {MAX_AUTOLOAD} from "../../api/const";
 
 const initialState = {
   loading: null,
@@ -15,6 +17,7 @@ const initialState = {
   after: '',
   isLast: false,
   page: '',
+  autoLoadMaxBlockCnt: MAX_AUTOLOAD,
 };
 
 // const posts = useSelector(state => state.postsReducer.posts);
@@ -49,7 +52,8 @@ export const postsReducer = (state = initialState, action) => { // преобр�
     case POSTS_CLEAR: {
       return {
         ...state, loading: false, error: '',
-        posts: [] // ???
+        posts: [], // ???
+        autoLoadMaxBlockCnt: MAX_AUTOLOAD,
       };
     }
     case CHANGE_PAGE:
@@ -58,8 +62,16 @@ export const postsReducer = (state = initialState, action) => { // преобр�
         page: action.page,
         after: '',
         posts: [],
-        isLast: false
+        isLast: false,
+        autoLoadMaxBlockCnt: MAX_AUTOLOAD,
       };
+    case AUTOLOAD_INC: {
+      // debugger
+      return {
+        ...state, loading: false, error: '',
+        autoLoadMaxBlockCnt: state.autoLoadMaxBlockCnt + MAX_AUTOLOAD,
+      };
+    }
 
     default:
       return state;

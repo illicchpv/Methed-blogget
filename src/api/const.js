@@ -20,3 +20,5 @@ export const SCOPE_STRING = 'identity submit read'; // https://www.reddit.com/de
 
 export const POSTS_COUNT = 7;
 export const FETCH_TIMEOUT = 300;
+export const MAX_AUTOLOAD = 2;
+
