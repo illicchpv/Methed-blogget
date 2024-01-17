@@ -25,6 +25,9 @@ export const authRequestAsync = () => (dispatch, getState) => {
   const token = getState().tokenReducer.token; // или useSelector(state => state.tokenReducer.token);
   if (!token) return;
   console.log(`authRequestAsync token:.length`, token.length);
+  if (token.length < 15) {
+    console.log(`authRequestAsync token:`, token);
+  }
 
   dispatch(authRequest()); // ! это сбрасывает данные и выставляет loading = true
 
@@ -45,9 +48,12 @@ export const authRequestAsync = () => (dispatch, getState) => {
         dispatch(authRequestSuccess(data));
       }, 300);
 
-      const newHref = window.location.href.split('#')[0].replace('/auth', '');
+      /*
+      const newHref = window.location.href.split('#')[0]; // .replace('/auth', '');
       // console.log('newHref: ', newHref);
       window.history.replaceState(null, null, newHref);
+      // navigate ???
+      */
     })
     .catch((err) => {
       console.error(err);

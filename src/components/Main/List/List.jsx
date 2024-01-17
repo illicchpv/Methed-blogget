@@ -15,7 +15,8 @@ export const List = () => {
   const endList = useRef(null);
   const after = useSelector(state => state.postsReducer.after);
   const dispatch = useDispatch();
-  const {page} = useParams()
+  const {page} = useParams();
+  // console.log('List page: ', page);  // ??? а тут показывает page?
   // const [autoLoadCnt, setAutoLoadCnt] = useState(0);
 
   // console.log(`${autoLoadCnt}/${autoLoadMaxBlockCnt} List page: ${page}  [${loading}]  [${after}] `, new Date().getTime())
@@ -27,7 +28,7 @@ export const List = () => {
   useEffect(() => {
     // console.log('useEffect postsRequestAsync')
     dispatch(postsRequestAsync(page));
-  }, [page])
+  }, [page]);
 
   useEffect(() => {
     let observer = undefined;
@@ -50,7 +51,7 @@ export const List = () => {
       if (endList.current && observer) {
         observer.unobserve(endList.current);
       }
-    }
+    };
   }, [endList.current, posts]);
 
   const childrenData = posts.map(el => el.data);
@@ -64,15 +65,15 @@ export const List = () => {
     selftext: el.selftext, // .replaceAll('&amp;', 'IIII'),
   }));
 
-  const s = <span>{autoLoadCnt}/{autoLoadMaxBlockCnt} по {POSTS_COUNT}</span>
+  const s = <span>{autoLoadCnt}/{autoLoadMaxBlockCnt} по {POSTS_COUNT}</span>;
   return (
     <>
       <ul className={style.list}>
         {
-          postsData.map((el) => <Post key={el.id} postData={el}/>)
+          postsData.map((el) => <Post key={el.id} postData={el} />)
         }
         <li ref={endList} className={style.end}>
-          {autoLoadCnt < autoLoadMaxBlockCnt && (loading && (<><Preloader/>{s}</>))}
+          {autoLoadCnt < autoLoadMaxBlockCnt && (loading && (<><Preloader />{s}</>))}
           {autoLoadCnt >= autoLoadMaxBlockCnt && (after &&
             <button className={style.continue} onClick={() => {
               dispatch(autoLoadCntInc());
@@ -82,7 +83,7 @@ export const List = () => {
           )}
         </li>
       </ul>
-      <Outlet/>
+      <Outlet />
     </>
   );
 };
