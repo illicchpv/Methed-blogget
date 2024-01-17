@@ -1,15 +1,23 @@
 import {combineReducers, createStore, applyMiddleware} from "redux";
 import {composeWithDevTools} from '@redux-devtools/extension';
 import {commentReducer} from "./commentReducer";
+import {cutTabReducer} from "./cutTabReducer";
 import {tokenMidleware, tokenReducer} from "./tokenReducer";
 import {thunk} from 'redux-thunk';
-import {authReducer} from './auth/authReducer'
-import {postsReducer} from './posts/postsReducer'
-import {postInfoReducer} from './postInfo/postInfoReducer'
+import {authReducer} from './auth/authReducer';
+import {postsReducer} from './posts/postsReducer';
+import {postInfoReducer} from './postInfo/postInfoReducer';
 // import {xDataxReducer} from './xDatax/xDataxReducer'
 
 // пример включения xDataxReducer   const rootReducer = combineReducers({tokenReducer, authReducer, postsReducer, postInfoReducer, xDataxReducer});
-const rootReducer = combineReducers({commentReducer, tokenReducer, authReducer, postsReducer, postInfoReducer});
+const rootReducer = combineReducers({
+  cutTabReducer,
+  commentReducer,
+  tokenReducer,
+  authReducer,
+  postsReducer,
+  postInfoReducer
+});
 
 // для примера напишем logger
 // const logger = (store) => (next) => (action) => {

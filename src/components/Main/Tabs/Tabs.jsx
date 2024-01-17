@@ -11,6 +11,8 @@ import {ReactComponent as HotIcon} from './img2/hot.svg';
 import {debounceRaf} from '../../../utils/debounceRaf';
 import Text from '../../../UI/Text';
 import {useNavigate} from "react-router-dom";
+import {useDispatch} from 'react-redux';
+import {setTabName} from '../../../store/cutTabReducer';
 
 const LIST = [
   {value: 'Главная', Icon: HomeIcon, link: 'rising'},
@@ -24,7 +26,7 @@ export const Tabs = (props) => {
   const [isDropdown, setIsDropdown] = useState(true); // true - mobile version / desktop;
   const [selectedTab, setSelectedTab] = useState(0);
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
 
   const handleResize = () => {
     if (document.documentElement.clientWidth < 768) {
@@ -55,7 +57,7 @@ export const Tabs = (props) => {
         >
           {LIST[selectedTab].value}
 
-          <ArrowIcon width={15} height={15}/>
+          <ArrowIcon width={15} height={15} />
         </Text>
       </div>}
 
@@ -65,12 +67,15 @@ export const Tabs = (props) => {
             <Text As='button' size={18} tsize={24}
               className={style.btn} onClick={() => {
                 LIST.forEach((el2, i) => {
-                  if (el2.value === el.value) setSelectedTab(i);
+                  if (el2.value === el.value) {
+                    setSelectedTab(i);
+                    dispatch(setTabName(LIST[i].value));
+                  }
                 });
                 navigate(`/category/${el.link}`);
               }}>
               {el.value}
-              {el.Icon && <el.Icon width={30} height={30}/>}
+              {el.Icon && <el.Icon width={30} height={30} />}
             </Text>
           </li>
         ))}

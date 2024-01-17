@@ -10,6 +10,7 @@ import {POSTS_COUNT} from "../../../api/const";
 // import {postsReducer} from "../../../store/posts/postsReducer";
 
 export const List = () => {
+  const auth = useSelector(state => state.authReducer.data);
   const {posts, loading, autoLoadMaxBlockCnt} = useSelector(state => state.postsReducer); // loading === null ключ что это первая отрисовка
   const autoLoadCnt = posts ? Math.round(posts.length / POSTS_COUNT) : 0;
   const endList = useRef(null);
@@ -68,22 +69,23 @@ export const List = () => {
   const s = <span>{autoLoadCnt}/{autoLoadMaxBlockCnt} по {POSTS_COUNT}</span>;
   return (
     <>
-      <ul className={style.list}>
-        {
-          postsData.map((el) => <Post key={el.id} postData={el} />)
-        }
-        <li ref={endList} className={style.end}>
-          {autoLoadCnt < autoLoadMaxBlockCnt && (loading && (<><Preloader />{s}</>))}
-          {autoLoadCnt >= autoLoadMaxBlockCnt && (after &&
-            <button className={style.continue} onClick={() => {
-              dispatch(autoLoadCntInc());
-              dispatch(postsRequestAsync());
-            }}> "загрузить еще" {s}</button>
-
-          )}
-        </li>
-      </ul>
-      <Outlet />
+      {auth.name && (<>
+        <ul className={style.list}>
+          {
+            postsData.map((el) => <Post key={el.id} postData={el} />)
+          }
+          <li ref={endList} className={style.end}>
+            {autoLoadCnt < autoLoadMaxBlockCnt && (loading && (<><Preloader />{s}</>))}
+            {autoLoadCnt >= autoLoadMaxBlockCnt && (after &&
+              <button className={style.continue} onClick={() => {
+                dispatch(autoLoadCntInc());
+                dispatch(postsRequestAsync());
+              }}> "загрузить еще" {s}</button>
+            )}
+          </li>
+        </ul>
+        <Outlet />
+      </>)}
     </>
   );
 };
