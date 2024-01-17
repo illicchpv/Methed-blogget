@@ -16,11 +16,12 @@ export const useAuth = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(authRequestAsync());
+    if(!auth.name){
+      dispatch(authRequestAsync());    
+    }
   }, [token, dispatch]);
 
   const clearAuth = () => {
-    // setAuth({});
     dispatch(postsClear());
     dispatch(deleteToken());
     dispatch(authLogout());
