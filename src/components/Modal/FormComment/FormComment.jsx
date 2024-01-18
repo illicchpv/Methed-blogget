@@ -10,12 +10,13 @@ import style from './FormComment.module.css';
 import Text from '../../../UI/Text/Text';
 import {useDispatch, useSelector} from 'react-redux';
 import {updateComment} from '../../../store/commentReducer';
-import {useAuth} from '../../../hooks/useAuth';
+// import {useAuth} from '../../../hooks/useAuth';
 
 export const FormComment = () => {
   // console.log('FormComment props:', props);
   // const {auth} = useContext(authContext);
-  const [auth] = useAuth();
+  // const [auth] = useAuth();
+  const auth = useSelector(state => state.authReducer.data);
   // console.log('auth: ', auth);
   // const textareaRef = useRef(null);
 

@@ -37,7 +37,7 @@ export const List = () => {
       if (!posts || !posts.length || !endList.current) return;
 
       if (autoLoadCnt < autoLoadMaxBlockCnt) {
-        //setAutoLoadCnt((p) => p++);
+        // setAutoLoadCnt((p) => p++);
         // dispatch(autoLoadCntInc())
 
         observer = new IntersectionObserver((entries) => {
@@ -80,7 +80,7 @@ export const List = () => {
               <button className={style.continue} onClick={() => {
                 dispatch(autoLoadCntInc());
                 dispatch(postsRequestAsync());
-              }}> "загрузить еще" {s}</button>
+              }}> загрузить еще {s}</button>
             )}
           </li>
         </ul>

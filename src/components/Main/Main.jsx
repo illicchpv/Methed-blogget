@@ -9,11 +9,11 @@ import {useEffect} from 'react';
 const Main = (props) => {
   const {page} = useParams();
   const navigate = useNavigate();
-  console.log('Main page: ', page, window.location.href); // ??? почему не показывает page?
+  console.log('Main page: ', page, window.location.href); // ??? 1 почему не показывает page?
 
   useEffect(() => {
     if (window.location.href.includes("/auth#")) {
-      navigate(`/`);
+      navigate(`/`); // ??? navigate('/path') можно использовать только в useEffect ?
     }
   }, []);
 
@@ -52,7 +52,7 @@ const Main = (props) => {
 export default Main;
 /*
 
- <Outlet /> ???
+ <Outlet /> ??? 2 в компоненте List не понял как это работает <Outlet />
 
       {isModalOpen && <Modal id={id}
                              closeModal={() => {

@@ -15,10 +15,10 @@ import {useNavigate, useParams} from "react-router-dom";
 export const Modal = () => {
   const {id, page} = useParams()
   const navigate = useNavigate()
-  const closeModal = () => {
-    // navigate(-1)
-    navigate(`/category/${page}`);
-  }
+
+  // const closeModal = () => {
+  //   navigate(`/category/${page}`);
+  // }
 
   const overlayRef = useRef(null);
   const closeRef = useRef(null);
@@ -42,12 +42,12 @@ export const Modal = () => {
   const handleClick = useCallback((e) => {
     const target = e.target;
     if (target === overlayRef.current || target === closeRef.current || target.closest('button') === closeRef.current) {
-      closeModal();
+      navigate(`/category/${page}`); // closeModal();
     }
-  }, [closeModal]);
+  }, []); // closeModal
   const handleKey = useCallback((e) => {
-    if (e.key === 'Escape') closeModal();
-  }, [closeModal]);
+    if (e.key === 'Escape') navigate(`/category/${page}`); // closeModal();
+  }, []); // closeModal
 
   useEffect(() => {
     if (!closeRef.current) return;

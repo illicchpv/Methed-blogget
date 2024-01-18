@@ -15,7 +15,6 @@ import {useAuth} from '../../../hooks/useAuth';
 // import {AuthLoader} from './AuthLoader/AuthLoader';
 
 export const Auth = () => {
-  // const [auth, clearAuth] = useAuth();
   const [logoutVisible, setLogoutVisible] = useState(false);
   // const {auth, clearAuth} = useContext(authContext);
   const [auth, loading, clearAuth] = useAuth();
