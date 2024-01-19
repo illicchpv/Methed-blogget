@@ -1,6 +1,7 @@
 
 export const getRedditRezArray = (posts) => {
   try {
+    debugger;
     if (!posts) return [];
     const a1 = posts.map((el) => el.data);
     const a2 = a1.map((el) => el.children);

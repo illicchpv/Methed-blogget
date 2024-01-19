@@ -33,6 +33,7 @@ export const postInfoRequestAsync = (id) => (dispatch, getState) => {
   })
     .then((data) => {
       if (!data || !data.data) return;
+      debugger;
       const post = data.data[0].data.children[0].data;
 
       const children = data.data[1].data.children;

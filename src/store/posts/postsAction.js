@@ -1,5 +1,6 @@
 import axios from "axios";
 import {URL_API, POSTS_COUNT, FETCH_TIMEOUT} from "../../api/const";
+import {postsSlice} from './postsSlice'
 
 export const POSTS_REQUEST = 'POSTS_REQUEST';
 export const POSTS_REQUEST_SUCCESS = 'POSTS_REQUEST_SUCCESS';
@@ -9,39 +10,40 @@ export const POSTS_CLEAR = 'POSTS_CLEAR';
 export const CHANGE_PAGE = 'CHANGE_PAGE';
 export const AUTOLOAD_INC = 'AUTOLOAD_INC';
 
-export const postsRequest = () => ({
-  type: POSTS_REQUEST,
-});
-export const postsRequestSuccess = (data) => ({
-  type: POSTS_REQUEST_SUCCESS,
-  data,
-});
-export const postsRequestSuccessAfter = (data) => ({
-  type: POSTS_REQUEST_SUCCESS_AFTER,
-  data,
-});
-export const postsRequestError = (error) => ({
-  type: POSTS_REQUEST_ERROR,
-  error,
-});
-export const postsClear = () => ({
-  type: POSTS_CLEAR,
-});
+// export const postsRequest = () => ({
+//   type: POSTS_REQUEST,
+// });
+// export const postsRequestSuccess = (data) => ({
+//   type: POSTS_REQUEST_SUCCESS,
+//   data,
+// });
+// export const postsRequestSuccessAfter = (data) => ({
+//   type: POSTS_REQUEST_SUCCESS_AFTER,
+//   data,
+// });
+// export const postsRequestError = (error) => ({
+//   type: POSTS_REQUEST_ERROR,
+//   error,
+// });
+// export const postsClear = () => ({
+//   type: POSTS_CLEAR,
+// });
 
-export const changePage = (page) => ({
-  type: CHANGE_PAGE,
-  page,
-});
+// export const changePage = (page) => ({
+//   type: CHANGE_PAGE,
+//   page,
+// });
 
-export const autoLoadCntInc = (page) => ({
-  type: AUTOLOAD_INC,
-});
+// export const autoLoadCntInc = (page) => ({
+//   type: AUTOLOAD_INC,
+// });
 
 export const postsRequestAsync = (newPage) => (dispatch, getState) => {
+  // debugger;
   let page = getState().postsReducer.page;
   if (newPage) {
     page = newPage
-    dispatch(changePage(page));
+    dispatch(postsSlice.actions.changePage(page));
   }
   const token = getState().tokenReducer.token; // или useSelector(state => state.tokenReducer.token);
   const after = getState().postsReducer.after;
@@ -50,7 +52,7 @@ export const postsRequestAsync = (newPage) => (dispatch, getState) => {
 
   if (!token || loading || isLast) return;
 
-  dispatch(postsRequest()); // ! это сбрасывает данные и выставляет loading = true
+  dispatch(postsSlice.actions.postsRequest()); // ! это сбрасывает данные и выставляет loading = true
 
   const url = `${URL_API}/${page}?limit=${POSTS_COUNT}${after ? ('&after=' + after) : ''}`;
   console.log(`postsRequestAsync after:[${after}] url: `, url);
@@ -68,16 +70,16 @@ export const postsRequestAsync = (newPage) => (dispatch, getState) => {
       if (after) {
         // console.log('postsRequestSuccessAfter')
         setTimeout(() => {
-          dispatch(postsRequestSuccessAfter(data.data));
+          dispatch(postsSlice.actions.postsRequestSuccessAfter(data.data));
         }, FETCH_TIMEOUT);
       } else {
         // console.log('postsRequestSuccess')
         setTimeout(() => {
-          dispatch(postsRequestSuccess(data.data));
+          dispatch(postsSlice.actions.postsRequestSuccess(data.data));
         }, FETCH_TIMEOUT);
       }
     })
     .catch((err) => {
-      dispatch(postsRequestError(err.message)); // ? err.toString()
+      dispatch(postsSlice.actions.postsRequestError(err.message)); // ? err.toString()
     });
 };

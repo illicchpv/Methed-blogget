@@ -5,7 +5,8 @@ import {cutTabReducer} from "./cutTabReducer";
 import {tokenMidleware, tokenReducer} from "./tokenReducer";
 // import {thunk} from 'redux-thunk';
 import {authReducer} from './auth/authReducer';
-import {postsReducer} from './posts/postsReducer';
+// import {postsReducer} from './posts/postsReducer';
+import postsReducer from './posts/postsSlice';
 import {postInfoReducer} from './postInfo/postInfoReducer';
 // import {xDataxReducer} from './xDatax/xDataxReducer'
 import {configureStore} from '@reduxjs/toolkit';

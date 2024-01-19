@@ -7,11 +7,12 @@ import {useEffect, useRef} from "react";
 import {autoLoadCntInc, postsRequestAsync} from '../../../store/posts/postsAction';
 import {Outlet, useParams} from "react-router-dom";
 import {POSTS_COUNT} from "../../../api/const";
+import {postsSlice} from '../../../store/posts/postsSlice';
 // import {postsReducer} from "../../../store/posts/postsReducer";
 
 export const List = () => {
   const auth = useSelector(state => state.authReducer.data);
-  const {posts, loading, autoLoadMaxBlockCnt} = useSelector(state => state.postsReducer); // loading === null ключ что это первая отрисовка
+  const {posts, loading, autoLoadMaxBlockCnt, realNewState} = useSelector(state => state.postsReducer); // loading === null ключ что это первая отрисовка
   const autoLoadCnt = posts ? Math.round(posts.length / POSTS_COUNT) : 0;
   const endList = useRef(null);
   const after = useSelector(state => state.postsReducer.after);
@@ -78,8 +79,12 @@ export const List = () => {
             {autoLoadCnt < autoLoadMaxBlockCnt && (loading && (<><Preloader />{s}</>))}
             {autoLoadCnt >= autoLoadMaxBlockCnt && (after &&
               <button className={style.continue} onClick={() => {
-                dispatch(autoLoadCntInc());
-                dispatch(postsRequestAsync());
+                dispatch(postsSlice.actions.autoLoadCntInc());
+                // ??? при попытке получить ещё посты - вылетает 👇
+                // setTimeout(() => {
+                //   debugger;
+                //   dispatch(postsSlice.actions.postsRequestAsync());
+                // }, 1)
               }}> загрузить еще {s}</button>
             )}
           </li>
