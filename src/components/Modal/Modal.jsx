@@ -31,10 +31,10 @@ export const Modal = () => {
   let author = 'author loading...';
   let markdown = 'markdown loading...';
   let comments = [];
-  if (post) {
+  if (post && post.author) {
     title = post.title;
     author = post.author;
-    if (post.selftext) markdown = post.selftext;
+    (post.selftext === '') ? markdown = '' : markdown = post.selftext;
     comments = comms;
   }
   const status = error ? 'error' : (loading ? 'loading' : 'ok');
@@ -44,10 +44,10 @@ export const Modal = () => {
     if (target === overlayRef.current || target === closeRef.current || target.closest('button') === closeRef.current) {
       navigate(`/category/${page}`); // closeModal();
     }
-  }, []); // closeModal
+  }, [navigate, page]); // closeModal
   const handleKey = useCallback((e) => {
     if (e.key === 'Escape') navigate(`/category/${page}`); // closeModal();
-  }, []); // closeModal
+  }, [navigate, page]); // closeModal
 
   useEffect(() => {
     if (!closeRef.current) return;
