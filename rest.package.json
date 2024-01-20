@@ -1,34 +1,24 @@
 {
-  "name": "blogget",
+  "name": "front",
   "version": "0.1.0",
-  "homepage": ".",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "axios": "^1.6.5",
-    "classnames": "^2.5.1",
-    "markdown-to-jsx": "^7.4.0",
-    "normalize.css": "^8.0.1",
-    "prop-types": "^15.8.1",
-    "random-words": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.2",
-    "react-router-dom": "^6.21.2",
+    "react-router-dom": "^6.20.1",
     "react-scripts": "5.0.1",
-    "react-spinners": "^0.13.8",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "set BROWSER=none&& react-scripts start",
-    "cc": "hygen create component",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 200",
-    "lint:fix": "eslint . --ext js,jsx --fix",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -52,10 +42,6 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^8.56.0",
-    "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-refresh": "^0.4.5",
-    "gh-pages": "^6.1.1",
-    "hygen": "^6.2.11"
+    "gh-pages": "^6.1.0"
   }
 }

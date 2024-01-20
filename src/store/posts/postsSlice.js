@@ -67,6 +67,9 @@ export const postsSlice = createSlice({
       state.autoLoadMaxBlockCnt = state.autoLoadMaxBlockCnt + MAX_AUTOLOAD;
     },
   },
+  extraReducers: {
+
+  },
 });
 
 export default postsSlice.reducer;
