@@ -4,7 +4,8 @@ import style from './List.module.css';
 import Preloader from '../../../UI/Preloader';
 import {useDispatch, useSelector} from 'react-redux';
 import {useEffect, useRef} from "react";
-import {autoLoadCntInc, postsRequestAsync} from '../../../store/posts/postsAction';
+// import {autoLoadCntInc, postsRequestAsync} from '../../../store/posts/postsAction'; // ??? Cannot access 'postsRequestAsync' before initialization
+import {postsRequestAsync} from '../../../store/posts/postsSlice';
 import {Outlet, useParams} from "react-router-dom";
 import {POSTS_COUNT} from "../../../api/const";
 import {postsSlice} from '../../../store/posts/postsSlice';
@@ -12,7 +13,8 @@ import {postsSlice} from '../../../store/posts/postsSlice';
 
 export const List = () => {
   const auth = useSelector(state => state.authReducer.data);
-  const {posts, loading, autoLoadMaxBlockCnt, realNewState} = useSelector(state => state.postsReducer); // loading === null ключ что это первая отрисовка
+  const {posts, loading, autoLoadMaxBlockCnt, realNewState, error} = useSelector(state => state.postsReducer); // loading === null ключ что это первая отрисовка
+  // console.log('error: ', error);
   const autoLoadCnt = posts ? Math.round(posts.length / POSTS_COUNT) : 0;
   const endList = useRef(null);
   const after = useSelector(state => state.postsReducer.after);
@@ -32,21 +34,27 @@ export const List = () => {
     dispatch(postsRequestAsync(page));
   }, [page]);
 
+  // ??? что-то тут каша какая-то
   useEffect(() => {
     let observer = undefined;
     if (after && !loading) { // if (loading !== null) {
-      if (!posts || !posts.length || !endList.current) return;
+      // console.log('after: ', after, loading, !posts);
+      // if (!posts || !posts.length || !endList.current) return;
 
+      // console.log(`IntersectionObserver: 1 ${autoLoadCnt} < ${autoLoadMaxBlockCnt} `);
       if (autoLoadCnt < autoLoadMaxBlockCnt) {
         // setAutoLoadCnt((p) => p++);
         // dispatch(autoLoadCntInc())
+        // console.log('IntersectionObserver: 2');
 
         observer = new IntersectionObserver((entries) => {
+          // console.log('IntersectionObserver: 31');
           if (entries[0].isIntersecting) {
+            // console.log('IntersectionObserver: 32');
             dispatch(postsRequestAsync());
           }
         }, {rootMargin: '100px'});
-        observer.observe(endList.current);
+        if (endList.current) observer.observe(endList.current);
       }
     }
     return () => {
@@ -54,7 +62,7 @@ export const List = () => {
         observer.unobserve(endList.current);
       }
     };
-  }, [endList.current, posts]);
+  }, [endList.current, posts, posts.length, autoLoadMaxBlockCnt]);
 
   const childrenData = posts.map(el => el.data);
   const postsData = childrenData.map((el) => ({
@@ -75,19 +83,34 @@ export const List = () => {
           {
             postsData.map((el) => <Post key={el.id} postData={el} />)
           }
-          <li ref={endList} className={style.end}>
-            {autoLoadCnt < autoLoadMaxBlockCnt && (loading && (<><Preloader />{s}</>))}
+          <li className={style.end}>
+            {autoLoadCnt < autoLoadMaxBlockCnt && (!error && (<>
+              
+              {s}
+              <button className={style.continue} onClick={() => {
+                dispatch(postsSlice.actions.autoLoadCntInc());
+                // ??? при попытке получить ещё посты - вылетает 👇 так делать нельзя?
+                // setTimeout(() => {
+                //   debugger;
+                //   dispatch(postsSlice.actions.postsRequestAsync());
+                // }, 1)
+              }}><Preloader /> загрузить еще {s}</button>
+
+            </>))}
+            {/* {autoLoadCnt < autoLoadMaxBlockCnt && (<><Preloader />{s}</>)} */}
             {autoLoadCnt >= autoLoadMaxBlockCnt && (after &&
               <button className={style.continue} onClick={() => {
                 dispatch(postsSlice.actions.autoLoadCntInc());
-                // ??? при попытке получить ещё посты - вылетает 👇
+                // ??? при попытке получить ещё посты - вылетает 👇 так делать нельзя?
                 // setTimeout(() => {
                 //   debugger;
                 //   dispatch(postsSlice.actions.postsRequestAsync());
                 // }, 1)
               }}> загрузить еще {s}</button>
             )}
+            {error && <h2 className={style.error}>{error}</h2>}
           </li>
+          <li ref={endList} className={style.end2}></li>
         </ul>
         <Outlet />
       </>)}

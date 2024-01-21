@@ -9,7 +9,7 @@ import {useEffect} from 'react';
 const Main = (props) => {
   const {page} = useParams();
   const navigate = useNavigate();
-  console.log('Main page: ', page, window.location.href); // ??? 1 почему не показывает page?
+  // console.log('Main page: ', page, window.location.href); // ??? понятно 1 почему не показывает page?
 
   useEffect(() => {
     if (window.location.href.includes("/auth#")) {

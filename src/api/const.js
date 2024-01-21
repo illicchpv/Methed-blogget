@@ -18,7 +18,7 @@ export const SCOPE_STRING = 'identity submit read'; // https://www.reddit.com/de
 //    modwiki, mysubreddits, privatemessages, read, report, save, submit, subscribe, vote,
 //    wikiedit, wikiread.
 
-export const POSTS_COUNT = 7;
+export const POSTS_COUNT = 8;
 export const FETCH_TIMEOUT = 300;
 export const MAX_AUTOLOAD = 2;
 
