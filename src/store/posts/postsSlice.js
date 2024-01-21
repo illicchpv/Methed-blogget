@@ -59,10 +59,9 @@ export const postsRequestAsync = createAsyncThunk( // ??? Cannot access 'postsRe
       {
         // dispatch(postsSlice.actions.postsRequestError(err.message)); // ? err.toString()
         return err.message;
-      }
-      );
-
-  });
+      });
+  }
+);
 
 const initialState = {
   loading: null,
@@ -135,13 +134,13 @@ export const postsSlice = createSlice({
   },
   extraReducers: {
     [postsRequestAsync.pending.type]: (state, action) => {
-      // console.log(`postsRequestAsync ${postsRequestAsync.fulfilled.type} action.payload: `, action.payload);
+      // console.log(`postsRequestAsync ${postsRequestAsync.pending.type} action.payload: `, action.payload);
       // debugger;
       state.loading = true;
       state.error = '';
     },
     [postsRequestAsync.fulfilled.type]: (state, action) => {
-      console.log(`postsRequestAsync after:${state.after} ${postsRequestAsync.fulfilled.type} action.payload: `, action.payload);
+      // console.log(`postsRequestAsync after:${state.after} ${postsRequestAsync.fulfilled.type} action.payload: `, action.payload);
       if(typeof(action.payload) === 'string'){
         state.loading = false;
         state.error = action.payload;
@@ -151,6 +150,7 @@ export const postsSlice = createSlice({
         // state.posts = action.payload.data.children;
         // state.after = action.payload.data.after;
         // state.isLast = !action.payload.data.after;
+        if(!action.payload) return;
         const len1 = state.posts.length;
         const len2 = action.payload.data.children.length;
           const newPosts = uniqByKeepFirst(
@@ -171,7 +171,7 @@ export const postsSlice = createSlice({
     },
     [postsRequestAsync.rejected.type]: (state, action) => {
       // ??? сюда вообще не попадает :(
-      console.log(`postsRequestAsync ${postsRequestAsync.fulfilled.type} action.payload: `, action.payload);
+      // console.log(`postsRequestAsync ${postsRequestAsync.rejected.type} action.payload: `, action.payload);
       // debugger;
       state.loading = false;
       state.error = action.payload;

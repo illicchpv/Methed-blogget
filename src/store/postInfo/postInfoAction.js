@@ -1,22 +1,25 @@
-import axios from "axios";
-import {URL_API} from "../../api/const";
+// import axios from "axios";
+// import {URL_API} from "../../api/const";
+// import {postInfoSlice} from './postInfoSlice';
+// import {createAsyncThunk} from "@reduxjs/toolkit";
 
-export const POST_INFO_REQUEST = 'POST_INFO_REQUEST';
-export const POST_INFO_REQUEST_SUCCESS = 'POST_INFO_REQUEST_SUCCESS';
-export const POST_INFO_REQUEST_ERROR = 'POST_INFO_REQUEST_ERROR';
+// export const POST_INFO_REQUEST = 'POST_INFO_REQUEST';
+// export const POST_INFO_REQUEST_SUCCESS = 'POST_INFO_REQUEST_SUCCESS';
+// export const POST_INFO_REQUEST_ERROR = 'POST_INFO_REQUEST_ERROR';
 
-export const postInfoRequest = () => ({
-  type: POST_INFO_REQUEST,
-});
-export const postInfoRequestSuccess = (data) => ({
-  type: POST_INFO_REQUEST_SUCCESS,
-  data,
-});
-export const postInfoRequestError = (error) => ({
-  type: POST_INFO_REQUEST_ERROR,
-  error,
-});
+// export const postInfoRequest = () => ({
+//   type: POST_INFO_REQUEST,
+// });
+// export const postInfoRequestSuccess = (data) => ({
+//   type: POST_INFO_REQUEST_SUCCESS,
+//   data,
+// });
+// export const postInfoRequestError = (error) => ({
+//   type: POST_INFO_REQUEST_ERROR,
+//   error,
+// });
 
+/*
 export const postInfoRequestAsync = (id) => (dispatch, getState) => {
   const token = getState().tokenReducer.token; // или useSelector(state => state.tokenReducer.token);
   if (!token) return;
@@ -51,6 +54,7 @@ export const postInfoRequestAsync = (id) => (dispatch, getState) => {
       dispatch(postInfoRequestError(err.message)); // ? err.toString()
     });
 };
+*/
 /*
 
 
