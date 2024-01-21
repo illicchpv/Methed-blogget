@@ -13,7 +13,7 @@ import {postsSlice} from '../../../store/posts/postsSlice';
 
 export const List = () => {
   const auth = useSelector(state => state.authReducer.data);
-  const {posts, loading, autoLoadMaxBlockCnt, realNewState, error} = useSelector(state => state.postsReducer); // loading === null ключ что это первая отрисовка
+  const {posts, loading, autoLoadMaxBlockCnt, error} = useSelector(state => state.postsReducer); // loading === null ключ что это первая отрисовка
   // console.log('error: ', error);
   const autoLoadCnt = posts ? Math.round(posts.length / POSTS_COUNT) : 0;
   const endList = useRef(null);
@@ -85,7 +85,7 @@ export const List = () => {
           }
           <li className={style.end}>
             {autoLoadCnt < autoLoadMaxBlockCnt && (!error && (<>
-              
+
               {s}
               <button className={style.continue} onClick={() => {
                 dispatch(postsSlice.actions.autoLoadCntInc());

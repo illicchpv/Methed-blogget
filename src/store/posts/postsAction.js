@@ -1,15 +1,15 @@
-import axios from "axios";
-import {URL_API, POSTS_COUNT, FETCH_TIMEOUT} from "../../api/const";
-import {postsSlice} from './postsSlice';
-import {createAsyncThunk} from "@reduxjs/toolkit";
+// import axios from "axios";
+// import {URL_API, POSTS_COUNT, FETCH_TIMEOUT} from "../../api/const";
+// import {postsSlice} from './postsSlice';
+// import {createAsyncThunk} from "@reduxjs/toolkit";
 
-export const POSTS_REQUEST = 'POSTS_REQUEST';
-export const POSTS_REQUEST_SUCCESS = 'POSTS_REQUEST_SUCCESS';
-export const POSTS_REQUEST_SUCCESS_AFTER = 'POSTS_REQUEST_SUCCESS_AFTER';
-export const POSTS_REQUEST_ERROR = 'POSTS_REQUEST_ERROR';
-export const POSTS_CLEAR = 'POSTS_CLEAR';
-export const CHANGE_PAGE = 'CHANGE_PAGE';
-export const AUTOLOAD_INC = 'AUTOLOAD_INC';
+// export const POSTS_REQUEST = 'POSTS_REQUEST';
+// export const POSTS_REQUEST_SUCCESS = 'POSTS_REQUEST_SUCCESS';
+// export const POSTS_REQUEST_SUCCESS_AFTER = 'POSTS_REQUEST_SUCCESS_AFTER';
+// export const POSTS_REQUEST_ERROR = 'POSTS_REQUEST_ERROR';
+// export const POSTS_CLEAR = 'POSTS_CLEAR';
+// export const CHANGE_PAGE = 'CHANGE_PAGE';
+// export const AUTOLOAD_INC = 'AUTOLOAD_INC';
 
 // export const postsRequest = () => ({
 //   type: POSTS_REQUEST,

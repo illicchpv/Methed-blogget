@@ -5,7 +5,7 @@ import {deleteToken} from '../store/tokenReducer';
 // import {authLogout, authRequest, authRequestAsync, authRequestError, authRequestSuccess} from '../store/auth/authAction';
 import {authLogout, authRequestAsync} from '../store/auth/authAction';
 // import axios from 'axios';
-import {postsClear} from '../store/posts/postsAction';
+// import {postsClear} from '../store/posts/postsAction';
 import {postsSlice} from '../store/posts/postsSlice';
 
 export const useAuth = () => {
@@ -23,7 +23,6 @@ export const useAuth = () => {
   }, [token, dispatch, auth.name]);
 
   const clearAuth = () => {
-    debugger;
     dispatch(postsSlice.actions.postsClear());
     dispatch(deleteToken());
     dispatch(authLogout());

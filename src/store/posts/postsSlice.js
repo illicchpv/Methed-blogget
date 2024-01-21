@@ -2,7 +2,7 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {MAX_AUTOLOAD, POSTS_COUNT, URL_API} from "../../api/const";
 import {uniqByKeepFirst} from "../../utils/uniqByKey";
 import axios from "axios";
-import {useSelector} from "react-redux";
+// import {useSelector} from "react-redux";
 // import {postsRequestAsync} from "./postsAction"; // ??? Cannot access 'postsRequestAsync' before initialization
 
 export const postsRequestAsync = createAsyncThunk( // ??? Cannot access 'postsRequestAsync' before initialization
@@ -11,7 +11,7 @@ export const postsRequestAsync = createAsyncThunk( // ??? Cannot access 'postsRe
     // console.log('111postsRequestAsync newPage', newPage, 'postsRequestAsync reduxTK: ', reduxTK);
     const {getState, dispatch} = reduxTK;
     // debugger;
-    
+
     let page = getState().postsReducer.page;
     if (newPage) {
       page = newPage;
@@ -20,12 +20,12 @@ export const postsRequestAsync = createAsyncThunk( // ??? Cannot access 'postsRe
 
     // const token = useSelector(state => state.tokenReducer.token);
     const token = getState().tokenReducer.token;
-    const {after, loading, isLast} = getState().postsReducer;
+    const {after, isLast} = getState().postsReducer; // loading,
     if (!token || isLast) return;
-    
+
 
     // ? ??? почему Макс удаляет это 👇 на 24:25+
-    dispatch(postsSlice.actions.postsRequest()); // ! это сбрасывает данные и выставляет loading = true
+    // dispatch(postsSlice.actions.postsRequest()); // ! это сбрасывает данные и выставляет loading = true
 
     const url = `${URL_API}/${page}?limit=${POSTS_COUNT}${after ? ('&after=' + after) : ''}`;
     // console.log(`>>>postsRequestAsync token.len:[${token.length}] after:[${after}] url: `, url);
@@ -55,11 +55,11 @@ export const postsRequestAsync = createAsyncThunk( // ??? Cannot access 'postsRe
         //   return data.data;
         // }
       })
-      .catch((err) => 
-      {
+      .catch((err) =>
+
         // dispatch(postsSlice.actions.postsRequestError(err.message)); // ? err.toString()
-        return err.message;
-      });
+        err.message
+      );
   }
 );
 
@@ -82,7 +82,7 @@ export const postsSlice = createSlice({
       state.loading = true; state.error = '';
     },
     postsRequestSuccess: (state, action) => {
-      debugger; // не должно сюда приходить
+      // debugger; // не должно сюда приходить
       state.loading = false;
       state.error = '';
       state.posts = action.payload.data.children;
@@ -90,7 +90,7 @@ export const postsSlice = createSlice({
       state.isLast = !action.payload.data.after;
     },
     postsRequestSuccessAfter: (state, action) => {
-      debugger; // не должно сюда приходить
+      // debugger; // не должно сюда приходить
       // ??? state.posts как-то странно выглядит - Proxy(Array) {0: {…}}
       // console.log('state.posts: ', state.posts);
       const len1 = state.posts.length;
@@ -101,7 +101,7 @@ export const postsSlice = createSlice({
           ...action.payload.data.children
         ], el => el.data.id
       );
-      if(newPosts.length !== (len1 + len2)){
+      if (newPosts.length !== (len1 + len2)) {
         console.warn(`postsRequestSuccessAfter newPosts.${newPosts.length} !== (${len1} + ${len2}): `);
       }
       state.loading = false;
@@ -111,7 +111,7 @@ export const postsSlice = createSlice({
       state.isLast = !action.payload.data.after;
     },
     postsRequestError: (state, action) => {
-      debugger; // не должно сюда приходить
+      // debugger; // не должно сюда приходить
       state.loading = false;
       state.error = action.payload;
     },
@@ -129,7 +129,7 @@ export const postsSlice = createSlice({
       state.autoLoadMaxBlockCnt = MAX_AUTOLOAD;
     },
     autoLoadCntInc: (state, action) => {
-      state.autoLoadMaxBlockCnt = state.autoLoadMaxBlockCnt + MAX_AUTOLOAD;
+      state.autoLoadMaxBlockCnt += MAX_AUTOLOAD;
     },
   },
   extraReducers: {
@@ -141,25 +141,25 @@ export const postsSlice = createSlice({
     },
     [postsRequestAsync.fulfilled.type]: (state, action) => {
       // console.log(`postsRequestAsync after:${state.after} ${postsRequestAsync.fulfilled.type} action.payload: `, action.payload);
-      if(typeof(action.payload) === 'string'){
+      if (typeof(action.payload) === 'string') {
         state.loading = false;
         state.error = action.payload;
-      }else{
+      } else {
         // state.loading = false;
         // state.error = '';
         // state.posts = action.payload.data.children;
         // state.after = action.payload.data.after;
         // state.isLast = !action.payload.data.after;
-        if(!action.payload) return;
+        if (!action.payload) return;
         const len1 = state.posts.length;
         const len2 = action.payload.data.children.length;
-          const newPosts = uniqByKeepFirst(
+        const newPosts = uniqByKeepFirst(
           [
             ...state.posts,
             ...action.payload.data.children
           ], el => el.data.id
         );
-        if(newPosts.length !== (len1 + len2)){
+        if (newPosts.length !== (len1 + len2)) {
           console.warn(`postsRequestSuccessAfter newPosts.${newPosts.length} !== (${len1} + ${len2}): `);
         }
         state.loading = false;

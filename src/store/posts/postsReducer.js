@@ -28,7 +28,7 @@ export const postsReducer = (state = initialState, action) => { // преобр�
         ...state, loading: true, error: '',
         // posts: [] ???
       };
-    case POSTS_REQUEST_SUCCESS:{
+    case POSTS_REQUEST_SUCCESS: {
       return {
         ...state, loading: false, error: '',
         posts: action.data.data.children,
