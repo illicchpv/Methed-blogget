@@ -5,7 +5,7 @@ import Preloader from '../../../UI/Preloader';
 import {useDispatch, useSelector} from 'react-redux';
 import {useEffect, useRef} from "react";
 // import {autoLoadCntInc, postsRequestAsync} from '../../../store/posts/postsAction'; // ??? Cannot access 'postsRequestAsync' before initialization
-import {postsRequestAsync} from '../../../store/posts/postsSlice';
+import {postsRequestAsync} from '../../../store/posts/postsAction';
 import {Outlet, useParams} from "react-router-dom";
 import {POSTS_COUNT} from "../../../api/const";
 import {postsSlice} from '../../../store/posts/postsSlice';
