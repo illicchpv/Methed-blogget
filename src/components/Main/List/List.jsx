@@ -34,7 +34,7 @@ export const List = () => {
     dispatch(postsRequestAsync(page));
   }, [page]);
 
-  // ??? что-то тут каша какая-то
+  // ???12 что-то тут каша какая-то
   useEffect(() => {
     let observer = undefined;
     if (after && !loading) { // if (loading !== null) {
@@ -89,7 +89,7 @@ export const List = () => {
               {s}
               <button className={style.continue} onClick={() => {
                 dispatch(postsSlice.actions.autoLoadCntInc());
-                // ??? при попытке получить ещё посты - вылетает 👇 так делать нельзя?
+                // ???12 при попытке получить ещё посты - вылетает 👇 так делать нельзя?
                 // setTimeout(() => {
                 //   debugger;
                 //   dispatch(postsSlice.actions.postsRequestAsync());
@@ -101,7 +101,7 @@ export const List = () => {
             {autoLoadCnt >= autoLoadMaxBlockCnt && (after &&
               <button className={style.continue} onClick={() => {
                 dispatch(postsSlice.actions.autoLoadCntInc());
-                // ??? при попытке получить ещё посты - вылетает 👇 так делать нельзя?
+                // ???12 при попытке получить ещё посты - вылетает 👇 так делать нельзя?
                 // setTimeout(() => {
                 //   debugger;
                 //   dispatch(postsSlice.actions.postsRequestAsync());

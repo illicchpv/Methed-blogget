@@ -31,7 +31,7 @@ export const postsSlice = createSlice({
     },
     postsRequestSuccessAfter: (state, action) => {
       // debugger; // не должно сюда приходить
-      // ??? state.posts как-то странно выглядит - Proxy(Array) {0: {…}}
+      // ???12 state.posts как-то странно выглядит - Proxy(Array) {0: {…}}
       // console.log('state.posts: ', state.posts);
       const len1 = state.posts.length;
       const len2 = action.payload.data.children.length;
@@ -110,7 +110,7 @@ export const postsSlice = createSlice({
       }
     },
     [postsRequestAsync.rejected.type]: (state, action) => {
-      // ??? сюда вообще не попадает :(
+      // ???12 сюда вообще не попадает :(
       // console.log(`postsRequestAsync ${postsRequestAsync.rejected.type} action.payload: `, action.payload);
       // debugger;
       state.loading = false;

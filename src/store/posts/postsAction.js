@@ -22,7 +22,7 @@ export const postsRequestAsync = createAsyncThunk( // ??? Cannot access 'postsRe
     if (!token || isLast) return;
 
 
-    // ? ??? почему Макс удаляет это 👇 на 24:25+  // если его включить, то посты не грузятся
+    // ? ???12 почему Макс удаляет это 👇 на 24:25+  // если его включить, то посты не грузятся
     // dispatch(postsSlice.actions.postsRequest()); // ! это сбрасывает данные и выставляет loading = true
 
     const url = `${URL_API}/${page}?limit=${POSTS_COUNT}${after ? ('&after=' + after) : ''}`;
