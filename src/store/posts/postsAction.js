@@ -1,28 +1,19 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {POSTS_COUNT, URL_API} from "../../api/const";
+import {LIST, POSTS_COUNT, URL_API} from "../../api/const";
 import axios from "axios";
-import postsSlice from "./postsSlice";
+import {uniqByKeepFirst} from "../../utils/uniqByKey";
 
 export const postsRequestAsync = createAsyncThunk( // ??? Cannot access 'postsRequestAsync' before initialization
   'posts/fetch',
-  (newPage, reduxTK) => {
+  (newPage, reduxTK) => {   // ???12 newPage берётся из useDispatch(); URL надо бы избавиться непонятно как
     // console.log('111postsRequestAsync newPage', newPage, 'postsRequestAsync reduxTK: ', reduxTK);
     const {getState, dispatch} = reduxTK; // , dispatch
-    // debugger;
 
-    let page = getState().postsReducer.page;
-
-    // const token = useSelector(state => state.tokenReducer.token);
     const token = getState().tokenReducer.token;
-    let {after, isLast} = getState().postsReducer; // loading,
-    if (newPage !== page) {
-      page = newPage;
-      after = '';
-      isLast = false;
-    }
-
+    let {postsSelectedTab, after, isLast, posts} = getState().postsReducer; // loading,
     if (!token || isLast) return;
 
+    const page = LIST[postsSelectedTab].link;
 
     // ? ???12 почему Макс удаляет это 👇 на 24:25+  // если его включить, то посты не грузятся
     // dispatch(postsSlice.actions.postsRequest()); // ! это сбрасывает данные и выставляет loading = true
@@ -38,13 +29,29 @@ export const postsRequestAsync = createAsyncThunk( // ??? Cannot access 'postsRe
     })
       .then((data) => {
         if (!data || !data.data) return;
-        data.data.page = page;
-        return data.data;
+
+        const rezData = data.data.data;
+        const rezPosts = data.data.data.children;
+
+        const len1 = posts.length;
+        const len2 = rezPosts.length;
+        const newPosts = uniqByKeepFirst(
+          [
+            ...posts,
+            ...rezPosts
+          ], el => el.data.id
+        );
+        if (newPosts.length !== (len1 + len2)) { // на всякий случай, чтоб не было повторения ключей
+          console.warn(`postsRequestSuccessAfter newPosts.${newPosts.length} !== (${len1} + ${len2}): `);
+        }
+        rezData.children = newPosts;
+
+        return rezData;
       })
       .catch((err) => {
         // dispatch(postsSlice.actions.postsRequestError(err.message)); // ? err.toString()
         throw err.message;
       }
-    );
+      );
   }
 );

@@ -18,8 +18,6 @@ export const Tabs = (props) => {
   const dispatch = useDispatch();
   const postsSelectedTab = useSelector(state => state.postsReducer.postsSelectedTab);
 
-  console.log('postsSlice: ', postsSlice);
-
   const handleChangePage = (i) => {
     dispatch(postsSlice.actions.postsСhangeSelectedTab(i));
   };

@@ -73,6 +73,8 @@ export const List = () => {
   postsData = postsData === undefined ? [] : postsData;
 
   const s = <span>{autoLoadCnt}/{autoLoadMaxBlockCnt} по {POSTS_COUNT}</span>;
+  // console.log('after: ', after, 'loading:', loading);
+
   return (
     <>
       {auth.name && (<>
@@ -84,26 +86,15 @@ export const List = () => {
             {autoLoadCnt < autoLoadMaxBlockCnt && (!error && (<>
 
               {s}
-              {after && 
+              {(after !== null && loading) && 
                 <button className={style.continue} onClick={() => {
                   dispatch(postsSlice.actions.autoLoadCntInc());
-                  // ???12 при попытке получить ещё посты - вылетает 👇 так делать нельзя?
-                  // setTimeout(() => {
-                  //   debugger;
-                  //   dispatch(postsSlice.actions.postsRequestAsync());
-                  // }, 1)
                 }}><Preloader /> загрузить еще {s}</button>
               }
             </>))}
-            {/* {autoLoadCnt < autoLoadMaxBlockCnt && (<><Preloader />{s}</>)} */}
             {autoLoadCnt >= autoLoadMaxBlockCnt && (after &&
               <button className={style.continue} onClick={() => {
                 dispatch(postsSlice.actions.autoLoadCntInc());
-                // ???12 при попытке получить ещё посты - вылетает 👇 так делать нельзя?
-                // setTimeout(() => {
-                //   debugger;
-                //   dispatch(postsSlice.actions.postsRequestAsync());
-                // }, 1)
               }}> загрузить еще {s}</button>
             )}
             {error && <h2 className={style.error}>{error}</h2>}
