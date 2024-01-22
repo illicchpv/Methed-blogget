@@ -1,7 +1,7 @@
 // import {combineReducers, createStore, applyMiddleware} from "redux";
 // import {composeWithDevTools} from '@redux-devtools/extension';
 import {commentReducer} from "./commentReducer";
-import {cutTabReducer} from "./cutTabReducer";
+// import {cutTabReducer} from "./cutTabReducer";
 import {tokenMidleware, tokenReducer} from "./tokenReducer";
 // import {thunk} from 'redux-thunk';
 import {authReducer} from './auth/authReducer';
@@ -37,7 +37,7 @@ import {configureStore} from '@reduxjs/toolkit';
 
 export const store = configureStore({
   reducer: {
-    cutTabReducer,
+    // cutTabReducer,
     commentReducer,
     tokenReducer,
     authReducer,

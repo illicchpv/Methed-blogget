@@ -1,4 +1,10 @@
 
+import {assignId} from '../utils/genRandomId';
+import {ReactComponent as HomeIcon} from '../components/Main/Tabs/img2/home.svg';
+import {ReactComponent as TopIcon} from '../components/Main/Tabs/img2/top.svg';
+import {ReactComponent as BestIcon} from '../components/Main/Tabs/img2/best.svg';
+import {ReactComponent as HotIcon} from '../components/Main/Tabs/img2/hot.svg';
+
 const appPlace = 0; // 0-local
 // const appPlace = 1; // 1-github
 
@@ -17,6 +23,13 @@ export const SCOPE_STRING = 'identity submit read'; // https://www.reddit.com/de
 // Scope Values: identity, edit, flair, history, modconfig, modflair, modlog, modposts,
 //    modwiki, mysubreddits, privatemessages, read, report, save, submit, subscribe, vote,
 //    wikiedit, wikiread.
+
+export const LIST = [
+  {value: 'Главная', Icon: HomeIcon, link: 'rising'},
+  {value: 'Топ', Icon: TopIcon, link: 'top'},
+  {value: 'Лучшие', Icon: BestIcon, link: 'best'},
+  {value: 'Горячие', Icon: HotIcon, link: 'hot'},
+].map(assignId);
 
 export const POSTS_COUNT = 8;
 export const FETCH_TIMEOUT = 300;

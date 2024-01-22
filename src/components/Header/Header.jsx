@@ -6,17 +6,17 @@ import Search from './Search';
 import Auth from './Auth';
 import Heading from './Heading';
 import {useSelector} from 'react-redux';
+import {LIST} from '../../api/const';
 
 export const Header = () => {
-  const curTabName = useSelector(state => state.cutTabReducer.curTabName);
-  // debugger;
+  const postsSelectedTab = useSelector(state => state.postsReducer.postsSelectedTab);
 
   return (
     <header className={style.header}>
       <Layout>
         <div className={style.gridContainer}>
           <Logo />
-          <Heading text={curTabName} />
+          <Heading text={LIST[postsSelectedTab].value} />
           <Search />
           <Auth /> {/* v3  */}
           {/* v2 <Auth token={ctx.token} delToken={ctx.delToken} /> */}

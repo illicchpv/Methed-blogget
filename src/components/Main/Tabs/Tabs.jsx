@@ -1,32 +1,28 @@
 import {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import style from './Tabs.module.css';
-import {assignId} from '../../../utils/genRandomId';
+// import {assignId} from '../../../utils/genRandomId';
 
 import {ReactComponent as ArrowIcon} from './img/arrow.svg';
-import {ReactComponent as HomeIcon} from './img2/home.svg';
-import {ReactComponent as TopIcon} from './img2/top.svg';
-import {ReactComponent as BestIcon} from './img2/best.svg';
-import {ReactComponent as HotIcon} from './img2/hot.svg';
 import {debounceRaf} from '../../../utils/debounceRaf';
 import Text from '../../../UI/Text';
 import {useNavigate} from "react-router-dom";
-import {useDispatch} from 'react-redux';
-import {setTabName} from '../../../store/cutTabReducer';
-
-const LIST = [
-  {value: 'Главная', Icon: HomeIcon, link: 'rising'},
-  {value: 'Топ', Icon: TopIcon, link: 'top'},
-  {value: 'Лучшие', Icon: BestIcon, link: 'best'},
-  {value: 'Горячие', Icon: HotIcon, link: 'hot'},
-].map(assignId);
+import {useDispatch, useSelector} from 'react-redux';
+import {LIST} from '../../../api/const';
+import {postsSlice} from '../../../store/posts/postsSlice';
 
 export const Tabs = (props) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdown, setIsDropdown] = useState(true); // true - mobile version / desktop;
-  const [selectedTab, setSelectedTab] = useState(0);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const postsSelectedTab = useSelector(state => state.postsReducer.postsSelectedTab);
+
+  console.log('postsSlice: ', postsSlice);
+
+  const handleChangePage = (i) => {
+    dispatch(postsSlice.actions.postsСhangeSelectedTab(i));
+  };
 
   const handleResize = () => {
     if (document.documentElement.clientWidth < 768) {
@@ -55,7 +51,7 @@ export const Tabs = (props) => {
             setIsDropdownOpen(!isDropdownOpen);
           }}
         >
-          {LIST[selectedTab].value}
+          {LIST[postsSelectedTab].value}
 
           <ArrowIcon width={15} height={15} />
         </Text>
@@ -68,8 +64,7 @@ export const Tabs = (props) => {
               className={style.btn} onClick={() => {
                 LIST.forEach((el2, i) => {
                   if (el2.value === el.value) {
-                    setSelectedTab(i);
-                    dispatch(setTabName(LIST[i].value));
+                    handleChangePage(i)
                   }
                 });
                 navigate(`/category/${el.link}`);

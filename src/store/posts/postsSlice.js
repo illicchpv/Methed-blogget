@@ -10,6 +10,7 @@ const initialState = {
   after: '',
   isLast: false,
   page: '',
+  postsSelectedTab: 0,
   autoLoadMaxBlockCnt: MAX_AUTOLOAD,
 };
 
@@ -60,12 +61,13 @@ export const postsSlice = createSlice({
       state.autoLoadMaxBlockCnt = MAX_AUTOLOAD;
       state.isLast = false;
     },
-    changePage: (state, action) => {
+    postsСhangeSelectedTab: (state, action) => {
       state.loading = false;
       state.error = '';
       state.after = '';
       state.posts = [];
       state.isLast = false;
+      state.postsSelectedTab = action.payload;
       state.autoLoadMaxBlockCnt = MAX_AUTOLOAD;
     },
     autoLoadCntInc: (state, action) => {
