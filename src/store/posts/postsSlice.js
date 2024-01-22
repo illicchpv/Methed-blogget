@@ -81,40 +81,43 @@ export const postsSlice = createSlice({
     },
     [postsRequestAsync.fulfilled.type]: (state, action) => {
       // console.log(`postsRequestAsync after:${state.after} ${postsRequestAsync.fulfilled.type} action.payload: `, action.payload);
-      if (typeof(action.payload) === 'string') {
-        state.loading = false;
-        state.error = action.payload;
-      } else {
-        // state.loading = false;
-        // state.error = '';
-        // state.posts = action.payload.data.children;
-        // state.after = action.payload.data.after;
-        // state.isLast = !action.payload.data.after;
-        if (!action.payload) return;
+      if (!action.payload) { // ??? а вдруг
+        console.warn('postsRequestAsync.fulfilled !action.payload'); return;
+      }
+      let newPosts = [];
+      if(state.page !== action.payload.page){
+        newPosts = [...action.payload.data.children];
+        state.error = '';
+        state.after = '';
+        state.posts = [];
+        state.isLast = false;
+        state.autoLoadMaxBlockCnt = MAX_AUTOLOAD;
+      }else{
         const len1 = state.posts.length;
         const len2 = action.payload.data.children.length;
-        const newPosts = uniqByKeepFirst(
+        newPosts = uniqByKeepFirst(
           [
             ...state.posts,
             ...action.payload.data.children
           ], el => el.data.id
         );
-        if (newPosts.length !== (len1 + len2)) {
+        if (newPosts.length !== (len1 + len2)) { // на всякий случай, чтоб не было повторения ключей
           console.warn(`postsRequestSuccessAfter newPosts.${newPosts.length} !== (${len1} + ${len2}): `);
         }
-        state.loading = false;
-        state.error = '';
-        state.posts = newPosts;
-        state.after = action.payload.data.after;
-        state.isLast = !action.payload.data.after;
       }
+      state.loading = false;
+      state.error = '';
+      state.posts = newPosts;
+      state.isLast = !action.payload.data.after || action.payload.data.after === state.after;
+      state.after = action.payload.data.after;
+      state.page = action.payload.page;
     },
     [postsRequestAsync.rejected.type]: (state, action) => {
       // ???12 сюда вообще не попадает :(
       // console.log(`postsRequestAsync ${postsRequestAsync.rejected.type} action.payload: `, action.payload);
       // debugger;
       state.loading = false;
-      state.error = action.payload;
+      state.error = action.error.message;
     },
   },
 });

@@ -37,9 +37,10 @@ export const postInfoRequestAsync = createAsyncThunk( // ??? Cannot access 'post
         //   dispatch(postInfoRequestSuccess({post, comms: comments}));
         // }, 300);
       })
-      .catch((err) =>
+      .catch((err) => {
         // dispatch(postInfoRequestError(err.message)); // ? err.toString()
-        err.message
+        throw err.message;
+      }
       );
   }
 );

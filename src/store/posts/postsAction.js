@@ -11,22 +11,23 @@ export const postsRequestAsync = createAsyncThunk( // ??? Cannot access 'postsRe
     // debugger;
 
     let page = getState().postsReducer.page;
-    if (newPage) {
-      page = newPage;
-      // dispatch(postsSlice.actions.changePage(page));
-    }
 
     // const token = useSelector(state => state.tokenReducer.token);
     const token = getState().tokenReducer.token;
-    const {after, isLast} = getState().postsReducer; // loading,
+    let {after, isLast} = getState().postsReducer; // loading,
+    if (newPage !== page) {
+      page = newPage;
+      after = '';
+      isLast = false;
+    }
+
     if (!token || isLast) return;
 
 
     // ? ???12 почему Макс удаляет это 👇 на 24:25+  // если его включить, то посты не грузятся
     // dispatch(postsSlice.actions.postsRequest()); // ! это сбрасывает данные и выставляет loading = true
-
     const url = `${URL_API}/${page}?limit=${POSTS_COUNT}${after ? ('&after=' + after) : ''}`;
-    // console.log(`>>>postsRequestAsync token.len:[${token.length}] after:[${after}] url: `, url);
+    console.log(`>>>postsRequestAsync page:${page} token.len:[${token.length}] after:[${after}] url: `, url);
 
     // https://github.com/reddit-archive/reddit/wiki/OAuth2#authorization-implicit-grant-flow
     // API requests with a bearer token should be made to https://oauth.reddit.com, NOT www.reddit.com.
@@ -37,11 +38,13 @@ export const postsRequestAsync = createAsyncThunk( // ??? Cannot access 'postsRe
     })
       .then((data) => {
         if (!data || !data.data) return;
+        data.data.page = page;
         return data.data;
       })
-      .catch((err) =>
+      .catch((err) => {
         // dispatch(postsSlice.actions.postsRequestError(err.message)); // ? err.toString()
-        err.message
-      );
+        throw err.message;
+      }
+    );
   }
 );

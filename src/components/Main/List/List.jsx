@@ -25,10 +25,6 @@ export const List = () => {
 
   // console.log(`${autoLoadCnt}/${autoLoadMaxBlockCnt} List page: ${page}  [${loading}]  [${after}] `, new Date().getTime())
 
-  // if (!after) { // (loading === null) {
-  //   dispatch(postsRequestAsync());
-  // }
-
   useEffect(() => {
     // console.log('useEffect postsRequestAsync')
     dispatch(postsRequestAsync(page));
@@ -51,7 +47,7 @@ export const List = () => {
           // console.log('IntersectionObserver: 31');
           if (entries[0].isIntersecting) {
             // console.log('IntersectionObserver: 32');
-            dispatch(postsRequestAsync());
+            dispatch(postsRequestAsync(page));
           }
         }, {rootMargin: '100px'});
         if (endList.current) observer.observe(endList.current);
@@ -65,7 +61,7 @@ export const List = () => {
   }, [endList.current, posts, posts.length, autoLoadMaxBlockCnt]);
 
   const childrenData = posts.map(el => el.data);
-  const postsData = childrenData.map((el) => ({
+  let postsData = childrenData.map((el) => ({
     thumbnail: (el.thumbnail === 'self' ? '' : el.thumbnail),
     title: el.title.replaceAll('&amp;', '&'),
     author: el.author,
@@ -74,6 +70,7 @@ export const List = () => {
     id: el.id,
     selftext: el.selftext, // .replaceAll('&amp;', 'IIII'),
   }));
+  postsData = postsData === undefined ? [] : postsData;
 
   const s = <span>{autoLoadCnt}/{autoLoadMaxBlockCnt} по {POSTS_COUNT}</span>;
   return (
@@ -87,15 +84,16 @@ export const List = () => {
             {autoLoadCnt < autoLoadMaxBlockCnt && (!error && (<>
 
               {s}
-              <button className={style.continue} onClick={() => {
-                dispatch(postsSlice.actions.autoLoadCntInc());
-                // ???12 при попытке получить ещё посты - вылетает 👇 так делать нельзя?
-                // setTimeout(() => {
-                //   debugger;
-                //   dispatch(postsSlice.actions.postsRequestAsync());
-                // }, 1)
-              }}><Preloader /> загрузить еще {s}</button>
-
+              {after && 
+                <button className={style.continue} onClick={() => {
+                  dispatch(postsSlice.actions.autoLoadCntInc());
+                  // ???12 при попытке получить ещё посты - вылетает 👇 так делать нельзя?
+                  // setTimeout(() => {
+                  //   debugger;
+                  //   dispatch(postsSlice.actions.postsRequestAsync());
+                  // }, 1)
+                }}><Preloader /> загрузить еще {s}</button>
+              }
             </>))}
             {/* {autoLoadCnt < autoLoadMaxBlockCnt && (<><Preloader />{s}</>)} */}
             {autoLoadCnt >= autoLoadMaxBlockCnt && (after &&

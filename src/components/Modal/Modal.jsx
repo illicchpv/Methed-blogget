@@ -81,7 +81,7 @@ export const Modal = () => {
       <div className={style.modal}>
 
         {status === 'loading' && <h2>Загрузка...</h2>}
-        {status === 'error' && <h2>Ошибка!</h2>}
+        {status === 'error' && <div><h2>Ошибка!</h2><h3 className={style.err}>{error}</h3></div>}
         {status === 'ok' && (
           <>
             <Text As='h2' size={22} tsize={24} className={style.title}>{title}</Text>

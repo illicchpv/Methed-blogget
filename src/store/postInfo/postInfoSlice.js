@@ -31,7 +31,7 @@ export const postInfoSlice = createSlice({
       console.log(`postInfoRequestAsync ${postInfoRequestAsync.rejected.type} action.payload: `, action.payload);
       state.loading = false;
       state.post = {};
-      state.error = action.payload;
+      state.error = action.error.message;
       state.comms = [];
     },
   },

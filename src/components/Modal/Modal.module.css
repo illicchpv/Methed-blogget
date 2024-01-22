@@ -53,6 +53,10 @@
   height: 15px;
 }
 
+.err{
+  color: red;
+}
+
 @media (min-width: 768px) {
   .modal {
     padding: 30px;
