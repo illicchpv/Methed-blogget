@@ -10,7 +10,7 @@ const Search = (props) => {
 
   const handlerSubmit = (e) => {
     e.preventDefault();
-    dispatch(searchRequest({searchText}));
+    dispatch(searchRequest(searchText));
   }  
 
   //  для // const data = yield fetchSearch(action);

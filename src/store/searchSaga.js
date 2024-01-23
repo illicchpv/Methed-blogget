@@ -37,7 +37,7 @@ function* workerSearch(action) {
   // console.log('workerSearch data: ', data);
 }
 
-function* fetchSearch(searchText){
+function* fetchSearch({searchText}){
   const token = yield select(state => state.tokenReducer.token);
   const url = `${URL_API}/search?q=${searchText}&limit=3`;
   console.log(`token:${token.length} fetchSearch: url`, url);
