@@ -17,6 +17,7 @@ export const postsSlice = createSlice({
   initialState,
   reducers: {
     postsClear: (state, action) => {
+      debugger;
       state.posts = [];
       state.autoLoadMaxBlockCnt = MAX_AUTOLOAD;
       state.isLast = false;

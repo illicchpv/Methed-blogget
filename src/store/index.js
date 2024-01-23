@@ -9,31 +9,14 @@ import {authReducer} from './auth/authReducer';
 import postsReducer from './posts/postsSlice';
 // import {postInfoReducer} from './postInfo/postInfoReducer';
 import postInfoReducer from './postInfo/postInfoSlice';
+import {searchReducer} from "./search/searchReducer";
 // import {xDataxReducer} from './xDatax/xDataxReducer'
 import {configureStore} from '@reduxjs/toolkit';
 
-// пример включения xDataxReducer   const rootReducer = combineReducers({tokenReducer, authReducer, postsReducer, postInfoReducer, xDataxReducer});
-// const rootReducer = combineReducers({
-//   cutTabReducer,
-//   commentReducer,
-//   tokenReducer,
-//   authReducer,
-//   postsReducer,
-//   postInfoReducer
-// });
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from "./saga";
 
-// для примера напишем logger
-// const logger = (store) => (next) => (action) => {
-//   console.log('logger action: ', action);
-//   next(action); // ! иначе дальнейшего прохождения action не будет!
-// };
-
-// если бы не было DevTools export const store = createStore(rootReducer, applyMiddleware());
-// export const store = createStore(
-//   rootReducer,
-//   // composeWithDevTools(applyMiddleware(logger)); // для примера напишем логер
-//   composeWithDevTools(applyMiddleware(tokenMidleware, thunk))
-// );
+const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
   reducer: {
@@ -42,8 +25,11 @@ export const store = configureStore({
     tokenReducer,
     authReducer,
     postsReducer,
-    postInfoReducer
+    postInfoReducer,
+    searchReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(tokenMidleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(tokenMidleware, sagaMiddleware),
 
 });
+
+sagaMiddleware.run(rootSaga);
