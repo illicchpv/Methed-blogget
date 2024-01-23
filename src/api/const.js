@@ -5,8 +5,8 @@ import {ReactComponent as TopIcon} from '../components/Main/Tabs/img2/top.svg';
 import {ReactComponent as BestIcon} from '../components/Main/Tabs/img2/best.svg';
 import {ReactComponent as HotIcon} from '../components/Main/Tabs/img2/hot.svg';
 
-const appPlace = 0; // 0-local
-// const appPlace = 1; // 1-github
+// const appPlace = 0; // 0-local
+const appPlace = 1; // 1-github
 
 export const URL_API = 'https://oauth.reddit.com';
 export const URL_AUTH = 'https://www.reddit.com/api/v1/authorize?'; // https://github.com/reddit-archive/reddit/wiki/OAuth2

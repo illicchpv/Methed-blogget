@@ -22,7 +22,7 @@ const Main = (props) => {
       <Layout>
         <Tabs />
         <Routes>
-          {["/", "/auth"].map((path, index) =>
+          {["/", "/auth", "/Methed-blogget"].map((path, index) =>
             <Route path={path} element={
               <div className={style.headerPage}>
                 <h1>Стартовая страница</h1>
