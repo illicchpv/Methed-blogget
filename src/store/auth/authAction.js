@@ -24,6 +24,8 @@ export const authLogout = (error) => ({
 export const authRequestAsync = () => (dispatch, getState) => {
   const token = getState().tokenReducer.token; // или useSelector(state => state.tokenReducer.token);
   if (!token) return;
+  console.log('authRequestAsync авторизуемся с полученным токеном');
+
   // console.log(`authRequestAsync token:.length`, token.length);
   if (token.length < 15) {
     console.log(`authRequestAsync token:`, token);

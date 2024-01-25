@@ -5,9 +5,13 @@ export const setToken = (token) => {
 export const getToken = () => {
   let token = '';
   if (window.location.pathname.includes('/auth') || window.location.hash.startsWith('#access_token=')) {
-    token = new URLSearchParams(window.location.hash.substring(1))
-      .get('access_token');
-    setToken(token);
+    token = new URLSearchParams(window.location.hash.substring(1)).get('access_token');
+    if(token) {
+      console.log('получили токен из url обратного редиректа', token?.length);
+      setToken(token);
+    }else{
+      setToken('');
+    }
   }
   if (sessionStorage.getItem('bearer')) {
     // setToken(sessionStorage.getItem('bearer'));
